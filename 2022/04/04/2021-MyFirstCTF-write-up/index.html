@@ -408,7 +408,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    440
+                    620
                 </div>
                 
 
@@ -464,40 +464,40 @@
 <p>flag <code>AIS3{H1n4m1z4w4_Sh0k0gun}</code></p>
 </blockquote>
 <h1 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h1><h2 id="Microchip"><a href="#Microchip" class="headerlink" title="Microchip"></a>Microchip</h2><p>題目如下</p>
-<pre class=" language-py"><code class="language-py">#include "python.h"
-def track(name, id):
-    if (len(name) % 4 == 0) :
-        padded = name + "4444"                                                  
-    elif (len(name) % 4 == 1) :
-        padded = name + "333"                                                   
-    elif (len(name) % 4 == 2) :
-        padded = name + "22"                                                    
-    elif (len(name) % 4 == 3) :
-        padded = name + "1"
+<pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true">#include "python.h"</span>
+<span class="token keyword">def</span> <span class="token function">track</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> id<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>len<span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">4</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">:</span>
+        padded <span class="token operator">=</span> name <span class="token operator">+</span> <span class="token string">"4444"</span>                                                  
+    <span class="token keyword">elif</span> <span class="token punctuation">(</span>len<span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">4</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">:</span>
+        padded <span class="token operator">=</span> name <span class="token operator">+</span> <span class="token string">"333"</span>                                                   
+    <span class="token keyword">elif</span> <span class="token punctuation">(</span>len<span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">4</span> <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">:</span>
+        padded <span class="token operator">=</span> name <span class="token operator">+</span> <span class="token string">"22"</span>                                                    
+    <span class="token keyword">elif</span> <span class="token punctuation">(</span>len<span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">4</span> <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">:</span>
+        padded <span class="token operator">=</span> name <span class="token operator">+</span> <span class="token string">"1"</span>
 
-    keys = list()
-    temp = id
-    for i in range(4):
-        keys.append(temp % 96)
-        temp = int(temp / 96)
+    keys <span class="token operator">=</span> list<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    temp <span class="token operator">=</span> id
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        keys<span class="token punctuation">.</span>append<span class="token punctuation">(</span>temp <span class="token operator">%</span> <span class="token number">96</span><span class="token punctuation">)</span>
+        temp <span class="token operator">=</span> int<span class="token punctuation">(</span>temp <span class="token operator">/</span> <span class="token number">96</span><span class="token punctuation">)</span>
 
-    result = ""
-    for i in range(0, len(padded), 4) :   #10 round
-        nums = list()
-        for j in range(4) :
-            num = ord(padded[i + j]) - 32
-            num = (num + keys[j]) % 96
-            nums.append(num + 32)
+    result <span class="token operator">=</span> <span class="token string">""</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> len<span class="token punctuation">(</span>padded<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token punctuation">:</span>   <span class="token comment" spellcheck="true">#10 round</span>
+        nums <span class="token operator">=</span> list<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token punctuation">:</span>
+            num <span class="token operator">=</span> ord<span class="token punctuation">(</span>padded<span class="token punctuation">[</span>i <span class="token operator">+</span> j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">32</span>
+            num <span class="token operator">=</span> <span class="token punctuation">(</span>num <span class="token operator">+</span> keys<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">96</span>
+            nums<span class="token punctuation">.</span>append<span class="token punctuation">(</span>num <span class="token operator">+</span> <span class="token number">32</span><span class="token punctuation">)</span>
 
-        result += chr(nums[3])
-        result += chr(nums[2])
-        result += chr(nums[1])
-        result += chr(nums[0])
-    return result  #len -> 40
+        result <span class="token operator">+=</span> chr<span class="token punctuation">(</span>nums<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        result <span class="token operator">+=</span> chr<span class="token punctuation">(</span>nums<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        result <span class="token operator">+=</span> chr<span class="token punctuation">(</span>nums<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        result <span class="token operator">+=</span> chr<span class="token punctuation">(</span>nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> result  <span class="token comment" spellcheck="true">#len -> 40</span>
 
-name = open("flag.txt", "r").read().strip()
-id = int(input("key = "))
-print("result is:", track(name, id)) 
+name <span class="token operator">=</span> open<span class="token punctuation">(</span><span class="token string">"flag.txt"</span><span class="token punctuation">,</span> <span class="token string">"r"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span>
+id <span class="token operator">=</span> int<span class="token punctuation">(</span>input<span class="token punctuation">(</span><span class="token string">"key = "</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"result is:"</span><span class="token punctuation">,</span> track<span class="token punctuation">(</span>name<span class="token punctuation">,</span> id<span class="token punctuation">)</span><span class="token punctuation">)</span> 
 </code></pre>
 <p>output： <code>=Js&amp;;*A``odZHi\'&gt;D=Js&amp;#i-DYf&gt;Uy\'yuyfyu&lt;)Gu</code></p>
 <p>從題目可以看到只要有 key 就可以用 result 逆推回 flag<br>由 flag 的 format <code>AIS3{}</code> 可以推 key<br>4個而已慢慢用手推即可</p>
@@ -514,22 +514,22 @@ print("result is:", track(name, id))
 </div>
 
 <p><strong>script</strong></p>
-<pre class=" language-py"><code class="language-py">result = '=Js&;*A`odZHi\'>D=Js&#i-DYf>Uy\'yuyfyu<)Gu'
-n = list()
-for i in range(0,40,4):
-    for j in range(4):
-        n.append(ord(result[i+j])-32)
-print(n)
-#n = [29, 42, 83, 6, 27, 10, 33, 64, 79, 68, 58, 40, 73, 7, 30, 36, 29, 42, 83, 6, 3, 73, 13, 36, 57, 70, 30, 53, 89, 7, 89, 85, 89, 70, 89, 85, 28, 9, 39, 85]
+<pre class=" language-python"><code class="language-python">result <span class="token operator">=</span> <span class="token string">'=Js&amp;;*A`odZHi\'>D=Js&amp;#i-DYf>Uy\'yuyfyu&lt;)Gu'</span>
+n <span class="token operator">=</span> list<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">40</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        n<span class="token punctuation">.</span>append<span class="token punctuation">(</span>ord<span class="token punctuation">(</span>result<span class="token punctuation">[</span>i<span class="token operator">+</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">32</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">#n = [29, 42, 83, 6, 27, 10, 33, 64, 79, 68, 58, 40, 73, 7, 30, 36, 29, 42, 83, 6, 3, 73, 13, 36, 57, 70, 30, 53, 89, 7, 89, 85, 89, 70, 89, 85, 28, 9, 39, 85]</span>
 
-for i in range(0,40,4):
-    n[i],n[i+1],n[i+2],n[i+3] = n[i+3],n[i+2],n[i+1],n[i]
-print(n)
-#n = [6, 83, 42, 29, 64, 33, 10, 27, 40, 58, 68, 79, 36, 30, 7, 73, 6, 83, 42, 29, 36, 13, 73, 3, 53, 30, 70, 57, 85, 89, 7, 89, 85, 89, 70, 89, 85, 39, 9, 28]
+<span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">40</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    n<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>n<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>n<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span>n<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> n<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span>n<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span>n<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>n<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">#n = [6, 83, 42, 29, 64, 33, 10, 27, 40, 58, 68, 79, 36, 30, 7, 73, 6, 83, 42, 29, 36, 13, 73, 3, 53, 30, 70, 57, 85, 89, 7, 89, 85, 89, 70, 89, 85, 39, 9, 28]</span>
 
-key = [69,42,87,10]
-for i in range(40):
-    print(chr(((n[i] + 96 - key[i%4]) % 96) + 32) , end='')
+key <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">69</span><span class="token punctuation">,</span><span class="token number">42</span><span class="token punctuation">,</span><span class="token number">87</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">40</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>chr<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>n<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">96</span> <span class="token operator">-</span> key<span class="token punctuation">[</span>i<span class="token operator">%</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">96</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">32</span><span class="token punctuation">)</span> <span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
 </code></pre>
 <p>執行 script 後得到<code>AIS3{w31c0me_t0_AIS3_cryptoO0O0o0Ooo0}22</code> 可以看到 padding 為 22</p>
 <blockquote>
