@@ -38,20 +38,6 @@
 
 
 <body>
-    <script> 
-    if (localStorage.getItem('dark') === '1') { 
-        document.body.classList.add('dark'); 
-    } 
-    else if (new Date().getHours() >= 22 || new Date().getHours() < 7) { 
-        document.body.classList.add('dark'); 
-    } 
-    else if (matchMedia('(prefers-color-scheme: dark)').matches) { 
-        document.body.classList.add('dark'); 
-    } 
-    </script> 
-    <a onclick="switchNightMode()" id="sma"> 
-        <i class="fa fa-moon-o" id="nightMode" aria-hidden="true"></i> 
-    </a>
 
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
@@ -677,39 +663,52 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/03/20/hello-world/">
+                <a href="/2022/04/04/2021-MyFirstCTF-write-up/">
                     <div class="card-image">
                         
+                        <img src="/source/imgs/mfc.png" class="responsive-img" alt="2021 MyFirstCTF write-up">
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Hello World">
-                        
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">2021 MyFirstCTF write-up</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            这是你自定义的文章摘要内容，如果这个属性有值，文章卡片摘要就显示这段文字，否则程序会自动截取文章的部分内容作为摘要
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-20
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-04
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Gunjyo
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/write-up/" class="post-category">
+                                    write-up
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CTF/">
+                        <span class="chip bg-color">CTF</span>
+                    </a>
+                    
+                    <a href="/tags/write-up/">
+                        <span class="chip bg-color">write-up</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1179,7 +1178,20 @@ $(function () {
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
-   
+    <script>
+        if (localStorage.getItem('dark') === '1') {
+        document.body.classList.add('dark');
+        }
+        else if (new Date().getHours() >= 22 || new Date().getHours() < 7) {
+        document.body.classList.add('dark');
+        } 
+        else if (matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+        }
+    </script>
+    <a onclick="switchNightMode()" id="sma">
+        <i class="fa fa-moon-o" id="nightMode" aria-hidden="true"></i>
+    </a>
 
 </body>
 

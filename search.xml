@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>2021 MyFirstCTF write-up</title>
+      <link href="/2022/04/04/2021-MyFirstCTF-write-up/"/>
+      <url>/2022/04/04/2021-MyFirstCTF-write-up/</url>
+      
+        <content type="html"><![CDATA[<p>這是我初次參加(好像也只能參加一次) MyFirstCTF，為期 8 小時，題目會與接續的 AIS3 Pre-exam 些微重疊(因為AIS3 Pre-exam的第一天是 MFC)</p><p>我的排名是第 11 名 ，對當時的我來說是個還滿滿意的成績~</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> write-up </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CTF </tag>
+            
+            <tag> write-up </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hello World</title>
       <link href="/2022/03/20/hello-world/"/>
       <url>/2022/03/20/hello-world/</url>
