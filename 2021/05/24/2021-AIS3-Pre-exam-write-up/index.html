@@ -412,14 +412,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.2k
+                    2.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
+                    13 分
                 </div>
                 
 
@@ -933,7 +933,72 @@ m <span class="token operator">=</span> pow<span class="token punctuation">(</sp
 <blockquote>
 <p>flag <code>AIS3{https://www.youtube.com/watch?v=jsYwFizhncE}</code><br>順帶一提 flag 內的 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=jsYwFizhncE">youtube 網址</a>是利用物理的彈性碰撞去計算<code>pi</code>，還滿有趣的，感興趣的可以去看看影片~~</p>
 </blockquote>
-<h2 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h2><h2 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h2><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+<h2 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h2><h3 id="Piano"><a href="#Piano" class="headerlink" title="Piano"></a>Piano</h3><p>題目給了一個 <code>.exe 檔</code>，執行後會是鋼琴界面(真的有聲音)<br><img src="https://i.imgur.com/9EgZvRS.png" alt="Piano"><br>題目還給一個 <code>.dll 檔</code>，可以用 <code>dnSpy</code> 來 <strong>反編譯</strong> ，就可以看到它在做的事情</p>
+<div class="spoiler collapsed">
+    <div class="spoiler-title">
+        isValid()
+    </div>
+    <div class="spoiler-content">
+        <pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// piano.Piano</span>
+<span class="token comment" spellcheck="true">// Token: 0x06000003 RID: 3 RVA: 0x00002220 File Offset: 0x00000420</span>
+<span class="token keyword">private</span> <span class="token keyword">bool</span> <span class="token function">isValid</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    List<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> list <span class="token operator">=</span> <span class="token keyword">new</span> List<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span>
+    <span class="token punctuation">{</span>
+        <span class="token number">14</span><span class="token punctuation">,</span>
+        <span class="token number">17</span><span class="token punctuation">,</span>
+        <span class="token number">20</span><span class="token punctuation">,</span>
+        <span class="token number">21</span><span class="token punctuation">,</span>
+        <span class="token number">22</span><span class="token punctuation">,</span>
+        <span class="token number">21</span><span class="token punctuation">,</span>
+        <span class="token number">19</span><span class="token punctuation">,</span>
+        <span class="token number">18</span><span class="token punctuation">,</span>
+        <span class="token number">12</span><span class="token punctuation">,</span>
+        <span class="token number">6</span><span class="token punctuation">,</span>
+        <span class="token number">11</span><span class="token punctuation">,</span>
+        <span class="token number">16</span><span class="token punctuation">,</span>
+        <span class="token number">15</span><span class="token punctuation">,</span>
+        <span class="token number">14</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    List<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> list2 <span class="token operator">=</span> <span class="token keyword">new</span> List<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span>
+    <span class="token punctuation">{</span>
+        <span class="token number">0</span><span class="token punctuation">,</span>
+        <span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">,</span>
+        <span class="token number">0</span><span class="token punctuation">,</span>
+        <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>
+        <span class="token number">0</span><span class="token punctuation">,</span>
+        <span class="token number">1</span><span class="token punctuation">,</span>
+        <span class="token number">1</span><span class="token punctuation">,</span>
+        <span class="token number">0</span><span class="token punctuation">,</span>
+        <span class="token number">6</span><span class="token punctuation">,</span>
+        <span class="token number">0</span><span class="token punctuation">,</span>
+        <span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">,</span>
+        <span class="token number">0</span><span class="token punctuation">,</span>
+        <span class="token number">1</span><span class="token punctuation">,</span>
+        <span class="token number">0</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">14</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>notes<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>notes<span class="token punctuation">[</span><span class="token punctuation">(</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">14</span><span class="token punctuation">]</span> <span class="token operator">!=</span> list<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>notes<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token keyword">this</span><span class="token punctuation">.</span>notes<span class="token punctuation">[</span><span class="token punctuation">(</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">14</span><span class="token punctuation">]</span> <span class="token operator">!=</span> list2<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+
+    </div>
+</div>
+<p>我們可以拿到 <code>list</code> 和 <code>list2</code><br>然後他會去 check <code> this.notes[]</code><br>可以看到想求出 <code>this.notes[i]</code> 的話只要把 <code>(list[i] + list2[i]) / 2</code> 就可以了<br>會得到答案的 index <code>{7,7,10,10,11,11,10,9,9,3,3,8,8,7}</code><br>對照那個 index 去按鋼琴鍵就會跳出 flag 了 (是升調的小星星哦<span class="github-emoji"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>)<br><img src="https://i.imgur.com/glKJkAU.png" alt="twinkle"></p>
+<blockquote>
+<p>flag <code>AIS3{7wink1e_tw1nkl3_l1ttl3_574r_1n_C_5h4rp}</code></p>
+</blockquote>
+<h2 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h2><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
             <hr/>
