@@ -408,7 +408,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    363
+                    440
                 </div>
                 
 
@@ -500,7 +500,19 @@ id = int(input("key = "))
 print("result is:", track(name, id)) 
 </code></pre>
 <p>output： <code>=Js&amp;;*A``odZHi\'&gt;D=Js&amp;#i-DYf&gt;Uy\'yuyfyu&lt;)Gu</code></p>
-<p>從題目可以看到只要有key就可以用result逆推回flag<br>由 flag 的 format <code>AIS3{}</code> 可以推 key<br>4個而已慢慢用手推即可</p>
+<p>從題目可以看到只要有 key 就可以用 result 逆推回 flag<br>由 flag 的 format <code>AIS3{}</code> 可以推 key<br>4個而已慢慢用手推即可</p>
+<div class="spoiler collapsed">
+    <div class="spoiler-title">
+        推 key
+    </div>
+    <div class="spoiler-content">
+        <p>把 <code>result</code> 推回陣列(如下script)，取前四個數字(6,83,42,29)</p>
+<p>ord(‘A’) - 32 = 33<br>( 33 + key[0] ) % 96 = 6 -&gt; key[0] = 69<br>ord(‘I’) - 32 = 41<br>( 41 + key[1] ) % 96 = 83 -&gt; key[1] = 42<br>ord(‘S’) - 32 = 51<br>( 51 + key[2] ) % 96 = 42 -&gt; key[2] = 87<br>ord(‘3’) - 32 = 19<br>( 19 + key[3] ) % 96 = 29 -&gt; key[3] = 10</p>
+<p>key={69,42,87,10}</p>
+
+    </div>
+</div>
+
 <p><strong>script</strong></p>
 <pre class=" language-py"><code class="language-py">result = '=Js&;*A`odZHi\'>D=Js&#i-DYf>Uy\'yuyfyu<)Gu'
 n = list()
@@ -509,14 +521,20 @@ for i in range(0,40,4):
         n.append(ord(result[i+j])-32)
 print(n)
 #n = [29, 42, 83, 6, 27, 10, 33, 64, 79, 68, 58, 40, 73, 7, 30, 36, 29, 42, 83, 6, 3, 73, 13, 36, 57, 70, 30, 53, 89, 7, 89, 85, 89, 70, 89, 85, 28, 9, 39, 85]
+
 for i in range(0,40,4):
     n[i],n[i+1],n[i+2],n[i+3] = n[i+3],n[i+2],n[i+1],n[i]
 print(n)
 #n = [6, 83, 42, 29, 64, 33, 10, 27, 40, 58, 68, 79, 36, 30, 7, 73, 6, 83, 42, 29, 36, 13, 73, 3, 53, 30, 70, 57, 85, 89, 7, 89, 85, 89, 70, 89, 85, 39, 9, 28]
+
 key = [69,42,87,10]
 for i in range(40):
-    print(chr(((n[i]+96-key[i%4])%96)+32),end='')
+    print(chr(((n[i] + 96 - key[i%4]) % 96) + 32) , end='')
 </code></pre>
+<p>執行 script 後得到<code>AIS3{w31c0me_t0_AIS3_cryptoO0O0o0Ooo0}22</code> 可以看到 padding 為 22</p>
+<blockquote>
+<p>flag <code>AIS3{w31c0me_t0_AIS3_cryptoO0O0o0Ooo0}</code></p>
+</blockquote>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
