@@ -408,7 +408,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    1.6k
                 </div>
                 
 
@@ -466,7 +466,6 @@
 <blockquote>
 <p>HINT的影片<br><a target="_blank" rel="noopener" href="https://youtu.be/2b3Oqo13-r0?t=1296">https://youtu.be/2b3Oqo13-r0?t=1296</a></p>
 </blockquote>
-<div class="video-container"><iframe src="https://www.youtube.com/embed/2b3Oqo13-r0&amp;t=1296s" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
 <h2 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h2><h3 id="Microchip"><a href="#Microchip" class="headerlink" title="Microchip"></a>Microchip</h3><div class="spoiler collapsed">
     <div class="spoiler-title">
         題目如下
@@ -729,22 +728,78 @@ F v G <span class="token number">3</span>
 <div class="video-container"><iframe src="https://www.youtube.com/embed/qu2tturKLLA" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
 
 <blockquote>
-<p>flag<br><code>AIS3{iT_IS_4_Beaut1FUL_day_0utside_8IrD5_4Re_SiNGin9_F1owERS_Ar3_BlOOmIN6_oN_dAys_1iKe_7h3se_kiDs_1ik3_Y0u_ShOuLD_Be_BUrnin6_1n_h311}</code></p>
+<p>flag<br><code>AIS3{iT_IS_4_Beaut1FUL_day_0utside_8IrD5_4Re_SiNGin9_F1owERS_Ar3_BlOOmIN6_oN_dAys_1iKe_7h3se_</code><br><code>kiDs_1ik3_Y0u_ShOuLD_Be_BUrnin6_1n_h311}</code></p>
 </blockquote>
 <h3 id="ReSident-evil-villAge"><a href="#ReSident-evil-villAge" class="headerlink" title="ReSident evil villAge"></a>ReSident evil villAge</h3><blockquote>
 <p>註：此題用了非正規解</p>
 </blockquote>
-<p><strong>script</strong></p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Util<span class="token punctuation">.</span>number <span class="token keyword">import</span> <span class="token operator">*</span>
-n <span class="token operator">=</span> <span class="token number">23662270311503602529211462628663973377651035055221337186547659666520360329842954292759496973737109678655075242892199643594552737098393308599593056828393773327639809644570618472781338585802514939812387999523164606025662379300143159103239039862833152034195535186138249963826772564309026532268561022599227047</span>
-e <span class="token operator">=</span> <span class="token number">65537</span>
-c <span class="token operator">=</span> <span class="token number">11458615427536252698065643586706850515055080432343893818398610010478579108516179388166781637371605857508073447120074461777733767824330662610330121174203247272860627922171793234818603728793293847713278049996058754527159158251083995933600335482394024095666411743953262490304176144151437205651312338816540536</span>
-count<span class="token operator">=</span><span class="token number">314159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848</span>
-phi <span class="token operator">=</span> n<span class="token operator">-</span>count<span class="token operator">+</span><span class="token number">1</span>
-d <span class="token operator">=</span> inverse<span class="token punctuation">(</span>e<span class="token punctuation">,</span>phi<span class="token punctuation">)</span>
-m <span class="token operator">=</span> pow<span class="token punctuation">(</span>c<span class="token punctuation">,</span>d<span class="token punctuation">,</span>n<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>long_to_bytes<span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<div class="spoiler collapsed">
+    <div class="spoiler-title">
+        題目 Source code如下
+    </div>
+    <div class="spoiler-content">
+        <pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> socketserver
+<span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>PublicKey <span class="token keyword">import</span> RSA
+<span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Util<span class="token punctuation">.</span>number <span class="token keyword">import</span> <span class="token operator">*</span>
+<span class="token keyword">from</span> binascii <span class="token keyword">import</span> unhexlify
+
+<span class="token keyword">class</span> <span class="token class-name">Task</span><span class="token punctuation">(</span>socketserver<span class="token punctuation">.</span>BaseRequestHandler<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">recv</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>request<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">send</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> msg<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>request<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span>msg <span class="token operator">+</span> b<span class="token string">'\n'</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">handle</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        privkey <span class="token operator">=</span> RSA<span class="token punctuation">.</span>generate<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+
+        n <span class="token operator">=</span> privkey<span class="token punctuation">.</span>n
+        e <span class="token operator">=</span> privkey<span class="token punctuation">.</span>e
+
+        self<span class="token punctuation">.</span>send<span class="token punctuation">(</span>b<span class="token string">'Welcome to ReSident evil villAge, sign the name "Ethan Winters" to get the flag.'</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>send<span class="token punctuation">(</span>b<span class="token string">'n = '</span> <span class="token operator">+</span> str<span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>send<span class="token punctuation">(</span>b<span class="token string">'e = '</span> <span class="token operator">+</span> str<span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>request<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span>b<span class="token string">'1) sign\n2) verify\n3) exit\n'</span><span class="token punctuation">)</span>
+            option <span class="token operator">=</span> self<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+            <span class="token keyword">if</span> option <span class="token operator">==</span> b<span class="token string">'1'</span><span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>request<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span>b<span class="token string">'Name (in hex): '</span><span class="token punctuation">)</span>
+                msg <span class="token operator">=</span> unhexlify<span class="token punctuation">(</span>self<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">if</span> msg <span class="token operator">==</span> b<span class="token string">'Ethan Winters'</span> <span class="token operator">or</span> bytes_to_long<span class="token punctuation">(</span>msg<span class="token punctuation">)</span> <span class="token operator">>=</span> n<span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># msg+k*n not allowed</span>
+                    self<span class="token punctuation">.</span>send<span class="token punctuation">(</span>b<span class="token string">'Nice try!'</span><span class="token punctuation">)</span>
+                <span class="token keyword">else</span><span class="token punctuation">:</span>
+                    sig <span class="token operator">=</span> pow<span class="token punctuation">(</span>bytes_to_long<span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">,</span> privkey<span class="token punctuation">.</span>d<span class="token punctuation">,</span> n<span class="token punctuation">)</span>     <span class="token comment" spellcheck="true"># TODO: Apply hashing first to prevent forgery</span>
+                    self<span class="token punctuation">.</span>send<span class="token punctuation">(</span>b<span class="token string">'Signature: '</span> <span class="token operator">+</span> str<span class="token punctuation">(</span>sig<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+            <span class="token keyword">elif</span> option <span class="token operator">==</span> b<span class="token string">'2'</span><span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>request<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span>b<span class="token string">'Signature: '</span><span class="token punctuation">)</span>
+                sig <span class="token operator">=</span> int<span class="token punctuation">(</span>self<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                verified <span class="token operator">=</span> <span class="token punctuation">(</span>pow<span class="token punctuation">(</span>sig<span class="token punctuation">,</span> e<span class="token punctuation">,</span> n<span class="token punctuation">)</span> <span class="token operator">==</span> bytes_to_long<span class="token punctuation">(</span>b<span class="token string">'Ethan Winters'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">if</span> verified<span class="token punctuation">:</span>
+                    self<span class="token punctuation">.</span>send<span class="token punctuation">(</span>b<span class="token string">'AIS3{THIS_IS_A_FAKE_FLAG}'</span><span class="token punctuation">)</span>
+                <span class="token keyword">else</span><span class="token punctuation">:</span>
+                    self<span class="token punctuation">.</span>send<span class="token punctuation">(</span>b<span class="token string">'Well done!'</span><span class="token punctuation">)</span>
+
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                <span class="token keyword">break</span>
+
+<span class="token keyword">class</span> <span class="token class-name">ForkingServer</span><span class="token punctuation">(</span>socketserver<span class="token punctuation">.</span>ForkingTCPServer<span class="token punctuation">,</span> socketserver<span class="token punctuation">.</span>TCPServer<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    HOST<span class="token punctuation">,</span> PORT <span class="token operator">=</span> <span class="token string">'0.0.0.0'</span><span class="token punctuation">,</span> <span class="token number">42069</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span>
+    server <span class="token operator">=</span> ForkingServer<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">,</span> Task<span class="token punctuation">)</span>
+    server<span class="token punctuation">.</span>allow_reuse_address <span class="token operator">=</span> <span class="token boolean">True</span>
+    server<span class="token punctuation">.</span>serve_forever<span class="token punctuation">(</span><span class="token punctuation">)</span>
 </code></pre>
+
+    </div>
+</div>
+<p>題目是 RSA 簽證，目標是把 signature 送進去以達到 <code>pow(sig, e, n) == bytes_to_long(b'Ethan Winters')</code><br>原則上只要把 Ethan Winters 轉成 hex 丟進去讓它跑出 signature 之後，再丟回去讓他 verify 就可以了。<br>但是從 <code>if msg == b'Ethan Winters' or bytes_to_long(msg) &gt;= n:  # msg+k*n not allowed</code> 這行可以看到 <code>check msg == Ethan Winters</code> 會被擋掉。<br>由於送進去的是字串，於是要讓<strong>數字不變但是字串改變</strong>，就去嘗試 Bypass，發現前面加上 <code>00</code> 可以繞過，所以傳 <code>00</code> 加上 <code>Ethan Winters</code> 轉成 <code>hex</code> 就可以了<br>直接上圖。<br><img src="https://i.imgur.com/Kwxy3WU.png"><br><img src="https://i.imgur.com/4dpX7qf.png"></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
@@ -988,53 +1043,36 @@ m <span class="token operator">=</span> pow<span class="token punctuation">(</sp
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/04/04/2021-MyFirstCTF-write-up/">
+                <a href="/2022/04/04/2021-AIS3-Pre-exam-write-up/">
                     <div class="card-image">
                         
-                        <img src="/imgs/mfc.png" class="responsive-img" alt="2021 MyFirstCTF write-up">
                         
-                        <span class="card-title">2021 MyFirstCTF write-up</span>
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="2021 AIS3 Pre-exam write-up">
+                        
+                        <span class="card-title">2021 AIS3 Pre-exam write-up</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            2021 MFC 的不專業 write-up，rank 11/282
+                            
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-04
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-04
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/write-up/" class="post-category">
-                                    write-up
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Gunjyo
                             
                         </span>
                     </div>
-                </div>
-
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/CTF/">
-                        <span class="chip bg-color">CTF</span>
-                    </a>
-                    
-                    <a href="/tags/write-up/">
-                        <span class="chip bg-color">write-up</span>
-                    </a>
-                    
                 </div>
                 
             </div>
