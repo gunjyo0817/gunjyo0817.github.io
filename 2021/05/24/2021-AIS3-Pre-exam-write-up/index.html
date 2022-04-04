@@ -1130,7 +1130,7 @@ tR<span class="token punctuation">.</span>
     </div>
 </div>
 <p>跑跑看後會需要輸入 flag ，正確的話會跑出 <code>correct!</code></p>
-<p>打開<code>pkl檔</code>，用<a target="_blank" rel="noopener" href="https://github.com/google/google-ctf/blob/master/third_party/edk2/AppPkg/Applications/Python/Python-2.7.2/Lib/pickle.py">pickle opcodes</a>看，先把t換成 ) 然後去排版</p>
+<p>打開<code>pkl檔</code>，用<a target="_blank" rel="noopener" href="https://github.com/google/google-ctf/blob/master/third_party/edk2/AppPkg/Applications/Python/Python-2.7.2/Lib/pickle.py">pickle opcodes</a>看，先把<code>t</code>換成 <code>)</code> 然後去排版</p>
 <div class="spoiler collapsed">
     <div class="spoiler-title">
         稍微排版後
@@ -1329,7 +1329,7 @@ print
 
     </div>
 </div>
-<p>可以看出它是字串的 Index 值 equal 一個 unicode 字元，用 stack 去推</p>
+<p>可以看出它是<code>字串的 Index 值</code> <code>equal</code> 一個 <code>unicode 字元</code>，用 <code>stack</code> 去推</p>
 <div class="spoiler collapsed">
     <div class="spoiler-title">
         stack
@@ -1381,7 +1381,7 @@ eq
 
     </div>
 </div>
-<p>按照 stack 的模式就可以推出 index 對應到的字元了!<br><img src="https://i.imgur.com/m1XC8eB.png" alt="Imgur"><br>送進去測試之後就會跳出 <code>Correct!</code></p>
+<p>按照 stack 的模式就可以推出 index 對應到的字元了!<br><img src="https://i.imgur.com/m1XC8eB.png"><br>送進去測試之後就會跳出 <code>Correct!</code></p>
 <blockquote>
 <p>flag <code>AIS3{dAmwjzphIj}</code></p>
 </blockquote>
