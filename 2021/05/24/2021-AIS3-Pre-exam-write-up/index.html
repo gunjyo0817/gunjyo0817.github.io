@@ -412,14 +412,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    1.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    7 分
                 </div>
                 
 
@@ -451,7 +451,265 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+                <h2 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h2><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>gunjyo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Date</td>
+<td>2021/05/22 10:00 - 2021/05/24 17:30</td>
+</tr>
+<tr>
+<td>Rank</td>
+<td>61(正取 AIS3)</td>
+</tr>
+<tr>
+<td>Score</td>
+<td>1346</td>
+</tr>
+</tbody></table>
+<p>這是我第一次參加 AIS3 Pre-exam，最終成績是 61 名，剛好落在錄取的 75 名內，萬幸~<br>隔年應該會因為準備大學而無法參加，希望後年能夠拿到更好的成績~<br><img src="https://i.imgur.com/OG8f5z5.jpg" alt="AIS3 rank"></p>
+<p>事不遲疑，直接進到 write-up 吧</p>
+<blockquote>
+<p>註 有些題目跟 MFC 是重疊的哦~ write-up 是一致的</p>
+</blockquote>
+<h2 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h2><h3 id="Cat-Slayer-ᶠᵃᵏᵉ-Nekogoroshi"><a href="#Cat-Slayer-ᶠᵃᵏᵉ-Nekogoroshi" class="headerlink" title="Cat Slayer ᶠᵃᵏᵉ | Nekogoroshi"></a>Cat Slayer ᶠᵃᵏᵉ | Nekogoroshi</h3><p>Welcome題<br><code>TERM=xterm-256color ssh -p 5566 h173@quiz.ais3.org</code><br>連線後會跳轉到輸入數字密碼的介面，只要按錯一個就會 Lock<br>暴力嘗試即可<br>密碼 2025830455298</p>
+<blockquote>
+<p>flag <code>AIS3{H1n4m1z4w4_Sh0k0gun}</code></p>
+</blockquote>
+<blockquote>
+<p>HINT 附上了<a target="_blank" rel="noopener" href="https://youtu.be/2b3Oqo13-r0?t=1296">影片</a></p>
+</blockquote>
+<h2 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h2><h3 id="Microchip"><a href="#Microchip" class="headerlink" title="Microchip"></a>Microchip</h3><div class="spoiler collapsed">
+    <div class="spoiler-title">
+        題目如下
+    </div>
+    <div class="spoiler-content">
+        <pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"python.h"</span></span>
+def <span class="token function">track</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> id<span class="token punctuation">)</span><span class="token operator">:</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">4</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">:</span>
+        padded <span class="token operator">=</span> name <span class="token operator">+</span> <span class="token string">"4444"</span>                                                  
+    <span class="token function">elif</span> <span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">4</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">:</span>
+        padded <span class="token operator">=</span> name <span class="token operator">+</span> <span class="token string">"333"</span>                                                   
+    <span class="token function">elif</span> <span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">4</span> <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">:</span>
+        padded <span class="token operator">=</span> name <span class="token operator">+</span> <span class="token string">"22"</span>                                                    
+    <span class="token function">elif</span> <span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">4</span> <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token operator">:</span>
+        padded <span class="token operator">=</span> name <span class="token operator">+</span> <span class="token string">"1"</span>
+
+    keys <span class="token operator">=</span> <span class="token function">list</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    temp <span class="token operator">=</span> id
+    <span class="token keyword">for</span> i in <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token operator">:</span>
+        keys<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>temp <span class="token operator">%</span> <span class="token number">96</span><span class="token punctuation">)</span>
+        temp <span class="token operator">=</span> <span class="token keyword">int</span><span class="token punctuation">(</span>temp <span class="token operator">/</span> <span class="token number">96</span><span class="token punctuation">)</span>
+
+    result <span class="token operator">=</span> <span class="token string">""</span>
+    <span class="token keyword">for</span> i in <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>padded<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">:</span>   #<span class="token number">10</span> round
+        nums <span class="token operator">=</span> <span class="token function">list</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> j in <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">:</span>
+            num <span class="token operator">=</span> <span class="token function">ord</span><span class="token punctuation">(</span>padded<span class="token punctuation">[</span>i <span class="token operator">+</span> j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">32</span>
+            num <span class="token operator">=</span> <span class="token punctuation">(</span>num <span class="token operator">+</span> keys<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">96</span>
+            nums<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>num <span class="token operator">+</span> <span class="token number">32</span><span class="token punctuation">)</span>
+
+        result <span class="token operator">+</span><span class="token operator">=</span> <span class="token function">chr</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        result <span class="token operator">+</span><span class="token operator">=</span> <span class="token function">chr</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        result <span class="token operator">+</span><span class="token operator">=</span> <span class="token function">chr</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        result <span class="token operator">+</span><span class="token operator">=</span> <span class="token function">chr</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> result  #len <span class="token operator">-</span><span class="token operator">></span> <span class="token number">40</span>
+
+name <span class="token operator">=</span> <span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"flag.txt"</span><span class="token punctuation">,</span> <span class="token string">"r"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">strip</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+id <span class="token operator">=</span> <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token function">input</span><span class="token punctuation">(</span><span class="token string">"key = "</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"result is:"</span><span class="token punctuation">,</span> <span class="token function">track</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> id<span class="token punctuation">)</span><span class="token punctuation">)</span> 
+</code></pre>
+
+    </div>
+</div>
+<p>output： <code>=Js&amp;;*A``odZHi\'&gt;D=Js&amp;#i-DYf&gt;Uy\'yuyfyu&lt;)Gu</code></p>
+<p>從題目可以看到只要有 key 就可以用 result 逆推回 flag<br>由 flag 的 format <code>AIS3{}</code> 可以推 key<br>4個而已慢慢用手推即可</p>
+<div class="spoiler collapsed">
+    <div class="spoiler-title">
+        推 key
+    </div>
+    <div class="spoiler-content">
+        <p>把 <code>result</code> 推回陣列(如下script)，取前四個數字(6,83,42,29)</p>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token function">ord</span><span class="token punctuation">(</span><span class="token string">'A'</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">32</span> <span class="token operator">=</span> <span class="token function">33</span>
+<span class="token punctuation">(</span> <span class="token number">33</span> <span class="token operator">+</span> key<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">96</span> <span class="token operator">=</span> <span class="token number">6</span> <span class="token operator">-</span><span class="token operator">></span> key<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">69</span>
+<span class="token function">ord</span><span class="token punctuation">(</span><span class="token string">'I'</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">32</span> <span class="token operator">=</span> <span class="token function">41</span>
+<span class="token punctuation">(</span> <span class="token number">41</span> <span class="token operator">+</span> key<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">96</span> <span class="token operator">=</span> <span class="token number">83</span> <span class="token operator">-</span><span class="token operator">></span> key<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">42</span>
+<span class="token function">ord</span><span class="token punctuation">(</span><span class="token string">'S'</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">32</span> <span class="token operator">=</span> <span class="token function">51</span>
+<span class="token punctuation">(</span> <span class="token number">51</span> <span class="token operator">+</span> key<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">96</span> <span class="token operator">=</span> <span class="token number">42</span> <span class="token operator">-</span><span class="token operator">></span> key<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">87</span>
+<span class="token function">ord</span><span class="token punctuation">(</span><span class="token string">'3'</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">32</span> <span class="token operator">=</span> <span class="token function">19</span>
+<span class="token punctuation">(</span> <span class="token number">19</span> <span class="token operator">+</span> key<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">96</span> <span class="token operator">=</span> <span class="token number">29</span> <span class="token operator">-</span><span class="token operator">></span> key<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">10</span>
+
+key<span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">69</span><span class="token punctuation">,</span><span class="token number">42</span><span class="token punctuation">,</span><span class="token number">87</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">}</span>
+</code></pre>
+
+    </div>
+</div>
+
+<p><strong>script</strong></p>
+<pre class=" language-cpp"><code class="language-cpp">result <span class="token operator">=</span> <span class="token string">'=Js&amp;;*A`odZHi\'>D=Js&amp;#i-DYf>Uy\'yuyfyu&lt;)Gu'</span>
+n <span class="token operator">=</span> <span class="token function">list</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> i in <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">40</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token operator">:</span>
+    <span class="token keyword">for</span> j in <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token operator">:</span>
+        n<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token function">ord</span><span class="token punctuation">(</span>result<span class="token punctuation">[</span>i<span class="token operator">+</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">32</span><span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+<span class="token macro property">#n = [29, 42, 83, 6, 27, 10, 33, 64, 79, 68, 58, 40, 73, 7, 30, 36, 29, 42, 83, 6, 3, 73, 13, 36, 57, 70, 30, 53, 89, 7, 89, 85, 89, 70, 89, 85, 28, 9, 39, 85]</span>
+
+<span class="token keyword">for</span> i in <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">40</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token operator">:</span>
+    n<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>n<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>n<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span>n<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> n<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span>n<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span>n<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>n<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+<span class="token function">print</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+<span class="token macro property">#n = [6, 83, 42, 29, 64, 33, 10, 27, 40, 58, 68, 79, 36, 30, 7, 73, 6, 83, 42, 29, 36, 13, 73, 3, 53, 30, 70, 57, 85, 89, 7, 89, 85, 89, 70, 89, 85, 39, 9, 28]</span>
+
+key <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">69</span><span class="token punctuation">,</span><span class="token number">42</span><span class="token punctuation">,</span><span class="token number">87</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> i in <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">40</span><span class="token punctuation">)</span><span class="token operator">:</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token function">chr</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>n<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">96</span> <span class="token operator">-</span> key<span class="token punctuation">[</span>i<span class="token operator">%</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">96</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">32</span><span class="token punctuation">)</span> <span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
+</code></pre>
+<p>執行 script 後得到<code>AIS3{w31c0me_t0_AIS3_cryptoO0O0o0Ooo0}22</code> 可以看到 padding 為 22</p>
+<blockquote>
+<p>flag <code>AIS3{w31c0me_t0_AIS3_cryptoO0O0o0Ooo0}</code></p>
+</blockquote>
+<h3 id="ReSident-evil-villAge"><a href="#ReSident-evil-villAge" class="headerlink" title="ReSident evil villAge"></a>ReSident evil villAge</h3><blockquote>
+<p>註：此題用了非正規解</p>
+</blockquote>
+<div class="spoiler collapsed">
+    <div class="spoiler-title">
+        題目 Source code如下
+    </div>
+    <div class="spoiler-content">
+        <pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> socketserver
+<span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>PublicKey <span class="token keyword">import</span> RSA
+<span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Util<span class="token punctuation">.</span>number <span class="token keyword">import</span> <span class="token operator">*</span>
+<span class="token keyword">from</span> binascii <span class="token keyword">import</span> unhexlify
+
+<span class="token keyword">class</span> <span class="token class-name">Task</span><span class="token punctuation">(</span>socketserver<span class="token punctuation">.</span>BaseRequestHandler<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">recv</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>request<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">send</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> msg<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>request<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span>msg <span class="token operator">+</span> b<span class="token string">'\n'</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">handle</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        privkey <span class="token operator">=</span> RSA<span class="token punctuation">.</span>generate<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span>
+
+        n <span class="token operator">=</span> privkey<span class="token punctuation">.</span>n
+        e <span class="token operator">=</span> privkey<span class="token punctuation">.</span>e
+
+        self<span class="token punctuation">.</span>send<span class="token punctuation">(</span>b<span class="token string">'Welcome to ReSident evil villAge, sign the name "Ethan Winters" to get the flag.'</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>send<span class="token punctuation">(</span>b<span class="token string">'n = '</span> <span class="token operator">+</span> str<span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>send<span class="token punctuation">(</span>b<span class="token string">'e = '</span> <span class="token operator">+</span> str<span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>request<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span>b<span class="token string">'1) sign\n2) verify\n3) exit\n'</span><span class="token punctuation">)</span>
+            option <span class="token operator">=</span> self<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+            <span class="token keyword">if</span> option <span class="token operator">==</span> b<span class="token string">'1'</span><span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>request<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span>b<span class="token string">'Name (in hex): '</span><span class="token punctuation">)</span>
+                msg <span class="token operator">=</span> unhexlify<span class="token punctuation">(</span>self<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">if</span> msg <span class="token operator">==</span> b<span class="token string">'Ethan Winters'</span> <span class="token operator">or</span> bytes_to_long<span class="token punctuation">(</span>msg<span class="token punctuation">)</span> <span class="token operator">>=</span> n<span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># msg+k*n not allowed</span>
+                    self<span class="token punctuation">.</span>send<span class="token punctuation">(</span>b<span class="token string">'Nice try!'</span><span class="token punctuation">)</span>
+                <span class="token keyword">else</span><span class="token punctuation">:</span>
+                    sig <span class="token operator">=</span> pow<span class="token punctuation">(</span>bytes_to_long<span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">,</span> privkey<span class="token punctuation">.</span>d<span class="token punctuation">,</span> n<span class="token punctuation">)</span>     <span class="token comment" spellcheck="true"># TODO: Apply hashing first to prevent forgery</span>
+                    self<span class="token punctuation">.</span>send<span class="token punctuation">(</span>b<span class="token string">'Signature: '</span> <span class="token operator">+</span> str<span class="token punctuation">(</span>sig<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+            <span class="token keyword">elif</span> option <span class="token operator">==</span> b<span class="token string">'2'</span><span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>request<span class="token punctuation">.</span>sendall<span class="token punctuation">(</span>b<span class="token string">'Signature: '</span><span class="token punctuation">)</span>
+                sig <span class="token operator">=</span> int<span class="token punctuation">(</span>self<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                verified <span class="token operator">=</span> <span class="token punctuation">(</span>pow<span class="token punctuation">(</span>sig<span class="token punctuation">,</span> e<span class="token punctuation">,</span> n<span class="token punctuation">)</span> <span class="token operator">==</span> bytes_to_long<span class="token punctuation">(</span>b<span class="token string">'Ethan Winters'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword">if</span> verified<span class="token punctuation">:</span>
+                    self<span class="token punctuation">.</span>send<span class="token punctuation">(</span>b<span class="token string">'AIS3{THIS_IS_A_FAKE_FLAG}'</span><span class="token punctuation">)</span>
+                <span class="token keyword">else</span><span class="token punctuation">:</span>
+                    self<span class="token punctuation">.</span>send<span class="token punctuation">(</span>b<span class="token string">'Well done!'</span><span class="token punctuation">)</span>
+
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                <span class="token keyword">break</span>
+
+<span class="token keyword">class</span> <span class="token class-name">ForkingServer</span><span class="token punctuation">(</span>socketserver<span class="token punctuation">.</span>ForkingTCPServer<span class="token punctuation">,</span> socketserver<span class="token punctuation">.</span>TCPServer<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    HOST<span class="token punctuation">,</span> PORT <span class="token operator">=</span> <span class="token string">'0.0.0.0'</span><span class="token punctuation">,</span> <span class="token number">42069</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span>
+    server <span class="token operator">=</span> ForkingServer<span class="token punctuation">(</span><span class="token punctuation">(</span>HOST<span class="token punctuation">,</span> PORT<span class="token punctuation">)</span><span class="token punctuation">,</span> Task<span class="token punctuation">)</span>
+    server<span class="token punctuation">.</span>allow_reuse_address <span class="token operator">=</span> <span class="token boolean">True</span>
+    server<span class="token punctuation">.</span>serve_forever<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+
+    </div>
+</div>
+<p>題目是 RSA 簽證，目標是把 signature 送進去以達到 <code>pow(sig, e, n) == bytes_to_long(b'Ethan Winters')</code><br>原則上只要把 Ethan Winters 轉成 hex 丟進去讓它跑出 signature 之後，再丟回去讓他 verify 就可以了。<br>但是從 <code>if msg == b'Ethan Winters' or bytes_to_long(msg) &gt;= n:  # msg+k*n not allowed</code> 這行可以看到 <code>check msg == Ethan Winters</code> 會被擋掉。<br>由於送進去的是字串，於是要讓<strong>數字不變但是字串改變</strong>，就去嘗試 Bypass，發現前面加上 <code>00</code> 可以繞過，所以傳 <code>00</code> 加上 <code>Ethan Winters</code> 轉成 <code>hex</code> 就可以了<br>直接上圖。<br><img src="https://i.imgur.com/Kwxy3WU.png"><br><img src="https://i.imgur.com/4dpX7qf.png"></p>
+<h3 id="Republic-of-South-Africa"><a href="#Republic-of-South-Africa" class="headerlink" title="Republic of South Africa"></a>Republic of South Africa</h3><div class="spoiler collapsed">
+    <div class="spoiler-title">
+        題目 Source code如下
+    </div>
+    <div class="spoiler-content">
+        <p>chall.py</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Util<span class="token punctuation">.</span>number <span class="token keyword">import</span> <span class="token operator">*</span>
+<span class="token keyword">from</span> secret <span class="token keyword">import</span> flag
+<span class="token keyword">import</span> random
+<span class="token keyword">import</span> gmpy2
+gmpy2<span class="token punctuation">.</span>get_context<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>precision <span class="token operator">=</span> <span class="token number">1024</span>
+
+<span class="token keyword">def</span> <span class="token function">collision</span><span class="token punctuation">(</span>m1<span class="token punctuation">,</span> v1<span class="token punctuation">,</span> m2<span class="token punctuation">,</span> v2<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> v1<span class="token operator">*</span><span class="token punctuation">(</span>m1<span class="token operator">-</span>m2<span class="token punctuation">)</span><span class="token operator">/</span><span class="token punctuation">(</span>m1<span class="token operator">+</span>m2<span class="token punctuation">)</span> <span class="token operator">+</span> v2<span class="token operator">*</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">*</span>m2<span class="token punctuation">)</span><span class="token operator">/</span><span class="token punctuation">(</span>m1<span class="token operator">+</span>m2<span class="token punctuation">)</span><span class="token punctuation">,</span> v1<span class="token operator">*</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">*</span>m1<span class="token punctuation">)</span><span class="token operator">/</span><span class="token punctuation">(</span>m1<span class="token operator">+</span>m2<span class="token punctuation">)</span> <span class="token operator">+</span> v2<span class="token operator">*</span><span class="token punctuation">(</span>m2<span class="token operator">-</span>m1<span class="token punctuation">)</span><span class="token operator">/</span><span class="token punctuation">(</span>m1<span class="token operator">+</span>m2<span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">keygen</span><span class="token punctuation">(</span>digits<span class="token punctuation">)</span><span class="token punctuation">:</span>     <span class="token comment" spellcheck="true"># Warning: slow implementation</span>
+    m1 <span class="token operator">=</span> <span class="token number">1</span>
+    m2 <span class="token operator">=</span> <span class="token number">10</span> <span class="token operator">**</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">*</span>digits<span class="token number">-2</span><span class="token punctuation">)</span>
+    v1 <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>mpfr<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+    v2 <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>mpfr<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+    count <span class="token operator">=</span> <span class="token number">0</span>       <span class="token comment" spellcheck="true"># p+q</span>
+    <span class="token keyword">while</span> abs<span class="token punctuation">(</span>v1<span class="token punctuation">)</span> <span class="token operator">></span> v2 <span class="token operator">or</span> v1 <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> v1 <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            v1 <span class="token operator">=</span> <span class="token operator">-</span>v1
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            v1<span class="token punctuation">,</span> v2 <span class="token operator">=</span> collision<span class="token punctuation">(</span>m1<span class="token punctuation">,</span> v1<span class="token punctuation">,</span> m2<span class="token punctuation">,</span> v2<span class="token punctuation">)</span>
+        count <span class="token operator">+=</span> <span class="token number">1</span>
+
+    <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+        p <span class="token operator">=</span> random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span>count<span class="token operator">//</span><span class="token number">3</span><span class="token punctuation">,</span> count<span class="token operator">//</span><span class="token number">2</span><span class="token punctuation">)</span>
+        q <span class="token operator">=</span> count <span class="token operator">-</span> p
+        <span class="token keyword">if</span> isPrime<span class="token punctuation">(</span>p<span class="token punctuation">)</span> <span class="token operator">and</span> isPrime<span class="token punctuation">(</span>q<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">break</span>
+    <span class="token keyword">return</span> p<span class="token punctuation">,</span> q
+
+
+p<span class="token punctuation">,</span> q <span class="token operator">=</span> keygen<span class="token punctuation">(</span><span class="token number">153</span><span class="token punctuation">)</span>
+n <span class="token operator">=</span> p<span class="token operator">*</span>q
+e <span class="token operator">=</span> <span class="token number">65537</span>
+m <span class="token operator">=</span> bytes_to_long<span class="token punctuation">(</span>flag<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'n ='</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'e ='</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'c ='</span><span class="token punctuation">,</span> pow<span class="token punctuation">(</span>m<span class="token punctuation">,</span> e<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+
+    </div>
+</div>
+
+
+<p>一開始在看題目的時候發現<code>collision</code>這個函式跟正向彈性碰撞的物理公式一樣(正好學到XD)，但是沒有想到該怎麼利用物理來解這道題。</p>
+<p>之前有弄過 TwinPrime 的 RSA ，看到 $count=p+q$ 就感覺很可疑<br>簡單代數就可以發現 $phi = (p-1)*(q-1) = pq-(p+q)+1 = n-count +1$<br>所以目標是求出 $count$ 就可以算 $m$<br>把<code>keygen</code>的函式跑進去之後可以得到 $count$<br>因為 $count$ 看起來很大所以先從小的跑跑看有沒有規律<br>發現 $314$ 很可疑 多跑幾次之後發現長的很像圓周率</p>
+<p><img src="https://i.imgur.com/2uZKwqU.jpg" alt="keygen"></p>
+<p><code>digits</code> 就代表位數<br>就試了一下代進去 RSA 的數字就得到 flag 了</p>
+<p><strong>script</strong></p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Util<span class="token punctuation">.</span>number <span class="token keyword">import</span> <span class="token operator">*</span>
+n <span class="token operator">=</span> <span class="token number">23662270311503602529211462628663973377651035055221337186547659666520360329842954292759496973737109678655075242892199643594552737098393308599593056828393773327639809644570618472781338585802514939812387999523164606025662379300143159103239039862833152034195535186138249963826772564309026532268561022599227047</span>
+e <span class="token operator">=</span> <span class="token number">65537</span>
+c <span class="token operator">=</span> <span class="token number">11458615427536252698065643586706850515055080432343893818398610010478579108516179388166781637371605857508073447120074461777733767824330662610330121174203247272860627922171793234818603728793293847713278049996058754527159158251083995933600335482394024095666411743953262490304176144151437205651312338816540536</span>
+count<span class="token operator">=</span><span class="token number">314159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848</span>
+phi <span class="token operator">=</span> n<span class="token operator">-</span>count<span class="token operator">+</span><span class="token number">1</span>
+d <span class="token operator">=</span> inverse<span class="token punctuation">(</span>e<span class="token punctuation">,</span>phi<span class="token punctuation">)</span>
+m <span class="token operator">=</span> pow<span class="token punctuation">(</span>c<span class="token punctuation">,</span>d<span class="token punctuation">,</span>n<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>long_to_bytes<span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<blockquote>
+<p>flag <code>AIS3{https://www.youtube.com/watch?v=jsYwFizhncE}</code><br>順帶一提 flag 內的 youtube 網址是**利用物理的彈性碰撞去計算<code>pi</code>**，還滿有趣的，感興趣的可以去看看影片~~</p>
+</blockquote>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
             <hr/>
