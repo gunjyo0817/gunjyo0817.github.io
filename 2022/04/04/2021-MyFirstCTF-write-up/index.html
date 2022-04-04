@@ -463,6 +463,10 @@
 <blockquote>
 <p>flag <code>AIS3{H1n4m1z4w4_Sh0k0gun}</code></p>
 </blockquote>
+<blockquote>
+<p>HINT的影片<br><a target="_blank" rel="noopener" href="https://youtu.be/2b3Oqo13-r0?t=1296">https://youtu.be/2b3Oqo13-r0?t=1296</a></p>
+</blockquote>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/2b3Oqo13-r0&amp;t=1296s" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
 <h2 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h2><h3 id="Microchip"><a href="#Microchip" class="headerlink" title="Microchip"></a>Microchip</h3><div class="spoiler collapsed">
     <div class="spoiler-title">
         題目如下
@@ -730,6 +734,17 @@ F v G <span class="token number">3</span>
 <h3 id="ReSident-evil-villAge"><a href="#ReSident-evil-villAge" class="headerlink" title="ReSident evil villAge"></a>ReSident evil villAge</h3><blockquote>
 <p>註：此題用了非正規解</p>
 </blockquote>
+<p><strong>script</strong></p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Util<span class="token punctuation">.</span>number <span class="token keyword">import</span> <span class="token operator">*</span>
+n <span class="token operator">=</span> <span class="token number">23662270311503602529211462628663973377651035055221337186547659666520360329842954292759496973737109678655075242892199643594552737098393308599593056828393773327639809644570618472781338585802514939812387999523164606025662379300143159103239039862833152034195535186138249963826772564309026532268561022599227047</span>
+e <span class="token operator">=</span> <span class="token number">65537</span>
+c <span class="token operator">=</span> <span class="token number">11458615427536252698065643586706850515055080432343893818398610010478579108516179388166781637371605857508073447120074461777733767824330662610330121174203247272860627922171793234818603728793293847713278049996058754527159158251083995933600335482394024095666411743953262490304176144151437205651312338816540536</span>
+count<span class="token operator">=</span><span class="token number">314159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848</span>
+phi <span class="token operator">=</span> n<span class="token operator">-</span>count<span class="token operator">+</span><span class="token number">1</span>
+d <span class="token operator">=</span> inverse<span class="token punctuation">(</span>e<span class="token punctuation">,</span>phi<span class="token punctuation">)</span>
+m <span class="token operator">=</span> pow<span class="token punctuation">(</span>c<span class="token punctuation">,</span>d<span class="token punctuation">,</span>n<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>long_to_bytes<span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
