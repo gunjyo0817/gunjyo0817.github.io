@@ -249,7 +249,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://imgur.com/7sUnrHf')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/imgs/mfc.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -408,7 +408,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    168
+                    297
                 </div>
                 
 
@@ -432,11 +432,73 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Info"><a href="#Info" class="headerlink" title="Info"></a>Info</h1><p>| ID | gunjyo |<br>| Date   | 2021.5.22 09:30 - 17:30 |<br>| Rank| 11/282 |<br>| Score | 1362 |</p>
+                <h1 id="Info"><a href="#Info" class="headerlink" title="Info"></a>Info</h1><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ID</td>
+<td>gunjyo</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>2021.5.22 09:30 - 17:30</td>
+</tr>
+<tr>
+<td>Rank</td>
+<td>11/282</td>
+</tr>
+<tr>
+<td>Score</td>
+<td>1362</td>
+</tr>
+</tbody></table>
 <p>這是我初次參加(好像也只能參加一次) MyFirstCTF，為期 8 小時。<br>題目會與接續的 AIS3 Pre-exam 些微重疊(因為 AIS3 Pre-exam 的第一天是 MFC~)</p>
 <p>我的排名是第 11 名 ，對當時的我來說是個還滿滿意的成績~<br>因為是 PR90 以上所以當時有領到獎狀和 AIS3 的帽子 <span class="github-emoji"><span>❤</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/2764.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><br><img src="https://i.imgur.com/DVqZFWL.jpg" alt="mfc rank"></p>
 <p>事不遲疑，直接進到 write-up 吧</p>
-<h2 id="Cat-Slayer-ᶠᵃᵏᵉ-Nekogoroshi"><a href="#Cat-Slayer-ᶠᵃᵏᵉ-Nekogoroshi" class="headerlink" title="Cat Slayer ᶠᵃᵏᵉ | Nekogoroshi"></a>Cat Slayer ᶠᵃᵏᵉ | Nekogoroshi</h2><p>Welcome題<br><code>TERM=xterm-256color ssh -p 5566 h173@quiz.ais3.org</code><br>連線後會跳轉到輸入數字密碼的介面，只要按錯一個就會 Lock<br>暴力嘗試即可<br>密碼 2025830455298<br>:::spoiler flag<br><code>AIS3{H1n4m1z4w4_Sh0k0gun}</code><br>:::</p>
+<h1 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h1><h2 id="Cat-Slayer-ᶠᵃᵏᵉ-Nekogoroshi"><a href="#Cat-Slayer-ᶠᵃᵏᵉ-Nekogoroshi" class="headerlink" title="Cat Slayer ᶠᵃᵏᵉ | Nekogoroshi"></a>Cat Slayer ᶠᵃᵏᵉ | Nekogoroshi</h2><p>Welcome題<br><code>TERM=xterm-256color ssh -p 5566 h173@quiz.ais3.org</code><br>連線後會跳轉到輸入數字密碼的介面，只要按錯一個就會 Lock<br>暴力嘗試即可<br>密碼 2025830455298</p>
+<blockquote>
+<p>flag <code>AIS3{H1n4m1z4w4_Sh0k0gun}</code></p>
+</blockquote>
+<h1 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h1><h2 id="Microchip"><a href="#Microchip" class="headerlink" title="Microchip"></a>Microchip</h2><p>題目</p>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"python.h"</span></span>
+def <span class="token function">track</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> id<span class="token punctuation">)</span><span class="token operator">:</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">4</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">:</span>
+        padded <span class="token operator">=</span> name <span class="token operator">+</span> <span class="token string">"4444"</span>                                                  
+    <span class="token function">elif</span> <span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">4</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">:</span>
+        padded <span class="token operator">=</span> name <span class="token operator">+</span> <span class="token string">"333"</span>                                                   
+    <span class="token function">elif</span> <span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">4</span> <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">:</span>
+        padded <span class="token operator">=</span> name <span class="token operator">+</span> <span class="token string">"22"</span>                                                    
+    <span class="token function">elif</span> <span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">4</span> <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token operator">:</span>
+        padded <span class="token operator">=</span> name <span class="token operator">+</span> <span class="token string">"1"</span>
+
+    keys <span class="token operator">=</span> <span class="token function">list</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    temp <span class="token operator">=</span> id
+    <span class="token keyword">for</span> i in <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token operator">:</span>
+        keys<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>temp <span class="token operator">%</span> <span class="token number">96</span><span class="token punctuation">)</span>
+        temp <span class="token operator">=</span> <span class="token keyword">int</span><span class="token punctuation">(</span>temp <span class="token operator">/</span> <span class="token number">96</span><span class="token punctuation">)</span>
+
+    result <span class="token operator">=</span> <span class="token string">""</span>
+    <span class="token keyword">for</span> i in <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>padded<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">:</span>   #<span class="token number">10</span> round
+        nums <span class="token operator">=</span> <span class="token function">list</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> j in <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">:</span>
+            num <span class="token operator">=</span> <span class="token function">ord</span><span class="token punctuation">(</span>padded<span class="token punctuation">[</span>i <span class="token operator">+</span> j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">32</span>
+            num <span class="token operator">=</span> <span class="token punctuation">(</span>num <span class="token operator">+</span> keys<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">96</span>
+            nums<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>num <span class="token operator">+</span> <span class="token number">32</span><span class="token punctuation">)</span>
+
+        result <span class="token operator">+</span><span class="token operator">=</span> <span class="token function">chr</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        result <span class="token operator">+</span><span class="token operator">=</span> <span class="token function">chr</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        result <span class="token operator">+</span><span class="token operator">=</span> <span class="token function">chr</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        result <span class="token operator">+</span><span class="token operator">=</span> <span class="token function">chr</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> result  #len <span class="token operator">-</span><span class="token operator">></span> <span class="token number">40</span>
+
+name <span class="token operator">=</span> <span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"flag.txt"</span><span class="token punctuation">,</span> <span class="token string">"r"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">strip</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+id <span class="token operator">=</span> <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token function">input</span><span class="token punctuation">(</span><span class="token string">"key = "</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"result is:"</span><span class="token punctuation">,</span> <span class="token function">track</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> id<span class="token punctuation">)</span><span class="token punctuation">)</span> 
+</code></pre>
 
                 
             </div>
@@ -688,7 +750,7 @@
                 <a href="/2022/04/04/2021-MyFirstCTF-write-up/">
                     <div class="card-image">
                         
-                        <img src="https://imgur.com/7sUnrHf" class="responsive-img" alt="2021 MyFirstCTF write-up">
+                        <img src="/imgs/mfc.png" class="responsive-img" alt="2021 MyFirstCTF write-up">
                         
                         <span class="card-title">2021 MyFirstCTF write-up</span>
                     </div>
