@@ -412,14 +412,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    2.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    11 分
                 </div>
                 
 
@@ -483,6 +483,230 @@
 <blockquote>
 <p>HINT 附上了<a target="_blank" rel="noopener" href="https://youtu.be/2b3Oqo13-r0?t=1296">影片</a></p>
 </blockquote>
+<h3 id="Microcheese"><a href="#Microcheese" class="headerlink" title="Microcheese"></a>Microcheese</h3><p>是一個撿石頭遊戲，玩家和電腦輪流選任一排的任意數目的石子，將它們移去，最後清空盤面的獲勝。<br><img src="https://i.imgur.com/bi7g9ec.png" alt="Chess"></p>
+<div class="spoiler collapsed">
+    <div class="spoiler-title">
+        game.py
+    </div>
+    <div class="spoiler-content">
+        <pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> random
+<span class="token keyword">from</span> typing <span class="token keyword">import</span> Tuple
+
+
+<span class="token keyword">class</span> <span class="token class-name">Game</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    a simple Nim game with normal rules.
+    grundy's theorem: if nim_sum() is zero, then the player to move has a
+    winning strategy. otherwise, the other player has a winning strategy.
+    '''</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>stones <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+    <span class="token keyword">def</span> <span class="token function">generate_winning_game</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> None<span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">'''generate a game such that the first player has a winning strategy'''</span>
+        self<span class="token punctuation">.</span>stones <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        xor_sum <span class="token operator">=</span> <span class="token number">0</span>
+
+        piles <span class="token operator">=</span> random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>piles<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>stones<span class="token punctuation">.</span>append<span class="token punctuation">(</span>count <span class="token punctuation">:</span><span class="token operator">=</span> random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            xor_sum <span class="token operator">^</span><span class="token operator">=</span> count
+
+        <span class="token keyword">if</span> xor_sum <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>stones<span class="token punctuation">.</span>append<span class="token punctuation">(</span>random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">generate_losing_game</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> None<span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">'''generate a game such that the second player has a winning strategy'''</span>
+        self<span class="token punctuation">.</span>stones <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        xor_sum <span class="token operator">=</span> <span class="token number">0</span>
+
+        piles <span class="token operator">=</span> random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>piles<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>stones<span class="token punctuation">.</span>append<span class="token punctuation">(</span>count <span class="token punctuation">:</span><span class="token operator">=</span> random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            xor_sum <span class="token operator">^</span><span class="token operator">=</span> count
+
+        <span class="token keyword">if</span> xor_sum <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>stones<span class="token punctuation">.</span>append<span class="token punctuation">(</span>xor_sum<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">make_move</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> pile<span class="token punctuation">:</span> int<span class="token punctuation">,</span> count<span class="token punctuation">:</span> int<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> bool<span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">'''makes a move, returns whether the move is legal'''</span>
+
+        <span class="token keyword">if</span> pile <span class="token operator">not</span> <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>stones<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token boolean">False</span>
+        <span class="token keyword">if</span> count <span class="token operator">not</span> <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>stones<span class="token punctuation">[</span>pile<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token boolean">False</span>
+
+        self<span class="token punctuation">.</span>stones<span class="token punctuation">[</span>pile<span class="token punctuation">]</span> <span class="token operator">-=</span> count
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>stones<span class="token punctuation">[</span>pile<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>stones<span class="token punctuation">.</span>pop<span class="token punctuation">(</span>pile<span class="token punctuation">)</span>
+
+        <span class="token keyword">return</span> <span class="token boolean">True</span>
+
+    <span class="token keyword">def</span> <span class="token function">nim_sum</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> int<span class="token punctuation">:</span>
+        xor_sum <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">for</span> count <span class="token keyword">in</span> self<span class="token punctuation">.</span>stones<span class="token punctuation">:</span>
+            xor_sum <span class="token operator">^</span><span class="token operator">=</span> count
+        <span class="token keyword">return</span> xor_sum
+
+    <span class="token keyword">def</span> <span class="token function">ended</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> bool<span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">'''
+        checks if the game has ended, i.e., the player has no more moves.
+        if True, the current player loses the game
+        '''</span>
+        <span class="token keyword">return</span> len<span class="token punctuation">(</span>self<span class="token punctuation">.</span>stones<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span>
+
+    <span class="token keyword">def</span> <span class="token function">show</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> None<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'+---+-------------- stones info ------------------+'</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> pile<span class="token punctuation">,</span> count <span class="token keyword">in</span> enumerate<span class="token punctuation">(</span>self<span class="token punctuation">.</span>stones<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">'| {pile} | {"o" * count:&lt;43} |'</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">load</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> game_str<span class="token punctuation">:</span> str<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> None<span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">'''loads a saved game from string'''</span>
+        self<span class="token punctuation">.</span>stones <span class="token operator">=</span> list<span class="token punctuation">(</span>map<span class="token punctuation">(</span>int<span class="token punctuation">,</span> game_str<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">','</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">save</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> str<span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">'''returns the current game as a string'''</span>
+        <span class="token keyword">return</span> <span class="token string">','</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>map<span class="token punctuation">(</span>str<span class="token punctuation">,</span> self<span class="token punctuation">.</span>stones<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">AIPlayer</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    a perfect Nim player. if there exists a winning strategy for a game, this
+    player will always win.
+    '''</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">pass</span>
+
+    <span class="token keyword">def</span> <span class="token function">get_move</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> game<span class="token punctuation">:</span> Game<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> Tuple<span class="token punctuation">[</span>int<span class="token punctuation">,</span> int<span class="token punctuation">]</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">'''
+        if there is a winning strategy, returns a move that guarantees a win.
+        otherwise, returns a random move.
+        '''</span>
+        nim_sum <span class="token operator">=</span> game<span class="token punctuation">.</span>nim_sum<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> nim_sum <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true"># losing game, make a random move</span>
+            pile <span class="token operator">=</span> random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> len<span class="token punctuation">(</span>game<span class="token punctuation">.</span>stones<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span>
+            count <span class="token operator">=</span> random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> game<span class="token punctuation">.</span>stones<span class="token punctuation">[</span>pile<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true"># winning game, make a winning move</span>
+            <span class="token keyword">for</span> i<span class="token punctuation">,</span> v <span class="token keyword">in</span> enumerate<span class="token punctuation">(</span>game<span class="token punctuation">.</span>stones<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                target <span class="token operator">=</span> v <span class="token operator">^</span> nim_sum
+                <span class="token keyword">if</span> target <span class="token operator">&lt;</span> v<span class="token punctuation">:</span>
+                    pile <span class="token operator">=</span> i
+                    count <span class="token operator">=</span> v <span class="token operator">-</span> target
+                    <span class="token keyword">break</span>
+
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>pile<span class="token punctuation">,</span> count<span class="token punctuation">)</span>
+</code></pre>
+
+    </div>
+</div>
+
+<div class="spoiler collapsed">
+    <div class="spoiler-title">
+        server.py
+    </div>
+    <div class="spoiler-content">
+        <pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> myhash
+<span class="token keyword">from</span> game <span class="token keyword">import</span> Game<span class="token punctuation">,</span> AIPlayer
+<span class="token keyword">from</span> text <span class="token keyword">import</span> <span class="token operator">*</span>
+
+
+flag <span class="token operator">=</span> <span class="token string">'(no flag here)'</span>
+
+hash <span class="token operator">=</span> myhash<span class="token punctuation">.</span>Hash<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">play</span><span class="token punctuation">(</span>game<span class="token punctuation">:</span> Game<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    ai_player <span class="token operator">=</span> AIPlayer<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    win <span class="token operator">=</span> <span class="token boolean">False</span>
+
+    <span class="token keyword">while</span> <span class="token operator">not</span> game<span class="token punctuation">.</span>ended<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        game<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        print_game_menu<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        choice <span class="token operator">=</span> input<span class="token punctuation">(</span><span class="token string">'it\'s your turn to move! what do you choose? '</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> choice <span class="token operator">==</span> <span class="token string">'0'</span><span class="token punctuation">:</span>
+            pile <span class="token operator">=</span> int<span class="token punctuation">(</span>input<span class="token punctuation">(</span><span class="token string">'which pile do you choose? '</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            count <span class="token operator">=</span> int<span class="token punctuation">(</span>input<span class="token punctuation">(</span><span class="token string">'how many stones do you remove? '</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token operator">not</span> game<span class="token punctuation">.</span>make_move<span class="token punctuation">(</span>pile<span class="token punctuation">,</span> count<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                print_error<span class="token punctuation">(</span><span class="token string">'that is not a valid move!'</span><span class="token punctuation">)</span>
+                <span class="token keyword">continue</span>
+
+        <span class="token keyword">elif</span> choice <span class="token operator">==</span> <span class="token string">'1'</span><span class="token punctuation">:</span>
+            game_str <span class="token operator">=</span> game<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            digest <span class="token operator">=</span> hash<span class="token punctuation">.</span>hexdigest<span class="token punctuation">(</span>game_str<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'you game has been saved! here is your saved game:'</span><span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span>game_str <span class="token operator">+</span> <span class="token string">':'</span> <span class="token operator">+</span> digest<span class="token punctuation">)</span>
+            <span class="token keyword">return</span>
+
+        <span class="token keyword">elif</span> choice <span class="token operator">==</span> <span class="token string">'2'</span><span class="token punctuation">:</span>
+            <span class="token keyword">break</span>
+
+        <span class="token comment" spellcheck="true"># no move -> player wins!</span>
+        <span class="token keyword">if</span> game<span class="token punctuation">.</span>ended<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            win <span class="token operator">=</span> <span class="token boolean">True</span>
+            <span class="token keyword">break</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            print_move<span class="token punctuation">(</span><span class="token string">'you'</span><span class="token punctuation">,</span> count<span class="token punctuation">,</span> pile<span class="token punctuation">)</span>
+            game<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token comment" spellcheck="true"># the AI plays a move</span>
+        pile<span class="token punctuation">,</span> count <span class="token operator">=</span> ai_player<span class="token punctuation">.</span>get_move<span class="token punctuation">(</span>game<span class="token punctuation">)</span>
+        <span class="token keyword">assert</span> game<span class="token punctuation">.</span>make_move<span class="token punctuation">(</span>pile<span class="token punctuation">,</span> count<span class="token punctuation">)</span>
+        print_move<span class="token punctuation">(</span><span class="token string">'i'</span><span class="token punctuation">,</span> count<span class="token punctuation">,</span> pile<span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> win<span class="token punctuation">:</span>
+        print_flag<span class="token punctuation">(</span>flag<span class="token punctuation">)</span>
+        exit<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        print_lose<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">menu</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    print_main_menu<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    choice <span class="token operator">=</span> input<span class="token punctuation">(</span><span class="token string">'what would you like to do? '</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> choice <span class="token operator">==</span> <span class="token string">'0'</span><span class="token punctuation">:</span>
+        print_rules<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">elif</span> choice <span class="token operator">==</span> <span class="token string">'1'</span><span class="token punctuation">:</span>
+        game <span class="token operator">=</span> Game<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        game<span class="token punctuation">.</span>generate_losing_game<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        play<span class="token punctuation">(</span>game<span class="token punctuation">)</span>
+
+    <span class="token keyword">elif</span> choice <span class="token operator">==</span> <span class="token string">'2'</span><span class="token punctuation">:</span>
+        saved <span class="token operator">=</span> input<span class="token punctuation">(</span><span class="token string">'enter the saved game: '</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        game_str<span class="token punctuation">,</span> digest <span class="token operator">=</span> saved<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">':'</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> hash<span class="token punctuation">.</span>hexdigest<span class="token punctuation">(</span>game_str<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> digest<span class="token punctuation">:</span>
+            game <span class="token operator">=</span> Game<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            game<span class="token punctuation">.</span>load<span class="token punctuation">(</span>game_str<span class="token punctuation">)</span>
+            play<span class="token punctuation">(</span>game<span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            print_error<span class="token punctuation">(</span><span class="token string">'invalid game provided!'</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">elif</span> choice <span class="token operator">==</span> <span class="token string">'3'</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'omg bye!'</span><span class="token punctuation">)</span>
+        exit<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    print_welcome<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+            menu<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">except</span> Exception<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'oops i died'</span><span class="token punctuation">)</span>
+</code></pre>
+
+    </div>
+</div>
+<p>從 <code>game.py</code> 的規則可以看到有先手贏的棋盤(<code>generate_winning_game()</code>)和後手贏的棋盤(<code>generate_losing_game()</code>)，我是先手，所以 SERVER 會給後手贏的棋盤，理論上來說應該贏不了。<br><img src="https://i.imgur.com/3KslZMz.png" alt="play()"><br>但問題出在 <code>server.py</code> 中的 <code>play()</code>，只有判斷 <code>choice</code> 為 0,1,2 的狀況，因此若我們輸入非 0,1,2 的數字便可跳過回合，直到剩下最後一排為止，便可以獲勝得到 flag<br><img src="https://i.imgur.com/9OAfNm9.png" alt="win"></p>
 <h2 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h2><h3 id="Microchip"><a href="#Microchip" class="headerlink" title="Microchip"></a>Microchip</h3><div class="spoiler collapsed">
     <div class="spoiler-title">
         題目如下
