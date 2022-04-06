@@ -455,7 +455,7 @@
 <p>註 有些題目跟 MFC 是重疊的哦~ write-up 是一致的</p>
 </blockquote>
 <h2 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h2><h3 id="Cat-Slayer-ᶠᵃᵏᵉ-Nekogoroshi-100"><a href="#Cat-Slayer-ᶠᵃᵏᵉ-Nekogoroshi-100" class="headerlink" title="Cat Slayer ᶠᵃᵏᵉ | Nekogoroshi (100)"></a>Cat Slayer ᶠᵃᵏᵉ | Nekogoroshi (100)</h3><blockquote>
-<p>BGM: <a target="_blank" rel="noopener" href="https://youtu.be/9-NusuQ8JaA">亜咲花「I believe what you said」</a><br>TERM=xterm-256color ssh -p 5566 <a href="mailto:h173@quiz.ais3.org">h173@quiz.ais3.org</a><br>[name= Author: splitline feat. Hojo Satoko]</p>
+<p>BGM: <a target="_blank" rel="noopener" href="https://youtu.be/9-NusuQ8JaA">亜咲花「I believe what you said」</a><br>TERM=xterm-256color ssh -p 5566 <a href="mailto:h173@quiz.ais3.org">h173@quiz.ais3.org</a><br>Author: splitline feat. Hojo Satoko</p>
 </blockquote>
 <p>Welcome 題</p>
 <p><code>TERM=xterm-256color ssh -p 5566 h173@quiz.ais3.org</code><br>連線後會跳轉到輸入數字密碼的介面，只要按錯一個就會跳 Locked，要重新連線<br>暴力嘗試即可<br>密碼 2025830455298</p>
@@ -850,7 +850,7 @@ key <span class="token operator">=</span> <span class="token punctuation">[</spa
 </div>
 <p>題目是 RSA 簽證<br>目標是把 signature 送進去以達到 <code>pow(sig, e, n) == bytes_to_long(b'Ethan Winters')</code><br>原則上只要把 Ethan Winters 轉成 hex 丟進去讓它跑出 signature 之後，再丟回去讓他 verify 就可以了。<br>但是從 <code>if msg == b'Ethan Winters' or bytes_to_long(msg) &gt;= n:  # msg+k*n not allowed</code> 這行可以看到 <code>check msg == Ethan Winters</code> 會被擋掉。<br>由於送進去的是字串，於是要讓<strong>數字不變但是字串改變</strong>，就去嘗試 Bypass，發現前面加上 <code>00</code> 可以繞過，所以傳 <code>00</code> 加上 <code>Ethan Winters</code> 轉成 <code>hex</code> 就可以了<br>直接上圖。<br><img src="https://i.imgur.com/Kwxy3WU.png"><br><img src="https://i.imgur.com/4dpX7qf.png"></p>
 <h3 id="Republic-of-South-Africa-235"><a href="#Republic-of-South-Africa-235" class="headerlink" title="Republic of South Africa (235)"></a>Republic of South Africa (235)</h3><blockquote>
-<p>RSA collision or something IDK I am a physicist<br>[name=Author: Kuruwa]</p>
+<p>RSA collision or something IDK I am a physicist<br>Author: Kuruwa</p>
 </blockquote>
 <div class="spoiler collapsed">
     <div class="spoiler-title">
@@ -926,7 +926,7 @@ m <span class="token operator">=</span> pow<span class="token punctuation">(</sp
 <p>flag <code>AIS3{https://www.youtube.com/watch?v=jsYwFizhncE}</code><br>順帶一提 flag 內的 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=jsYwFizhncE">youtube 網址</a>是利用物理的彈性碰撞去計算<code>pi</code>，還滿有趣的，感興趣的可以去看看影片~~</p>
 </blockquote>
 <h2 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h2><h3 id="Piano-158"><a href="#Piano-158" class="headerlink" title="Piano(158)"></a>Piano(158)</h3><blockquote>
-<p>Is this a MUSIC GAME?<br>[name=Author: CSY54]</p>
+<p>Is this a MUSIC GAME?<br>Author: CSY54</p>
 </blockquote>
 <p>題目給了一個 <code>.exe 檔</code>，執行後會是鋼琴界面(真的有聲音)<br><img src="https://i.imgur.com/9EgZvRS.png" alt="Piano"><br>題目還給一個 <code>.dll 檔</code>，可以用 <code>dnSpy</code> 來 <strong>反編譯</strong> ，就可以看到它在做的事情</p>
 <blockquote>
@@ -997,7 +997,7 @@ m <span class="token operator">=</span> pow<span class="token punctuation">(</sp
 <p>flag <code>AIS3{7wink1e_tw1nkl3_l1ttl3_574r_1n_C_5h4rp}</code></p>
 </blockquote>
 <h3 id="rabbit-Peekora-cucumber"><a href="#rabbit-Peekora-cucumber" class="headerlink" title=":rabbit: Peekora :cucumber:"></a><span class="github-emoji"><span>🐰</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f430.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> Peekora <span class="github-emoji"><span>🥒</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f952.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></h3><blockquote>
-<p>吃太甜要配什麼<br>可樂<br>因為 too 甜配 cola<br>Usage: python3 -m pickle flag_checker.pkl<br>[name=Author: splitline]</p>
+<p>吃太甜要配什麼<br>可樂<br>因為 too 甜配 cola<br>Usage: python3 -m pickle flag_checker.pkl<br>Author: splitline</p>
 </blockquote>
 <p>題目給了<code>.pkl檔</code>和它的用法 <code>python3 -m pickle flag_checker.pkl</code></p>
 <div class="spoiler collapsed">
@@ -1408,7 +1408,7 @@ qq<span class="token string">","</span>password<span class="token string">":null
 <p>flag <code>AIS3{V3rY_v3rY_V3ry_345Y_55rF}</code></p>
 </blockquote>
 <h2 id="PWN"><a href="#PWN" class="headerlink" title="PWN"></a>PWN</h2><h3 id="Write-Me-192-賽後"><a href="#Write-Me-192-賽後" class="headerlink" title="Write Me (192) (賽後)"></a>Write Me (192) (賽後)</h3><blockquote>
-<p>[name=Author: lys0829]</p>
+<p>Author: lys0829</p>
 </blockquote>
 <div class="spoiler collapsed">
     <div class="spoiler-title">
