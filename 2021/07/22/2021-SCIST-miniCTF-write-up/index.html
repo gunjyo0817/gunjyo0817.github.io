@@ -1,0 +1,1243 @@
+<!DOCTYPE HTML>
+<html lang="zh-TW">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="2021 SCIST miniCTF write-up, Gunjyo&#39;s Blog">
+    <meta name="description" content="2021 SCIST 第一屆 資安課程季後賽 FinalCTF 的不專業 write-up，rank 1(Official)">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>2021 SCIST miniCTF write-up | Gunjyo&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.1.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+
+
+<body>
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Gunjyo&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>Categories</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>Archives</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Gunjyo&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            To live out as I am to the death of me.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			Categories
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			Archives
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/imgs/SCIST.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">2021 SCIST miniCTF write-up</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/CTF/">
+                                <span class="chip bg-color">CTF</span>
+                            </a>
+                        
+                            <a href="/tags/write-up/">
+                                <span class="chip bg-color">write-up</span>
+                            </a>
+                        
+                            <a href="/tags/SCIST/">
+                                <span class="chip bg-color">SCIST</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/write-up/" class="post-category">
+                                write-up
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2021-07-22
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    818
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    4 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+
+                <div class="info-break-policy">
+                    
+                    <i class="fa fa-pencil"></i> 作者: Gunjyo
+                    
+                </div>
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h2><h3 id="Caesar"><a href="#Caesar" class="headerlink" title="Caesar"></a>Caesar</h3><p>題目:</p>
+<pre class=" language-python"><code class="language-python">Tj5ETk92VVVVWj4vYG5cbVpgXG50WmdqZzg4eAU<span class="token operator">=</span>
+</code></pre>
+<p>看到字串後面有<code>=</code>就可以猜到題目先做了base64的加密</p>
+<blockquote>
+<p>含有不可視字元，丟上去線上工具會爛掉</p>
+</blockquote>
+<p>所以要用 terminal 裡面的<br>然後自己寫一個 Caesar<br><strong>script</strong></p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> base64 <span class="token keyword">import</span> b64decode <span class="token keyword">as</span> b64d
+
+a<span class="token operator">=</span><span class="token string">'Tj5ETk92VVVVWj4vYG5cbVpgXG50WmdqZzg4eAU='</span>
+a<span class="token operator">=</span><span class="token punctuation">(</span>b64d<span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">256</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>chr<span class="token punctuation">(</span><span class="token punctuation">(</span>ord<span class="token punctuation">(</span>a<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">+</span>i<span class="token punctuation">)</span><span class="token operator">%</span><span class="token number">256</span><span class="token punctuation">)</span><span class="token operator">==</span><span class="token string">'S'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                key<span class="token operator">=</span>i
+                <span class="token keyword">break</span>
+
+<span class="token keyword">for</span> i <span class="token keyword">in</span> a<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>chr<span class="token punctuation">(</span><span class="token punctuation">(</span>ord<span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token operator">+</span>key<span class="token punctuation">)</span><span class="token operator">%</span><span class="token number">256</span><span class="token punctuation">)</span><span class="token punctuation">,</span>end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
+</code></pre>
+<div class="spoiler collapsed">
+    <div class="spoiler-title">
+        MuMu 的 One Line Python
+    </div>
+    <div class="spoiler-content">
+        <pre class=" language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token keyword">lambda</span> c <span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>map<span class="token punctuation">(</span><span class="token keyword">lambda</span> i <span class="token punctuation">,</span> key <span class="token punctuation">:</span> chr<span class="token punctuation">(</span>ord<span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">+</span> key<span class="token punctuation">)</span> <span class="token punctuation">,</span> c <span class="token punctuation">,</span> <span class="token punctuation">[</span>map<span class="token punctuation">(</span><span class="token keyword">lambda</span> a <span class="token punctuation">,</span> b <span class="token punctuation">:</span> ord<span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">-</span> ord<span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token punctuation">,</span> <span class="token string">"SCIST"</span> <span class="token punctuation">,</span> c<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">*</span> len<span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span>open<span class="token punctuation">(</span><span class="token string">"output.txt"</span> <span class="token punctuation">,</span> <span class="token string">"r"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">"base64"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+
+    </div>
+</div>
+
+<blockquote>
+<p>flag:<code>SCIST{ZZZ_C4esar_easy_lol==}</code></p>
+</blockquote>
+<div class="spoiler collapsed">
+    <div class="spoiler-title">
+        <bonus> Caesar 變形種 By:MuMu
+    </bonus></div>
+    <div class="spoiler-content">
+        <pre class=" language-python"><code class="language-python">U0JHUFB2aGhsVldUYmJkXlFbTVBNUF1KWmQ<span class="token operator">=</span>
+</code></pre>
+<p><img src="https://i.imgur.com/I1odGCc.png"></p>
+<p><img src="https://i.imgur.com/fQq124b.png"></p>
+<p>所以 Caesar 那題的更精確 solution:<br><img src="https://i.imgur.com/Y6FebA3.png"></p>
+
+    </div>
+</div>
+
+<h3 id="Triple-Prime"><a href="#Triple-Prime" class="headerlink" title="Triple Prime"></a>Triple Prime</h3><p>孿生質數 Twin Prime 的三胞胎版本(?<br>可以參考<a target="_blank" rel="noopener" href="https://www.slideshare.net/ssuseraba268/rsa-in-ctf">Rsa in CTF</a>的第八頁</p>
+<p><strong>script</strong></p>
+<pre class=" language-python"><code class="language-python">c<span class="token operator">=</span> <span class="token number">67492486663486144772221547069643364693153882987514859982801483371495669234313843407759516594581600505367563236786229196073368724923881815927703467529105355771821522774825198758466493383723698769253456158342022557472368699641009606588908947853294254252464792031328215741187269870367497007150999774039497278814</span>
+
+e<span class="token operator">=</span> <span class="token number">65537</span>
+
+n1<span class="token operator">=</span> <span class="token number">129460532860596440160706624843422070781645956231421467972744690581522205174258577915016187584314083476242785444854594515879017256215500086068771217735325021467405636414989186151325017345519162566774426861247861213205744866676097362990428554608031872143809925068116556339068532303253893915296775431906994181539</span>
+
+n2<span class="token operator">=</span> <span class="token number">129460532860596440160706624843422070781645956231421467972744690581522205174258577915016187584314083476242785444854594515879017256215500086068771217735325067405197029444112630416870299593351527503478052614265205752423349122130014615189517699859405374248112610462948216897942561697411354097800772588356777342511</span>
+
+n3<span class="token operator">=</span> <span class="token number">129460532860596440160706624843422070781645956231421467972744690581522205174258577915016187584314083476242785444854594515879017256215500086068771217735325159280779815502359518947960864089016257376885304120299894830858557633037849119587695990362152378456717981252611538015690620485726274462808766901256343664479</span>
+
+<span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Util<span class="token punctuation">.</span>number <span class="token keyword">import</span> <span class="token operator">*</span>
+
+pq<span class="token operator">=</span><span class="token punctuation">(</span>n2<span class="token operator">-</span>n1<span class="token number">-4</span><span class="token punctuation">)</span><span class="token operator">//</span><span class="token number">2</span>
+
+phi1<span class="token operator">=</span>n1<span class="token operator">-</span>pq<span class="token operator">+</span><span class="token number">1</span>
+phi2<span class="token operator">=</span>n1<span class="token operator">+</span>pq<span class="token operator">+</span><span class="token number">1</span>
+phi3<span class="token operator">=</span>n1<span class="token operator">+</span><span class="token number">5</span><span class="token operator">*</span>pq<span class="token operator">+</span><span class="token number">25</span>
+
+d1<span class="token operator">=</span>inverse<span class="token punctuation">(</span>e<span class="token punctuation">,</span>phi1<span class="token punctuation">)</span>
+d2<span class="token operator">=</span>inverse<span class="token punctuation">(</span>e<span class="token punctuation">,</span>phi2<span class="token punctuation">)</span>
+d3<span class="token operator">=</span>inverse<span class="token punctuation">(</span>e<span class="token punctuation">,</span>phi3<span class="token punctuation">)</span>
+
+m<span class="token operator">=</span>pow<span class="token punctuation">(</span>pow<span class="token punctuation">(</span>pow<span class="token punctuation">(</span>c<span class="token punctuation">,</span>d3<span class="token punctuation">,</span>n3<span class="token punctuation">)</span><span class="token punctuation">,</span>d2<span class="token punctuation">,</span>n2<span class="token punctuation">)</span><span class="token punctuation">,</span>d1<span class="token punctuation">,</span>n1<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>bytes<span class="token punctuation">.</span>fromhex<span class="token punctuation">(</span>hex<span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<blockquote>
+<p>flag:<code>SCIST{twin_prime==vykp_rtkog}</code></p>
+</blockquote>
+<hr>
+<h3 id="Winner-Winner-Chicken-Dinner"><a href="#Winner-Winner-Chicken-Dinner" class="headerlink" title="Winner Winner Chicken Dinner"></a>Winner Winner Chicken Dinner</h3><p>低解密指數攻擊 Wiener Attack<br>特性：</p>
+<ol>
+<li>q&lt;p&lt;2q</li>
+<li><img src="https://i.imgur.com/w4QJpLE.png"></li>
+</ol>
+<p>可以參考<a target="_blank" rel="noopener" href="https://www.slideshare.net/ssuseraba268/rsa-in-ctf">Rsa in CTF</a>的第21頁</p>
+<p><code>git clone https://github.com/pablocelayes/rsa-wiener-attack</code></p>
+<p>記得要把py檔放在同一目錄下</p>
+<p><strong>script</strong></p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> RSAwienerHacker
+<span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Util<span class="token punctuation">.</span>number <span class="token keyword">import</span> <span class="token operator">*</span>
+
+n <span class="token operator">=</span> <span class="token number">68126437388977012491646508485989748986441131328587518477687317430610358060299259889270096202942172667026765693121007244799277906816721129879871839668534245685223273320285357819059314305041568152938631311930694380458197864770594205779250872221180313165818499006934672425382344026926216633834392646021142886769</span>
+e <span class="token operator">=</span> <span class="token number">15950795120525802915045576886792784828953195706868419082039089065630551280007920240748167126298220976040006667069839541710102987502293373955109113066554922904845606595280968695858510227233594594345712943776826231898942926115077969092158946886802684295287362659572633661590452939636520740933192957991470727487</span>
+c <span class="token operator">=</span> <span class="token number">64084228016799140236089362630474537548271913453940735254127977713219774643382144415063040580056793784702386932065587548669067894646547290107939535980687043376839097247039277684116912998816751608587498829246494557174907620772811870282348713591834440433602622206371153329743437983172303794473772691521200966081</span>
+
+d<span class="token operator">=</span>RSAwienerHacker<span class="token punctuation">.</span>hack_RSA<span class="token punctuation">(</span>e<span class="token punctuation">,</span>n<span class="token punctuation">)</span>
+m<span class="token operator">=</span>pow<span class="token punctuation">(</span>c<span class="token punctuation">,</span>d<span class="token punctuation">,</span>n<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>long_to_bytes<span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<blockquote>
+<p>flag:<code>SCIST{w13n3R_aTt4cK_1S_Ez_wh3n_d_with_E}</code></p>
+</blockquote>
+<h3 id="Shuffle-Puzzle"><a href="#Shuffle-Puzzle" class="headerlink" title="Shuffle Puzzle"></a>Shuffle Puzzle</h3><p>此題為 Substitution cipher</p>
+<p>從<code>task.py</code>可以看到<code>freq</code>是把<code>flag</code>去做詞頻分析後 字母高到低遞減輸出</p>
+<p>所以我們把<code>res</code>去<code>decode()</code>拿到密文之後<br>也把密文去做詞頻分析</p>
+<p>再將兩者的頻率對照<br>就可以把密文轉回明文了</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> collections <span class="token keyword">import</span> Counter
+<span class="token keyword">from</span> Crypto<span class="token punctuation">.</span>Util<span class="token punctuation">.</span>number <span class="token keyword">import</span> <span class="token operator">*</span>
+
+f <span class="token operator">=</span> open<span class="token punctuation">(</span><span class="token string">"output.txt"</span><span class="token punctuation">,</span><span class="token string">'rb'</span><span class="token punctuation">)</span>
+
+c <span class="token operator">=</span> f<span class="token punctuation">.</span>readline<span class="token punctuation">(</span><span class="token punctuation">)</span>
+c <span class="token operator">=</span> c<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span>
+c <span class="token operator">=</span> bytes<span class="token punctuation">.</span>fromhex<span class="token punctuation">(</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'latin-1'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+c <span class="token operator">=</span> c<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'latin-1'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">#明文的字母頻率高低</span>
+freq<span class="token operator">=</span><span class="token string">' EATNISORHLDCGWUBFYPKMVXZJQ'</span>
+
+<span class="token comment" spellcheck="true">#計算密文的字母頻率高低</span>
+newf <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>map<span class="token punctuation">(</span><span class="token keyword">lambda</span> i <span class="token punctuation">:</span> i<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token punctuation">,</span> sorted<span class="token punctuation">(</span>Counter<span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">,</span> key <span class="token operator">=</span> <span class="token keyword">lambda</span> i <span class="token punctuation">:</span> i<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token punctuation">,</span> reverse <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>newf<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">#用頻率高低對照替換前的字母和替換後的字母，然後把你的密文替換回明文</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> c<span class="token punctuation">:</span>
+        <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span>len<span class="token punctuation">(</span>freq<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>newf<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">==</span>i<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                        <span class="token keyword">print</span><span class="token punctuation">(</span>freq<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span>end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
+</code></pre>
+<blockquote>
+<p>flag </p>
+</blockquote>
+<pre class=" language-bash"><code class="language-bash">HEREUPON LEGRAND AROSE WITH A GRAVE AND STATELY AIR AND BROUGHT ME THE BEETLEFROM A GLASS CASE IN WHICH IT WAS ENCLOSED IT WAS A BEAUTIFUL SCARABAEUS AND ATTHAT TIME UNKNOWN TO NATURALISTSOF COURSE A GREAT PRIZE IN A SCIENTIFIC POINTOF VIEW THERE WERE TWO ROUND BLACK SPOTS NEAR ONE EXTREMITY OF THE BACK AND ALONG ONE NEAR THE OTHER THE SCALES WERE EXCEEDINGLY HARD AND GLOSSY WITH ALL THEAPPEARANCE OF BURNISHED GOLD THE WEIGHT OF THE INSECT WAS VERY REMARKABLE ANDTAKING ALL THINGS INTO CONSIDERATION I COULD HARDLY BLAME JUPITER FOR HIS OPINIONRESPECTING IT SCIST I KNOW THIS FLAG IS VERY LONG BECAUSE I NEED MAKE FREQUENCY ANALYSIS WORK ON THIS CHALLENGE AND I WANT TO ASK WHETHER DID U SOLVE THIS BY HAND
+</code></pre>
+<h2 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h2><h3 id="Fuck…"><a href="#Fuck…" class="headerlink" title="Fuck…?"></a>Fuck…?</h3><p>檔案裡面的東東用<!--?php?-->包起來了<br>所以可以試著用php執行</p>
+<p>先裝php <code>sudo apt install php7.2-cli</code></p>
+<p>執行一次 將ERROR丟掉 抓SCIST的關鍵字<br><code>php output.txt 2&gt;&amp;1 | grep "SCIST{.*}</code></p>
+<p>Regex標準式<br><img src="https://i.imgur.com/Z0JqqX0.png"></p>
+<blockquote>
+<p>flag:<code>SCIST{Wtf_1s_th3sE_bu!L_sH1T...PHPFuck= =?}</code></p>
+</blockquote>
+<h3 id="Bits"><a href="#Bits" class="headerlink" title="Bits"></a>Bits</h3><p>既然他只有兩種顏色 1 和 0<br>那整體的形狀還是看的出來吧XD<br>所以可以縮小就得到 flag</p>
+<p><img src="https://i.imgur.com/WF4aEVy.jpg"></p>
+<h3 id="Re-g-eE-x"><a href="#Re-g-eE-x" class="headerlink" title="Re[g][eE]x"></a>Re[g][eE]x</h3><p>此題為 Regex 正規表示式<br>按照格式打出合理的 flag 就可以了<br><code>^SCIST{[KCck]+[0Oo]*[1!Lli]{2,}_[\d\D]+_[\W]{1, 3}_(fL4G|flag)_no(?!ne)_ex(PRES|pres)(S[1L!lil0N])}$</code><br>可以拿到 <a target="_blank" rel="noopener" href="https://regex101.com/">regex101</a> 測</p>
+<blockquote>
+<p>flag<br>Ex. <code>SCIST{k11_1_##_fL4G_no_exPRESSioN}</code></p>
+</blockquote>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Gunjyo</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://gunjyo0817.github.io/2021/07/22/2021-SCIST-miniCTF-write-up/">https://gunjyo0817.github.io/2021/07/22/2021-SCIST-miniCTF-write-up/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint policy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Gunjyo</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/CTF/">
+                                    <span class="chip bg-color">CTF</span>
+                                </a>
+                            
+                                <a href="/tags/write-up/">
+                                    <span class="chip bg-color">write-up</span>
+                                </a>
+                            
+                                <a href="/tags/SCIST/">
+                                    <span class="chip bg-color">SCIST</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2021/07/22/2021-SCIST-FinalCTF-%E5%AD%A3%E5%BE%8C%E8%B3%BD-write-up/">
+                    <div class="card-image">
+                        
+                        <img src="/imgs/SCIST.png" class="responsive-img" alt="2021 SCIST FinalCTF 季後賽 write-up">
+                        
+                        <span class="card-title">2021 SCIST FinalCTF 季後賽 write-up</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            2021 SCIST 第一屆 資安課程季後賽 FinalCTF 的不專業 write-up，rank 1(Official)
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-07-22
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/write-up/" class="post-category">
+                                    write-up
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CTF/">
+                        <span class="chip bg-color">CTF</span>
+                    </a>
+                    
+                    <a href="/tags/write-up/">
+                        <span class="chip bg-color">write-up</span>
+                    </a>
+                    
+                    <a href="/tags/SCIST/">
+                        <span class="chip bg-color">SCIST</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/05/24/2021-AIS3-Pre-exam-write-up/">
+                    <div class="card-image">
+                        
+                        <img src="/imgs/ais3.png" class="responsive-img" alt="2021 AIS3 Pre-exam write-up">
+                        
+                        <span class="card-title">2021 AIS3 Pre-exam write-up</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            2021 AIS3 pre-exam 的不專業 write-up，rank 61
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-24
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/write-up/" class="post-category">
+                                    write-up
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CTF/">
+                        <span class="chip bg-color">CTF</span>
+                    </a>
+                    
+                    <a href="/tags/write-up/">
+                        <span class="chip bg-color">write-up</span>
+                    </a>
+                    
+                    <a href="/tags/AIS3/">
+                        <span class="chip bg-color">AIS3</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2022</span>
+            
+            <a href="/about" target="_blank">Gunjyo</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;Total visits:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;Total visitors:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+    <a href="https://www.facebook.com/gunjyo0817" class="tooltipped" target="_blank" data-tooltip=" https://www.facebook.com/gunjyo0817" data-position="top" data-delay="50">
+        <i class="fab fa-facebook-f"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 鼠标星星特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+            }
+        </script>
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+
+</body>
+
+</html>
