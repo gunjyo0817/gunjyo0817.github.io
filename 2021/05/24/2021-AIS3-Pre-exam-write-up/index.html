@@ -992,7 +992,7 @@ m <span class="token operator">=</span> pow<span class="token punctuation">(</sp
 <p>flag <code>AIS3{7wink1e_tw1nkl3_l1ttl3_574r_1n_C_5h4rp}</code></p>
 </blockquote>
 <h3 id="rabbit-Peekora-cucumber"><a href="#rabbit-Peekora-cucumber" class="headerlink" title=":rabbit: Peekora :cucumber:"></a><span class="github-emoji"><span>🐰</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f430.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> Peekora <span class="github-emoji"><span>🥒</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f952.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></h3><blockquote>
-<p>吃太甜要配什麼<br>可樂<br>因為 too 甜配 cola<br>Author:spiltline</p>
+<p>吃太甜要配什麼<br>可樂<br>因為 too 甜配 cola<br>Usage: python3 -m pickle flag_checker.pkl<br>[name=Author: splitline]</p>
 </blockquote>
 <p>題目給了<code>.pkl檔</code>和它的用法 <code>python3 -m pickle flag_checker.pkl</code></p>
 <div class="spoiler collapsed">
@@ -1438,7 +1438,7 @@ qq<span class="token string">","</span>password<span class="token string">":null
 
     </div>
 </div>
-<p>從題目可以看到會在前面把 <code>*systemgot</code> 設為 0x0<br>呼叫 <code>system()</code>的時候會跳到 <code>*systemgot</code>執行，因為前面位址被改掉所以會噴錯<br>執行程式會讓你輸入 unsigned long long *address , unsigned long long value<br>接著把 *address = value<br>我們的目標是把 *systemgot 改回原本的值<br>因此用 gdb 去查看就可以找到了<br><strong>script</strong></p>
+<p>從題目可以看到會在前面把 <code>*systemgot</code> 設為 <code>0x0</code><br>呼叫 <code>system()</code>的時候會跳到 <code>*systemgot</code>執行，因為前面位址被改掉所以會噴錯<br>執行程式會讓你輸入 <code>unsigned long long *address</code> , <code>unsigned long long value</code><br>接著把 <code>*address = value</code><br>我們的目標是把 <code>*systemgot</code> 改回原本的值<br>因此用 <code>gdb</code> 去查看就可以找到了<br><strong>script</strong></p>
 <pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
 context<span class="token punctuation">.</span>arch <span class="token operator">=</span> <span class="token string">'amd64'</span>
 
