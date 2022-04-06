@@ -386,14 +386,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    1.7k
+                    1.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    8 Min
+                    9 Min
                 </div>
                 
 
@@ -445,7 +445,7 @@
 <td>1362</td>
 </tr>
 </tbody></table>
-<p>這是我初次參加(好像也只能參加一次) MyFirstCTF，為期 8 小時。<br>題目會與接續的 AIS3 Pre-exam 些微重疊(因為 AIS3 Pre-exam 的第一天是 MFC~)</p>
+<h2 id="Prologue"><a href="#Prologue" class="headerlink" title="Prologue"></a>Prologue</h2><p>這是我初次參加(好像也只能參加一次) MyFirstCTF，為期 8 小時。<br>題目會與接續的 AIS3 Pre-exam 些微重疊(因為 AIS3 Pre-exam 的第一天是 MFC~)</p>
 <p>我的排名是第 11 名 ，雖然解的題目不多，對當時的我來說是個還滿滿意的成績~<br>因為是 PR90 以上所以當時有領到獎狀和 AIS3 的帽子 <span class="github-emoji"><span>😍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f60d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><br><img src="https://i.imgur.com/DVqZFWL.jpg" alt="mfc rank"></p>
 <p>事不遲疑，直接進到 write-up 吧</p>
 <h2 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h2><h3 id="Cat-Slayer-ᶠᵃᵏᵉ-Nekogoroshi"><a href="#Cat-Slayer-ᶠᵃᵏᵉ-Nekogoroshi" class="headerlink" title="Cat Slayer ᶠᵃᵏᵉ | Nekogoroshi"></a>Cat Slayer ᶠᵃᵏᵉ | Nekogoroshi</h3><p>Welcome 題<br><code>TERM=xterm-256color ssh -p 5566 h173@quiz.ais3.org</code><br>連線後會跳轉到輸入數字密碼的介面，只要按錯一個就會跳 Locked，要重新連線<br>暴力嘗試即可<br>密碼 2025830455298</p>
@@ -790,6 +790,7 @@ F v G <span class="token number">3</span>
     </div>
 </div>
 <p>題目是 RSA 簽證，目標是把 signature 送進去以達到 <code>pow(sig, e, n) == bytes_to_long(b'Ethan Winters')</code><br>原則上只要把 Ethan Winters 轉成 hex 丟進去讓它跑出 signature 之後，再丟回去讓他 verify 就可以了。<br>但是從 <code>if msg == b'Ethan Winters' or bytes_to_long(msg) &gt;= n:  # msg+k*n not allowed</code> 這行可以看到 <code>check msg == Ethan Winters</code> 會被擋掉。<br>由於送進去的是字串，於是要讓<strong>數字不變但是字串改變</strong>，就去嘗試 Bypass，發現前面加上 <code>00</code> 可以繞過，所以傳 <code>00</code> 加上 <code>Ethan Winters</code> 轉成 <code>hex</code> 就可以了<br>直接上圖。<br><img src="https://i.imgur.com/Kwxy3WU.png"><br><img src="https://i.imgur.com/4dpX7qf.png"></p>
+<h2 id="Epilogue"><a href="#Epilogue" class="headerlink" title="Epilogue"></a>Epilogue</h2><p>記得在早上的時候可能是太緊張，好像只解出一題(?)左右<br>看著大家的分數一直往上跑，心態超爆炸，因為賽前一周有專門陪我練的學長，所以有種要考好的壓力(#<br>後來吃完午餐冷靜下來之後解題就很順利了<br>真的是親身體會比賽緊張會影響發揮這句話~~~<br>有任何問題歡迎和我討論~~</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
