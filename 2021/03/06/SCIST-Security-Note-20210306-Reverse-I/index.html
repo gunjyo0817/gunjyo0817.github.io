@@ -732,9 +732,10 @@ _start<span class="token operator">:</span>
 <p>可以看到輸入的 39 個字會依照 ASCII 數值被拆成 3 種</p>
 </blockquote>
 <ol>
-<li>1-31 || 127<br><code>+0</code></li>
+<li>1-31 || 127 ：<code>+0</code> -&gt; 1-31 || 127</li>
+<li>32-81 ：<code>+45</code> -&gt; 77-126</li>
+<li>82-126 ：<code>-50</code> -&gt; 33-76</li>
 </ol>
-<p>-&gt; 1-31 || 127<br>2. 32-81<br><code>+45</code><br>-&gt; 77-126<br>3. 82-126<br><code>-50</code><br>-&gt; 33-76</p>
 <p>我們得到加密的方法了！<br>只要從字串的 ASCII 碼逆推回原本的數值就可以了<br>現在要來找特別的字串</p>
 <p><code>shift+F12</code> 可以看到有一個奇怪的字串<br><img src="https://i.imgur.com/B8RgXik.png"></p>
 <p>於是我們可以寫一個程式去跑這行字串</p>
