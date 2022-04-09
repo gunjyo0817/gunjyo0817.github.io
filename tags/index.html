@@ -302,6 +302,15 @@
                 </a>
                 
                 
+                <a href="/categories/note/" title="note: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #F5EEF8;">note
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
             </div>
         </div>
     </div>
@@ -327,7 +336,7 @@
 <script type="text/javascript">
     
 
-    $('#tag-wordcloud').jQCloud([{"text":"CTF","weight":4,"link":"/tags/CTF/"},{"text":"write-up","weight":4,"link":"/tags/write-up/"},{"text":"AIS3","weight":1,"link":"/tags/AIS3/"},{"text":"SCIST","weight":2,"link":"/tags/SCIST/"}], {
+    $('#tag-wordcloud').jQCloud([{"text":"CTF","weight":5,"link":"/tags/CTF/"},{"text":"write-up","weight":4,"link":"/tags/write-up/"},{"text":"AIS3","weight":1,"link":"/tags/AIS3/"},{"text":"SCIST","weight":3,"link":"/tags/SCIST/"},{"text":"Note","weight":1,"link":"/tags/Note/"}], {
         autoResize: true
     });
 </script>
@@ -346,11 +355,11 @@
             <div class="tag-chips">
                 
                 
-                <a href="/tags/CTF/" title="CTF: 4">
+                <a href="/tags/CTF/" title="CTF: 5">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
                             data-tagname="CTF" style="background-color: #F9EBEA;">CTF
-                        <span class="tag-length">4</span>
+                        <span class="tag-length">5</span>
                     </span>
                 </a>
                 
@@ -373,11 +382,20 @@
                 </a>
                 
                 
-                <a href="/tags/SCIST/" title="SCIST: 2">
+                <a href="/tags/SCIST/" title="SCIST: 3">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
                             data-tagname="SCIST" style="background-color: #E8F8F5;">SCIST
-                        <span class="tag-length">2</span>
+                        <span class="tag-length">3</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Note/" title="Note: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="Note" style="background-color: #FEF9E7;">Note
+                        <span class="tag-length">1</span>
                     </span>
                 </a>
                 
@@ -421,7 +439,7 @@
                     color: '#3C4858'
                 }
             },
-            indicator: [{"name":"write-up","max":8}],
+            indicator: [{"name":"write-up","max":5},{"name":"note","max":5}],
             nameGap: 5,
             center: ['50%','55%'],
             radius: '66%'
@@ -432,7 +450,7 @@
             itemStyle: {normal: {areaStyle: {type: 'default'}}},
             data : [
                 {
-                    value : [4],
+                    value : [4,1],
                     name : 'Number of Categories'
                 }
             ]
@@ -546,7 +564,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"write-up","value":4}],
+                data: [{"name":"write-up","value":4},{"name":"note","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -570,7 +588,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["CTF","write-up","SCIST","AIS3"]
+                data: ["CTF","write-up","SCIST","AIS3","Note"]
             }
         ],
         yAxis: [
@@ -583,7 +601,7 @@
                 type: 'bar',
                 color: ['#82d3f4'],
                 barWidth : 18,
-                data: [4,4,2,1],
+                data: [5,4,3,1,1],
                 markPoint: {
                     symbolSize: 45,
                     data: [{
