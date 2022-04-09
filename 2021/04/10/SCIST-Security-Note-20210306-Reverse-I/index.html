@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="SCIST Security Note 20210306 Reverse I, Gunjyo&#39;s Blog">
-    <meta name="description" content="2021 SCIST 第一屆 資安課程 ReverseI 題目 write-up">
+    <meta name="keywords" content="2021 SCIST Security Note Reverse, Gunjyo&#39;s Blog">
+    <meta name="description" content="2021 SCIST 第一屆 資安課程 Reverse 第一堂(2021/3/6) &amp; 第二堂課(2021/4/10) 筆記 &amp; write-up">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>SCIST Security Note 20210306 Reverse I | Gunjyo&#39;s Blog</title>
+    <title>2021 SCIST Security Note Reverse | Gunjyo&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -232,7 +232,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">SCIST Security Note 20210306 Reverse I</h1>
+                    <h1 class="description center-align post-title">2021 SCIST Security Note Reverse</h1>
                 </div>
             </div>
         </div>
@@ -381,7 +381,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2021-03-06
+                    2021-04-10
                 </div>
                 
 
@@ -429,7 +429,10 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>今天的課程沒有紀錄什麼筆記，只有紀錄 write-up<br>有些沒有記全的題目就拔掉了！</p>
+                <h2 id="note"><a href="#note" class="headerlink" title="note"></a>note</h2><p><code>python3 -i [file]</code>跑完進入到 REPL mode</p>
+<h3 id="Angr"><a href="#Angr" class="headerlink" title="Angr"></a>Angr</h3><p>load binary<br><code>p = Project(binary,auto_load_libs = False)</code><br>(<code>auto_load_libs = False</code> 讓 explorer 這個 function 可以設定要找哪個 address )</p>
+<p><code>find=(addr1)</code>查找<code>addr1</code>這個address<br><code>avoid=(addr2)</code>避免找到<code>addr2</code>這個address<br>find 內可塞 address or function</p>
+<h3 id="Claripy"><a href="#Claripy" class="headerlink" title="Claripy"></a>Claripy</h3><p>BVS symbolic variable<br>BVV 常數<br><code>x = BVS('x',32)</code> 將 x 宣告為 32-bit 的變數<br><code>y = BVV(0xdeadbeef,32)</code> 將 y 宣告為 32-bit 的 0xdeadbeef 常數</p>
 <h2 id="Level-0"><a href="#Level-0" class="headerlink" title="Level 0"></a>Level 0</h2><h3 id="hexedit"><a href="#hexedit" class="headerlink" title="hexedit"></a>hexedit</h3><p>可以直接 <code>strings</code> 找到<br><img src="https://i.imgur.com/XtFZEXB.png"></p>
 <blockquote>
 <p>flag <code>easyctf{eb04fadf}</code></p>
@@ -828,6 +831,14 @@ a <span class="token operator">=</span> <span class="token string">""</span>
 <blockquote>
 <p>flag <code>MyFirstCTF{MAKECHRTOINT}</code></p>
 </blockquote>
+<h3 id="ptrace-me"><a href="#ptrace-me" class="headerlink" title="ptrace_me"></a>ptrace_me</h3><p>hoo.c</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">ptrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><code>gcc -fPIC -shared -o hook.so hook.c</code></p>
+<p><img src="https://i.imgur.com/IOXKvFB.png"></p>
+<p><code>LD_PRELOAD=./hook.so strace ./ptrace_me</code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
@@ -854,7 +865,7 @@ a <span class="token operator">=</span> <span class="token string">""</span>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://gunjyo0817.github.io/2021/03/06/SCIST-Security-Note-20210306-Reverse-I/">https://gunjyo0817.github.io/2021/03/06/SCIST-Security-Note-20210306-Reverse-I/</a>
+                    <a href="https://gunjyo0817.github.io/2021/04/10/SCIST-Security-Note-20210306-Reverse-I/">https://gunjyo0817.github.io/2021/04/10/SCIST-Security-Note-20210306-Reverse-I/</a>
                 </span>
             </div>
             <div class="reprint__notice">
