@@ -429,7 +429,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Level-0"><a href="#Level-0" class="headerlink" title="Level 0"></a>Level 0</h2><h3 id="hexedit"><a href="#hexedit" class="headerlink" title="hexedit"></a>hexedit</h3><p>可以直接 <code>strings</code> 找到<br><img src="https://i.imgur.com/XtFZEXB.png"></p>
+                <p>今天的課程沒有紀錄什麼筆記，只有紀錄 write-up<br>有些沒有記全的題目就拔掉了！</p>
+<h2 id="Level-0"><a href="#Level-0" class="headerlink" title="Level 0"></a>Level 0</h2><h3 id="hexedit"><a href="#hexedit" class="headerlink" title="hexedit"></a>hexedit</h3><p>可以直接 <code>strings</code> 找到<br><img src="https://i.imgur.com/XtFZEXB.png"></p>
 <blockquote>
 <p>flag <code>easyctf{eb04fadf}</code></p>
 </blockquote>
@@ -695,47 +696,6 @@ flag <span class="token operator">=</span> <span class="token string">""</span>
 <p>flag<code>BreakALLCTF{4U49uY7OJCrJL0vtbXjd}</code></p>
 </blockquote>
 <h3 id="林思辰-find"><a href="#林思辰-find" class="headerlink" title="林思辰_find"></a>林思辰_find</h3><p><code>strings</code><br>運用<code>grep</code>來擷取關鍵字<br><img src="https://i.imgur.com/GWm0Vwq.png"></p>
-<h3 id="林思辰-read-asm"><a href="#林思辰-read-asm" class="headerlink" title="林思辰_read-asm"></a>林思辰_read-asm</h3><pre class=" language-cpp"><code class="language-cpp">global _start
-
-section <span class="token punctuation">.</span>data
-n dd <span class="token number">10</span>
-
-section <span class="token punctuation">.</span>text
-foo<span class="token operator">:</span>
-  push rbp
-  mov rbp<span class="token punctuation">,</span> rsp
-  sub rsp<span class="token punctuation">,</span> <span class="token number">0x10</span>
-  mov qword <span class="token punctuation">[</span>rbp <span class="token operator">-</span> <span class="token number">0x8</span><span class="token punctuation">]</span><span class="token punctuation">,</span> rdi
-  cmp qword <span class="token punctuation">[</span>rbp <span class="token operator">-</span> <span class="token number">0x8</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">1</span>
-  jne L1 
-  mov rax<span class="token punctuation">,</span> <span class="token number">1</span>
-  jmp L2
-
-L1<span class="token operator">:</span>
-  mov rbx<span class="token punctuation">,</span> qword <span class="token punctuation">[</span>rbp <span class="token operator">-</span> <span class="token number">0x8</span><span class="token punctuation">]</span>
-  dec rbx
-  mov rdi<span class="token punctuation">,</span> rbx
-  call foo
-  <span class="token comment" spellcheck="true">//foo(n-1)</span>
-  imul rax<span class="token punctuation">,</span> qword <span class="token punctuation">[</span>rbp <span class="token operator">-</span> <span class="token number">0x8</span><span class="token punctuation">]</span>
-  <span class="token comment" spellcheck="true">//return n * n-1</span>
-
-L2<span class="token operator">:</span>
-  mov rsp<span class="token punctuation">,</span> rbp
-  pop rbp
-  ret
-  <span class="token comment" spellcheck="true">//return;</span>
-
-_start<span class="token operator">:</span>
-  mov rax<span class="token punctuation">,</span> n
-  mov rdi<span class="token punctuation">,</span> <span class="token punctuation">[</span>rax<span class="token punctuation">]</span>
-  call foo
-  <span class="token comment" spellcheck="true">//foo(n)</span>
-
-  mov rax<span class="token punctuation">,</span> <span class="token number">60</span>
-  mov rdi<span class="token punctuation">,</span> <span class="token number">0</span>
-  syscall
-</code></pre>
 <h3 id="林思辰-run-asm"><a href="#林思辰-run-asm" class="headerlink" title="林思辰_run-asm"></a>林思辰_run-asm</h3><p>先去看看檔案裏面有甚麼</p>
 <pre class=" language-cpp"><code class="language-cpp">global _start
 
@@ -768,7 +728,9 @@ _start<span class="token operator">:</span>
 </blockquote>
 <h3 id="林思辰-encrypt"><a href="#林思辰-encrypt" class="headerlink" title="林思辰_encrypt"></a>林思辰_encrypt</h3><p>我們要做的事情是”找出加密的方法並解密一個特別的字串”</p>
 <p>稍微美化一下 item 名稱之後看一下這個程式碼在做甚麼<br><img src="https://i.imgur.com/TuaTRzx.png"></p>
+<blockquote>
 <p>可以看到輸入的 39 個字會依照 ASCII 數值被拆成 3 種</p>
+</blockquote>
 <ol>
 <li>1-31 || 127<br><code>+0</code></li>
 </ol>
