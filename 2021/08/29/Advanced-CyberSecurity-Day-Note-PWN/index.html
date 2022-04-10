@@ -682,7 +682,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 <ul>
 <li><p>再來看一下 random<br>可以看到 random call 完後，eax 就會回傳產出的 random 值，將它存在 <code>var_ch</code> 內</p>
 </li>
-<li><p>接著看一下能夠出多少字<br><img src="https://i.imgur.com/Rxn5afJ.png"><br>在 read function 可以看到 <code>buff</code> 在<code>var_20h</code><br><code>mov edx, 0x64</code> 可以看出我們可以輸入 64 個 bytes</p>
+<li><p>接著看一下能夠輸入多少字<br><img src="https://i.imgur.com/Rxn5afJ.png"><br>在 read function 可以看到 <code>buff</code> 在<code>var_20h</code><br><code>mov edx, 0x64</code> 可以看出我們可以輸入 64 個 bytes</p>
 </li>
 </ul>
 <p><img src="https://i.imgur.com/7F3sWAq.png"><br>從這張圖可以看到 <code>var_20h</code> ，也就是 buffer，只有 4 個 bytes，但我們卻可以輸入 64 個，因此我們可以做 overflow的大小為 64 - 4 = 60，藍色的範圍都是我們可以控制的</p>
