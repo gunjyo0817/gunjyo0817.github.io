@@ -374,7 +374,7 @@ Input：使用者輸入、操作Output：反應 Input 所">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    1k
+                    1.1k
                 </div>
                 
 
@@ -527,6 +527,12 @@ r<span class="token punctuation">.</span>sendline<span class="token punctuation"
 r<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># switch to interation mode</span>
 </code></pre>
 <h4 id="readelf"><a href="#readelf" class="headerlink" title="readelf"></a>readelf</h4><p>分析 elf / binary 的工具<br><code>% readelf -a $libc | less</code></p>
+<p><code>% readelf -a $libc | grep 'printf'</code> 找出所有有<code>printf</code>的function</p>
+<h4 id="ROPgadget"><a href="#ROPgadget" class="headerlink" title="ROPgadget"></a>ROPgadget</h4><p>列出 binary 中可以使用的 ROP gadget<br><code>% ROPgadget --binary $ binary</code></p>
+<h4 id="radare2"><a href="#radare2" class="headerlink" title="radare2"></a>radare2</h4><p>動態、靜態分析都可以⽤的⼯具<br><a target="_blank" rel="noopener" href="https://frozenkp.github.io/reverse/radare2/">講師的使用教學</a></p>
+<pre class=" language-bash"><code class="language-bash">% <span class="token function">git</span> clone https://github.com/radare/radare2.git
+% <span class="token function">sudo</span> ./radare2/sys/install.sh
+</code></pre>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
