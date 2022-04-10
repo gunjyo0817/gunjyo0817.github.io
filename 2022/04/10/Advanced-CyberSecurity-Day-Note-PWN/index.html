@@ -374,7 +374,7 @@ Input：使用者輸入、操作Output：反應 Input 所">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    1.5k
+                    1.6k
                 </div>
                 
 
@@ -623,7 +623,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 <li>saved rbp -&gt; stack migration</li>
 <li>return address -&gt; ret2 series</li>
 </ul>
-<h4 id="local-variable"><a href="#local-variable" class="headerlink" title="local variable"></a>local variable</h4><pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<h3 id="local-variable"><a href="#local-variable" class="headerlink" title="local variable"></a>local variable</h3><pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
@@ -641,6 +641,28 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 <ul>
 <li>先隨意輸入來確定 buffer 位置</li>
 <li>計算 buffer 位置和⽬標位置距離多遠<br><img src="https://i.imgur.com/EbmFcCW.png"><br>0x7fffffffe7a8：buffer 位置<br>0x7fffffffe798：目標位置<br><code>offset = 0x7fffffffe7a8 - 0x7fffffffe798 = 0x10</code></li>
+</ul>
+<h3 id="ret2code"><a href="#ret2code" class="headerlink" title="ret2code"></a>ret2code</h3><p>透過 Buffer Overflow 改變 return address<br>將 return address 改到 code 中任意處</p>
+<blockquote>
+<p>須關閉 PIE</p>
+</blockquote>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+<span class="token keyword">void</span> <span class="token function">shell</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">system</span><span class="token punctuation">(</span>“<span class="token operator">/</span>bin<span class="token operator">/</span>sh”<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">char</span> buffer<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">gets</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>把 return address 覆蓋成 shell 的 address<br><img src="https://i.imgur.com/buf8nSQ.png"></p>
+<p>找 shell 的 address</p>
+<ul>
+<li>shell：<code>% objdump -M intel -d test | less</code></li>
+<li>gdb：<code>gdb-peda$ p shell</code></li>
+<li>r2：<code>[0x000005d0]&gt; afl~shell</code> (<code>~</code>-&gt;grep)</li>
 </ul>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
