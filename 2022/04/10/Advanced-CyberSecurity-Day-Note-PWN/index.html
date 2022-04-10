@@ -374,14 +374,14 @@ Input：使用者輸入、操作Output：反應 Input 所">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    939
+                    1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    3 Min
+                    4 Min
                 </div>
                 
 
@@ -507,7 +507,23 @@ Input：使用者輸入、操作Output：反應 Input 所">
 r
 vmmap
 </code></pre>
-<h4 id="pwntools"><a href="#pwntools" class="headerlink" title="pwntools"></a>pwntools</h4><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+<h4 id="pwntools"><a href="#pwntools" class="headerlink" title="pwntools"></a>pwntools</h4><p>用來和遠端程式互動的 python 套件</p>
+<pre class=" language-bash"><code class="language-bash">% pip <span class="token function">install</span> pwntools
+</code></pre>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+
+<span class="token comment" spellcheck="true"># connect to server(二擇一)</span>
+r <span class="token operator">=</span> process<span class="token punctuation">(</span><span class="token string">'./add'</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># localhost binary 本地端程式</span>
+r <span class="token operator">=</span> remote<span class="token punctuation">(</span><span class="token string">'140.113.0.3'</span> <span class="token punctuation">,</span> <span class="token number">8080</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># remote binary(IP,port) 遠端程式</span>
+
+s <span class="token operator">=</span> r<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">':'</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># receive from binary until ':'</span>
+<span class="token keyword">print</span> <span class="token string">'1: '</span> <span class="token operator">+</span> s
+
+r<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span><span class="token string">'3 5'</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># send to server (相當於在鍵盤上打 3 5 )</span>
+
+r<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># switch to interation mode</span>
+</code></pre>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
             <hr/>
