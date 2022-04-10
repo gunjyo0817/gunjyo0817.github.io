@@ -381,7 +381,7 @@ Input：使用者輸入、操作Output：反應 Input 所">
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    6 Min
+                    7 Min
                 </div>
                 
 
@@ -663,6 +663,24 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 <li>shell：<code>% objdump -M intel -d test | less</code></li>
 <li>gdb：<code>gdb-peda$ p shell</code></li>
 <li>r2：<code>[0x000005d0]&gt; afl~shell</code> (<code>~</code>-&gt;grep)</li>
+</ul>
+<h3 id="ret2sc"><a href="#ret2sc" class="headerlink" title="ret2sc"></a>ret2sc</h3><ul>
+<li>透過 Buffer Overflow 改變 return address</li>
+<li>將 return address 改到 <strong>⾃⼰寫的 shell code</strong> 處並執⾏<blockquote>
+<p>須關閉 NX<br><img src="https://i.imgur.com/KcgnGYF.png"></p>
+</blockquote>
+</li>
+</ul>
+<p>寫 shell code</p>
+<ul>
+<li>選有 <strong>rwx</strong> 處</li>
+<li>選中間部分 (前後可能有其他用處)</li>
+</ul>
+<p>Problem</p>
+<ul>
+<li>漏洞沒利用好</li>
+<li>寫的地方蓋到重要東西</li>
+<li>shell code 寫壞</li>
 </ul>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
