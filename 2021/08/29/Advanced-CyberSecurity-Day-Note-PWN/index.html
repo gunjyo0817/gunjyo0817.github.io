@@ -659,36 +659,27 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     </div>
     <div class="spoiler-content">
         <p>先去執行看看，它會讓我們輸入東西<br><img src="https://i.imgur.com/x9wSaUD.png"></p>
-<p>我們可以先用 r2 去分析第一階段要做什麼<br><img src="https://i.imgur.com/rf8z3sR.png"></p>
+<p>♟️我們可以先用 r2 去分析第一階段要做什麼<br><img src="https://i.imgur.com/rf8z3sR.png"></p>
 <pre class=" language-bash"><code class="language-bash">$ r2 ./luck <span class="token comment" spellcheck="true">#進入 r2</span>
 <span class="token operator">></span> aa <span class="token comment" spellcheck="true">#分析</span>
 <span class="token operator">></span> afl <span class="token comment" spellcheck="true">#列出 function，其中我們可以看到 main()</span>
 <span class="token operator">></span> s main <span class="token comment" spellcheck="true">#進到 main()</span>
 <span class="token operator">></span> VV <span class="token comment" spellcheck="true">#visual mode</span>
 </code></pre>
-<p>進入visual mode</p>
+<p>♟️進入visual mode</p>
 <blockquote>
 <p>技巧：從call function 看(綠色的)</p>
 </blockquote>
 <p><img src="https://i.imgur.com/DMNnJgh.png"><br>call function 的前面(mov…)在設定 call function 的參數</p>
 <p><img src="https://i.imgur.com/dRBlWGN.png"><br>從這裡可以看到它會去比較(<code>cmp</code>)兩次，都是 true 的話會有個 “Hello hacker,now guess the password”，所以我們的目標是進入這裡</p>
-<ul>
-<li>看一下 main function 有哪些區域變數<br><img src="https://i.imgur.com/cfk0L22.png"></li>
-</ul>
-<p>將上面這些整理為<br><img src="https://i.imgur.com/FjKrbOu.png" height="50%"></p>
+<p>♟️看一下 main function 有哪些區域變數<br><img src="https://i.imgur.com/cfk0L22.png"><br>將上面這些整理為 <img src="https://i.imgur.com/FjKrbOu.png" height="50%"></p>
 <blockquote>
 <p>rbp 位於藍色與綠色塊中間</p>
 </blockquote>
-<ul>
-<li><p>再來看一下 random<br>可以看到 random call 完後，eax 就會回傳產出的 random 值，將它存在 <code>var_ch</code> 內</p>
-</li>
-<li><p>接著看一下能夠輸入多少字<br><img src="https://i.imgur.com/Rxn5afJ.png"><br>在 read function 可以看到 <code>buff</code> 在<code>var_20h</code><br><code>mov edx, 0x64</code> 可以看出我們可以輸入 64 個 bytes</p>
-</li>
-</ul>
+<p>♟️再來看一下 random<br>可以看到 random call 完後，eax 就會回傳產出的 random 值，將它存在 <code>var_ch</code> 內</p>
+<p>♟️接著看一下能夠輸入多少字<br><img src="https://i.imgur.com/Rxn5afJ.png"><br>在 read function 可以看到 <code>buff</code> 在<code>var_20h</code><br><code>mov edx, 0x64</code> 可以看出我們可以輸入 64 個 bytes</p>
 <p><img src="https://i.imgur.com/7F3sWAq.png"><br>從這張圖可以看到 <code>var_20h</code> ，也就是 buffer，只有 4 個 bytes，但我們卻可以輸入 64 個，因此我們可以做 overflow的大小為 64 - 4 = 60，藍色的範圍都是我們可以控制的</p>
-<ul>
-<li>確認 address<br><img src="https://i.imgur.com/kNIBURF.png"><br>從剛才的<code>cmp</code>那裡可以看到，我們須滿足下面兩個條件<br><code>local_14h = 0xfaceb00c</code><br><code>local_10h = 0xdeadbeef</code></li>
-</ul>
+<p>♟️確認 address<br><img src="https://i.imgur.com/kNIBURF.png"><br>從剛才的<code>cmp</code>那裡可以看到，我們須滿足下面兩個條件<br><code>local_14h = 0xfaceb00c</code><br><code>local_10h = 0xdeadbeef</code></p>
 <p>因此我們寫一個 python 去 exploit，去作出下面的結構<br><img src="https://i.imgur.com/1LSvjXw.png"></p>
 <p><img src="https://i.imgur.com/YwqSDRI.png"><br>從這裡可以看到我們輸入的地方在第三行，而第二行後還有一個<code>\n</code></p>
 <pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
@@ -703,9 +694,7 @@ r<span class="token punctuation">.</span>sendline<span class="token punctuation"
 r<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span>
 </code></pre>
 <p><img src="https://i.imgur.com/mT0WFW7.png"><br>執行後可以看到我們通過了第一階段</p>
-<ul>
-<li>第二階段<br><img src="https://i.imgur.com/EsHygvz.png"></li>
-</ul>
+<p>♟️分析第二階段<br><img src="https://i.imgur.com/EsHygvz.png"></p>
 <p><code>scanf()</code>有二個參數，第一個參數是 format，我們去看一下<br><code>s 0x400a93</code><br>然後跳到 Hex mode<br><img src="https://i.imgur.com/sEh9bKc.png"><br>在<code>0x40093</code>可以看到它吃的是<code>%d</code>(代表整數)<br>讀一個整數進來後會存到 <code>var_1ch</code><br>剛才有題到 random 會存在 <code>var_ch</code></p>
 <p><img src="https://i.imgur.com/BErwebM.png"><br>從這裡可以看到 <code>var_1ch</code> 要等於 <code>var_ch</code><br>雖然我們不知道<code>var_ch</code>是什麼，但我們可以把它覆蓋掉阿~<br>可以把它改成<code>1</code></p>
 <pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
