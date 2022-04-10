@@ -519,10 +519,14 @@ r <span class="token operator">=</span> remote<span class="token punctuation">(<
 s <span class="token operator">=</span> r<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">':'</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># receive from binary until ':'</span>
 <span class="token keyword">print</span> <span class="token string">'1: '</span> <span class="token operator">+</span> s
 
+s <span class="token operator">=</span> r<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">'?'</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'$'</span> <span class="token operator">+</span> s <span class="token operator">+</span> <span class="token string">'$'</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">#辨識 s 取到那些</span>
+
 r<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span><span class="token string">'3 5'</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># send to server (相當於在鍵盤上打 3 5 )</span>
 
 r<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># switch to interation mode</span>
 </code></pre>
+<h4 id="readelf"><a href="#readelf" class="headerlink" title="readelf"></a>readelf</h4><p>分析 elf / binary 的工具<br><code>% readelf -a $libc | less</code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
