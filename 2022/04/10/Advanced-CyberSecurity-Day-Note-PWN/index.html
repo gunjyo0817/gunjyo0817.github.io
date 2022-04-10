@@ -374,7 +374,7 @@ Input：使用者輸入、操作Output：反應 Input 所">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    876
+                    939
                 </div>
                 
 
@@ -498,8 +498,16 @@ Input：使用者輸入、操作Output：反應 Input 所">
 <pre class=" language-bash"><code class="language-bash">% ncat -vc <span class="token variable">$binary</span> -kl <span class="token variable">$ip</span> <span class="token variable">$port</span>
 % nc <span class="token variable">$ip</span> <span class="token variable">$port</span>
 </code></pre>
-<h4 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a>gdb</h4><p><code>% j *0x4896aa*</code> 跳到某個位址(jmp)</p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+<h4 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a>gdb</h4><p><code>% j *0x4896aa</code> 跳到某個位址(jmp)</p>
+<p><code>% x/10gx 0x400686</code> 秀出某位址的值</p>
+<p><code>% set $rax=0x5</code> 設定某個位址/暫存器的值</p>
+<h4 id="checksec-差看程式的安全性保護"><a href="#checksec-差看程式的安全性保護" class="headerlink" title="checksec 差看程式的安全性保護"></a>checksec 差看程式的安全性保護</h4><p><code>%checksec $library</code><br><img src="https://i.imgur.com/0oaaxQZ.png"></p>
+<h4 id="gdb-vmmap"><a href="#gdb-vmmap" class="headerlink" title="gdb - vmmap"></a>gdb - vmmap</h4><p>查看目前程式的記憶體分布、rwn 權限設定<br><code>% vmmap</code></p>
+<pre class=" language-bash"><code class="language-bash">b main <span class="token punctuation">(</span>breakpoint<span class="token punctuation">)</span>
+r
+vmmap
+</code></pre>
+<h4 id="pwntools"><a href="#pwntools" class="headerlink" title="pwntools"></a>pwntools</h4><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
             <hr/>
