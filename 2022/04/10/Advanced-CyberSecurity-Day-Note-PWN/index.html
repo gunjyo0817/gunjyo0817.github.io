@@ -471,11 +471,24 @@ Input：使用者輸入、操作Output：反應 Input 所">
         前行摘要-Lazy Binding
     </div>
     <div class="spoiler-content">
-        <p>把所有的函式實作都包在一起-&gt;好處：執行方便 壞處：檔案太肥</p>
-<p>Dynamic linking 的程式在執行過程中，有些 library 的函式到結束都不會執行到。<br>ELF 採取 Lazy binding 的機制，在<strong>第一次 call library 函式時，才會去尋找函式真正的位置進行 binding</strong></p>
-<p>實現 Lazy Binding</p>
-<p>GOT &amp; PLT<br>GOT(Global Offset Table)：函式指標陣列，存了其他 library 中 function address。<br>因為 Lazy binding 的機制，一開始只會填上一段 <code>.plt</code> 的 code<br>第一次執行時，<code>plt</code>會呼叫<code>_dl_fixup()</code>，才會去真正的 function 並填入 GOT。第二次執行時，直接透過 GOT 找到 function address</p>
-<p><img src="https://i.imgur.com/hUPU3vI.png"><br>call <code>read()</code><br>Read 的 GOT 先去 GOT 表查找有沒有已經存放 read address<br>沒有 -&gt; 進入 <code>resolve()</code> 來找<code>read()</code>真正的位址，然後記錄到 GOT 表，並 return 回 call read (執行)<br>有 -&gt; 直接 return 回 call read (執行) </p>
+        <p>把所有的函式實作都包在一起<br>好處：執行方便<br>壞處：檔案太肥</p>
+<p>Dynamic linking 的程式在執行過程中，有些 library 的函式到結束都不會執行到。</p>
+<p>ELF 採取 Lazy binding 的機制，在<strong>第一次 call library 函式時，才會去尋找函式真正的位置進行 binding</strong></p>
+<blockquote>
+<p>實現 Lazy Binding<br>GOT &amp; PLT<br>GOT(Global Offset Table)：函式指標陣列，存了其他 library 中 function address。</p>
+</blockquote>
+<p>因為 Lazy binding 的機制，一開始只會填上一段 <code>.plt</code> 的 code</p>
+<p>第一次執行時，<code>plt</code>會呼叫<code>_dl_fixup()</code>，才會去真正的 function 並填入 GOT。</p>
+<p>第二次執行時，直接透過 GOT 找到 function address</p>
+<p><img src="https://i.imgur.com/hUPU3vI.png"></p>
+<ol>
+<li>call <code>read()</code> </li>
+<li>Read 的 GOT 先去 GOT 表查找有沒有已經存放 read address</li>
+</ol>
+<ul>
+<li>沒有 -&gt; 進入 <code>resolve()</code> 來找<code>read()</code>真正的位址，然後記錄到 GOT 表，並 return 回 call read (執行)</li>
+<li>有 -&gt; 直接 return 回 call read (執行)</li>
+</ul>
 
     </div>
 </div>
@@ -483,9 +496,9 @@ Input：使用者輸入、操作Output：反應 Input 所">
 <ul>
 <li>No RELRO - link 和 GOT 都可寫</li>
 <li>Partial RELRO - link map 不可寫，GOT 可寫(可利用來PWN)</li>
-<li>Full ReLRO - link map 和 GOT 都不可寫<h4 id="Stack-Canary"><a href="#Stack-Canary" class="headerlink" title="Stack Canary"></a>Stack Canary</h4>stack 上的柵欄<br>在 rbp 之前塞一個 random 值，ret 之前檢查是否相同，不同的話就會<code>abort</code><br><img src="https://i.imgur.com/uDEWMci.png"><br>沒有 canary 的話，發生 buffer overflow 時就可以一直往下寫(return address等)</li>
+<li>Full ReLRO - link map 和 GOT 都不可寫</li>
 </ul>
-<p>有 canary 的話，它發現後就會直接關掉程式<br><img src="https://i.imgur.com/B45WSph.png"></p>
+<h4 id="Stack-Canary"><a href="#Stack-Canary" class="headerlink" title="Stack Canary"></a>Stack Canary</h4><p>stack 上的柵欄<br>在 rbp 之前塞一個 random 值，ret 之前檢查是否相同，不同的話就會<code>abort</code><br><img src="https://i.imgur.com/uDEWMci.png"><br>沒有 canary 的話，發生 buffer overflow 時就可以一直往下寫(return address等)<br>有 canary 的話，它發現後就會直接關掉程式<br><img src="https://i.imgur.com/B45WSph.png"></p>
 <h4 id="NX"><a href="#NX" class="headerlink" title="NX"></a>NX</h4><p>No eXecute / DEP(Data Execution Prevention)<br>可寫的不可執行，可執行的不可寫<br><img src="https://i.imgur.com/j9UmJ6R.png"><br>可寫可執行很危險(把程式碼寫到這個空間，跳過去直接執行)</p>
 <h4 id="PIE"><a href="#PIE" class="headerlink" title="PIE"></a>PIE</h4><p>Position Independent Executable </p>
 <p>開啟時， data 段以及 code 段位址隨機化<br>關閉時， data 段以及 code 段位址固定</p>
@@ -548,6 +561,12 @@ s <span class="token variable">$address</span> <span class="token comment" spell
 pd <span class="token variable">$n_line</span> <span class="token comment" spellcheck="true">#印出從現在位置開始 n 行的 asm</span>
 pdf <span class="token comment" spellcheck="true"># 印出現在位置的整個 function 內容</span>
 </code></pre>
+<p>Mode</p>
+<ul>
+<li>CLI Mode</li>
+<li>Hex Mode</li>
+<li>Visual Mode<br><img src="https://i.imgur.com/UNorzos.png" alt="switch"></li>
+</ul>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
