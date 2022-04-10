@@ -374,7 +374,7 @@ Input：使用者輸入、操作Output：反應 Input 所">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    1.4k
+                    1.5k
                 </div>
                 
 
@@ -623,7 +623,26 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 <li>saved rbp -&gt; stack migration</li>
 <li>return address -&gt; ret2 series</li>
 </ul>
-<h4 id="local-variable"><a href="#local-variable" class="headerlink" title="local variable"></a>local variable</h4><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+<h4 id="local-variable"><a href="#local-variable" class="headerlink" title="local variable"></a>local variable</h4><pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span> buffer<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">gets</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span><span class="token punctuation">(</span>a <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">system</span><span class="token punctuation">(</span>“<span class="token operator">/</span>bin<span class="token operator">/</span>sh”<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>計算 offset (從開始寫的位置到目標位置間的長度)</p>
+<ul>
+<li>先隨意輸入來確定 buffer 位置</li>
+<li>計算 buffer 位置和⽬標位置距離多遠<br><img src="https://i.imgur.com/EbmFcCW.png"><br>0x7fffffffe7a8：buffer 位置<br>0x7fffffffe798：目標位置<br><code>offset = 0x7fffffffe7a8 - 0x7fffffffe798 = 0x10</code></li>
+</ul>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
             <hr/>
