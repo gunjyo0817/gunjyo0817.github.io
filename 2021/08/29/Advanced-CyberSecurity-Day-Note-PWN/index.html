@@ -433,9 +433,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <a href="/2021/05/24/2021-AIS3-Pre-exam-write-up/" title="顯示的文字">顯示的文字</a>
-
-<h2 id="PWN-Intro"><a href="#PWN-Intro" class="headerlink" title="PWN Intro"></a>PWN Intro</h2><h3 id="What-is-PWN"><a href="#What-is-PWN" class="headerlink" title="What is PWN?"></a>What is PWN?</h3><blockquote>
+                <h2 id="PWN-Intro"><a href="#PWN-Intro" class="headerlink" title="PWN Intro"></a>PWN Intro</h2><h3 id="What-is-PWN"><a href="#What-is-PWN" class="headerlink" title="What is PWN?"></a>What is PWN?</h3><blockquote>
 <p>控制程式流程進而觸發攻擊</p>
 </blockquote>
 <p>正常程式流程 Start -&gt; Input &lt;-&gt; Output -&gt; End</p>
@@ -663,6 +661,8 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 <li>先隨意輸入來確定 buffer 位置</li>
 <li>計算 buffer 位置和⽬標位置距離多遠<br><img src="https://i.imgur.com/EbmFcCW.png"><br>0x7fffffffe7a8：buffer 位置<br>0x7fffffffe798：目標位置<br><code>offset = 0x7fffffffe7a8 - 0x7fffffffe798 = 0x10</code></li>
 </ul>
+<a href="/2021/08/29/MyFirstPWN-%E5%BC%B5%E5%85%83-Pwn-1-luck-write-up/" title="[題目]Luck write-up">[題目]Luck write-up</a>
+
 <h3 id="ret2code"><a href="#ret2code" class="headerlink" title="ret2code"></a>ret2code</h3><p>透過 Buffer Overflow 改變 return address<br>將 return address 改到 code 中任意處</p>
 <blockquote>
 <p>須關閉 PIE</p>
