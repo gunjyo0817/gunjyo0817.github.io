@@ -30,9 +30,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.1.0">
+<meta name="generator" content="Hexo 6.1.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+</head>
 
 
 
@@ -394,14 +394,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    1.6k
+                    1.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    7 Min
+                    8 Min
                 </div>
                 
 
@@ -461,26 +461,26 @@
 <p>Stack 跟 Heap 不會碰到</p>
 </blockquote>
 <h4 id="區域變數-Local-Variable"><a href="#區域變數-Local-Variable" class="headerlink" title="區域變數 Local Variable"></a>區域變數 Local Variable</h4><p>先宣告的先存</p>
-<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">0x123</span><span class="token punctuation">;</span>
     <span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">0x456</span><span class="token punctuation">;</span>
     <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">}</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
 <p><img src="https://i.imgur.com/Jx9sVHS.png"><br>rsp 表示最低位<br>一個 block 8 個 byte</p>
 <h4 id="Return-address"><a href="#Return-address" class="headerlink" title="Return address"></a>Return address</h4><p>Q：Call function 時，怎麼知道執行完要回到哪裡?<br>call function前，將 return address 存進 stack<br>return 時，回到 stack 中所存的位址</p>
-<pre class=" language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">process</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">process</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
     <span class="token keyword">return</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
     <span class="token function">process</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     a <span class="token operator">=</span> a<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>
     <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
 <p><img src="https://i.imgur.com/gaPvpDU.png"></p>
 <p><code>process()</code>執行完後<code>...</code>會還原 ，跳過去<code>return address</code>指向的位置，接著 <code>pop</code>掉<code>return address</code></p>
@@ -491,7 +491,7 @@
         前行摘要-Lazy Binding
     </div>
     <div class="spoiler-content">
-        <p>把所有的函式實作都包在一起<br>好處：執行方便<br>壞處：檔案太肥</p>
+        <p>Static linking 把所有的函式實作都包在一起<br>好處：執行方便<br>壞處：檔案太肥</p>
 <p>Dynamic linking 的程式在執行過程中，有些 library 的函式到結束都不會執行到。</p>
 <p>ELF 採取 Lazy binding 的機制，在<strong>第一次 call library 函式時，才會去尋找函式真正的位置進行 binding</strong></p>
 <blockquote>
@@ -514,7 +514,7 @@
 </div>
 
 <ul>
-<li>No RELRO - link 和 GOT 都可寫</li>
+<li>No RELRO - link map 和 GOT 都可寫</li>
 <li>Partial RELRO - link map 不可寫，GOT 可寫(可利用來PWN)</li>
 <li>Full ReLRO - link map 和 GOT 都不可寫</li>
 </ul>
@@ -597,13 +597,13 @@ pdf <span class="token comment" spellcheck="true"># 印出現在位置的整個 
 <li>輸入時沒有控制輸入長度，導致記憶體空間被輸入覆蓋掉</li>
 <li>通常發⽣在 char 陣列 (字串) 的輸入</li>
 </ul>
-<h3 id="Ex"><a href="#Ex" class="headerlink" title="Ex"></a>Ex</h3><pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<h3 id="Ex"><a href="#Ex" class="headerlink" title="Ex"></a>Ex</h3><pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token keyword">char</span> buffer<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token function">gets</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Input</span>
     <span class="token function">puts</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Output</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
 <p>compile and execute</p>
 <pre class=" language-bash"><code class="language-bash">% gcc test.c -fno-stack-protector -o <span class="token function">test</span>
@@ -617,22 +617,22 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 </code></pre>
 <p><img src="https://i.imgur.com/KWnvPO7.png"><br><img src="https://i.imgur.com/4hB4Ihj.png"></p>
 <h3 id="輸入："><a href="#輸入：" class="headerlink" title="輸入："></a>輸入：</h3><ol>
-<li>gets 沒有限制輸入長度<pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<li>gets 沒有限制輸入長度<pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
  <span class="token keyword">char</span> buffer<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
  <span class="token function">gets</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
  <span class="token function">puts</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
 </li>
-<li>read 有限制最大輸入長度，可 overflow ⼤⼩為最⼤輸入長度與 buffer 長度之間<pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<li>read 有限制最大輸入長度，可 overflow ⼤⼩為最⼤輸入長度與 buffer 長度之間<pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
  <span class="token keyword">char</span> buffer<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
  <span class="token function">read</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> buffer<span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//只能 overflow 8 bytes(最大長度16-buffer長度8)</span>
  <span class="token function">puts</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
 </li>
 </ol>
@@ -642,19 +642,19 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 <li>saved rbp -&gt; stack migration</li>
 <li>return address -&gt; ret2 series</li>
 </ul>
-<h3 id="local-variable"><a href="#local-variable" class="headerlink" title="local variable"></a>local variable</h3><pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<h3 id="local-variable"><a href="#local-variable" class="headerlink" title="local variable"></a>local variable</h3><pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h&gt;</span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span>
     <span class="token keyword">char</span> buffer<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token function">gets</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="token keyword">if</span><span class="token punctuation">(</span>a <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>a <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token function">system</span><span class="token punctuation">(</span>“<span class="token operator">/</span>bin<span class="token operator">/</span>sh”<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
 <p>計算 offset (從開始寫的位置到目標位置間的長度)</p>
 <ul>
@@ -667,16 +667,16 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 <blockquote>
 <p>須關閉 PIE</p>
 </blockquote>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
-<span class="token keyword">void</span> <span class="token function">shell</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h&gt;</span></span>
+<span class="token keyword">void</span> <span class="token function">shell</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token function">system</span><span class="token punctuation">(</span>“<span class="token operator">/</span>bin<span class="token operator">/</span>sh”<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token keyword">char</span> buffer<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token function">gets</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
 <p>把 return address 覆蓋成 shell 的 address<br><img src="https://i.imgur.com/buf8nSQ.png"></p>
 <p>找 shell 的 address</p>
@@ -703,6 +703,18 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 <li>漏洞沒利用好</li>
 <li>寫的地方蓋到重要東西</li>
 <li>shell code 寫壞</li>
+</ul>
+<h3 id="GOT-Hikcaking"><a href="#GOT-Hikcaking" class="headerlink" title="GOT Hikcaking"></a>GOT Hikcaking</h3><p>透過改寫 GOT 使得呼叫該函式時，跳到指定位置</p>
+<blockquote>
+<p>不能是 Full RELRO (GOT 不能動)</p>
+</blockquote>
+<p>把 <code>puts libc</code>的地方覆蓋成我們要的<br><img src="https://i.imgur.com/pmKRFIo.png"></p>
+<h3 id="ret2libc"><a href="#ret2libc" class="headerlink" title="ret2libc"></a>ret2libc</h3><p>通常 libc 中的函式並不會全部⽤到，但其中包含許多好⽤的函式(Ex.<code>system()</code>,<code>execve()</code>)</p>
+<p>因為 ASLR，libc 的位址會有 libc base(隨機值)，必須有 libc base 才可以使⽤ libc 函式</p>
+<p>libc base 在哪?<br>因為是隨機值，每次都不一樣，只能在執行過程中 leak 出來<br>尋找執⾏中有⽤到 libc 的位址</p>
+<ul>
+<li>GOT 的內容</li>
+<li>stack 上的殘渣</li>
 </ul>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
