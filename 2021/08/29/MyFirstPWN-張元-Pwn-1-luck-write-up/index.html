@@ -472,7 +472,7 @@ r<span class="token punctuation">.</span>interactive<span class="token punctuati
 <p><img src="https://i.imgur.com/mT0WFW7.png"><br>執行後可以看到我們通過了第一階段</p>
 <h2 id="Step8-分析第二階段"><a href="#Step8-分析第二階段" class="headerlink" title="Step8 - 分析第二階段"></a>Step8 - 分析第二階段</h2><p><img src="https://i.imgur.com/EsHygvz.png"></p>
 <p><code>scanf()</code>有二個參數，第一個參數是 format，我們去看一下<br><code>s 0x400a93</code><br>然後跳到 Hex mode<br><img src="https://i.imgur.com/sEh9bKc.png"><br>在<code>0x40093</code>可以看到它吃的是<code>%d</code>(代表整數)<br>讀一個整數進來後會存到 <code>var_1ch</code><br>剛才有題到 random 會存在 <code>var_ch</code></p>
-<h2 id="STep9-寫script"><a href="#STep9-寫script" class="headerlink" title="STep9 - 寫script"></a>STep9 - 寫script</h2><p><img src="https://i.imgur.com/BErwebM.png"><br>從這裡可以看到 <code>var_1ch</code> 要等於 <code>var_ch</code><br>雖然我們不知道<code>var_ch</code>是什麼，但我們可以把它覆蓋掉阿~<br>可以把它改成<code>1</code></p>
+<h2 id="Step9-寫script"><a href="#Step9-寫script" class="headerlink" title="Step9 - 寫script"></a>Step9 - 寫script</h2><p><img src="https://i.imgur.com/BErwebM.png"><br>從這裡可以看到 <code>var_1ch</code> 要等於 <code>var_ch</code><br>雖然我們不知道<code>var_ch</code>是什麼，但我們可以把它覆蓋掉阿~<br>可以把它改成<code>1</code></p>
 <pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
 
 r <span class="token operator">=</span> process<span class="token punctuation">(</span><span class="token string">'./luck'</span><span class="token punctuation">)</span>

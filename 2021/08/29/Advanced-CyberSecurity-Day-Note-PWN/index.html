@@ -711,21 +711,19 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 <p>把 <code>puts libc</code>的地方覆蓋成我們要的<br><img src="https://i.imgur.com/pmKRFIo.png"></p>
 <h3 id="ret2libc"><a href="#ret2libc" class="headerlink" title="ret2libc"></a>ret2libc</h3><p>通常 libc 中的函式並不會全部⽤到，但其中包含許多好⽤的函式(Ex.<code>system()</code>,<code>execve()</code>)</p>
 <p>因為 ASLR，libc 的位址會有 libc base(隨機值)，必須有 libc base 才可以使⽤ libc 函式</p>
-<p>libc base 在哪?<br>因為是隨機值，每次都不一樣，只能在執行過程中 leak 出來<br>尋找執⾏中有⽤到 libc 的位址</p>
+<h4 id="libc-base-在哪"><a href="#libc-base-在哪" class="headerlink" title="libc base 在哪?"></a>libc base 在哪?</h4><p>因為是隨機值，每次都不一樣，只能在執行過程中 leak 出來<br>尋找執⾏中有⽤到 libc 的位址</p>
 <ul>
 <li>GOT 的內容</li>
 <li>stack 上的殘渣</li>
 </ul>
-<p>libc base 計算</p>
-<pre><code>puts_got_value = libc_base + puts_libc
-libc_base = puts_got_value - puts_libc
-system_got_value = libc_base + system_libc
+<h3 id="libc-base-計算"><a href="#libc-base-計算" class="headerlink" title="libc base 計算"></a>libc base 計算</h3><pre class=" language-bash"><code class="language-bash">puts_got_value <span class="token operator">=</span> libc_base + puts_libc
+libc_base <span class="token operator">=</span> puts_got_value - puts_libc
+system_got_value <span class="token operator">=</span> libc_base + system_libc
 </code></pre>
-<p>取得puts_libc</p>
-<pre><code>% readelf -a /libc.so.6 | grep puts
+<h4 id="取得puts-libc"><a href="#取得puts-libc" class="headerlink" title="取得puts_libc"></a>取得puts_libc</h4><pre class=" language-bash"><code class="language-bash">% readelf -a /libc.so.6 <span class="token operator">|</span> <span class="token function">grep</span> puts
 </code></pre>
 <h3 id="one-gadget"><a href="#one-gadget" class="headerlink" title="one_gadget"></a>one_gadget</h3><p>在 libc 中可以一次拿到 shell address</p>
-<p>必須符合規定限制 ^ 有 libc base</p>
+<p>必須符合規定限制 &amp;&amp; 有 libc base</p>
 <p>usage： <code>% one_gadget /libc.so.6</code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
@@ -855,7 +853,7 @@ system_got_value = libc_base + system_libc
                 <a href="/2022/04/19/DP-Dynamic-Programming/">
                     <div class="card-image">
                         
-                        <img src="/imgs/DP.png" class="responsive-img" alt="DP(Dynamic Programming)">
+                        <img src="/imgs/DP.jpg" class="responsive-img" alt="DP(Dynamic Programming)">
                         
                         <span class="card-title">DP(Dynamic Programming)</span>
                     </div>
