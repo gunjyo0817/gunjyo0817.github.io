@@ -401,7 +401,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    10 Min
+                    11 Min
                 </div>
                 
 
@@ -761,8 +761,9 @@ pop * <span class="token punctuation">;</span> ret
 <p>printf 參數 <code>%n$p</code> 指定第 n 個參數</p>
 <h3 id="讀取"><a href="#讀取" class="headerlink" title="讀取"></a>讀取</h3><ul>
 <li><code>%p</code> ：印出 register / stack 上存的值</li>
-<li><code>%s</code>: 將 register / stack 上的值作為位址，印出該位址所<br>存的值<h4 id="p-印出存的值"><a href="#p-印出存的值" class="headerlink" title="%p 印出存的值"></a>%p 印出存的值</h4>讀取順序：rsi -&gt; rdx -&gt; rcx -&gt; r8 -&gt; r9 -&gt; *rsp -&gt; *(rsp+0x8)<br>前幾個在 register 上，第 6 個開始在 stack 上(通常要的是 stack上的)<br>Ex. <code>%11$p</code> 會印出 <code>*(rsp+0x28)</code> 的值</li>
+<li><code>%s</code>: 將 register / stack 上的值作為位址，印出該位址所<br>存的值</li>
 </ul>
+<h4 id="p-印出存的值"><a href="#p-印出存的值" class="headerlink" title="%p 印出存的值"></a>%p 印出存的值</h4><p>讀取順序：rsi -&gt; rdx -&gt; rcx -&gt; r8 -&gt; r9 -&gt; *rsp -&gt; *(rsp+0x8)<br>前幾個在 register 上，第 6 個開始在 stack 上(通常要的是 stack上的)<br>Ex. <code>%11$p</code> 會印出 <code>*(rsp+0x28)</code> 的值 </p>
 <h4 id="s-將存的值作為指標來讀取"><a href="#s-將存的值作為指標來讀取" class="headerlink" title="%s 將存的值作為指標來讀取"></a>%s 將存的值作為指標來讀取</h4><p>若 payload 在 stack 上，可以把特定 address 寫在 stack 上來讀取<br><img src="https://i.imgur.com/unzIwBt.png"></p>
 <h3 id="寫入"><a href="#寫入" class="headerlink" title="寫入"></a>寫入</h3><p>使用 <code>%n</code> 來將 printf 輸出過的字元數寫到指定的位置<br><code>%hn</code> 2 bytes<br><code>%hhn</code> 1 bytes (字元數 % 256)</p>
 <p><code>%c</code> 指定 <code>%n</code> 寫入大小<br>Ex. input：0x1234</p>
@@ -795,6 +796,7 @@ pop rbp
 <h3 id="Simple-Migration-可控制輸入長度時"><a href="#Simple-Migration-可控制輸入長度時" class="headerlink" title="Simple Migration - 可控制輸入長度時"></a>Simple Migration - 可控制輸入長度時</h3><p>在 ROP chain 中 call input func，把新的 ROP chain 寫到 buffer 裡面</p>
 <p>第一次輸入(stack)<br>call input func，把 input 儲存點(rbp)設為 buffer 1 的 address<br><img src="https://i.imgur.com/7FjrChg.png"></p>
 <p>第二次輸入(buffer1)<br>from ROP chain I 的 input func<br><img src="https://i.imgur.com/rF3lIjE.png"><br>[註]如果不需要再 migration，buffer2 可以隨便填(因為不會用到 <code>leave</code> 去移動 stack 到 buffer2 上)，也不用重新 call input func </p>
+<h3 id="Fixed-Size-Migration-不能控制輸入長度時"><a href="#Fixed-Size-Migration-不能控制輸入長度時" class="headerlink" title="Fixed Size Migration - 不能控制輸入長度時"></a>Fixed Size Migration - 不能控制輸入長度時</h3><p>直接用原本的 read 來輸入<br>一次可以輸入的 ROP 長度為 payload 長度</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
