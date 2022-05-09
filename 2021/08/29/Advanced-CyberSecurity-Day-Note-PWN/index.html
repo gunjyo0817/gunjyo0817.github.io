@@ -518,7 +518,7 @@
 <li>Partial RELRO - link map 不可寫，GOT 可寫(可利用來PWN)</li>
 <li>Full ReLRO - link map 和 GOT 都不可寫</li>
 </ul>
-<h3 id="Stack-Canary"><a href="#Stack-Canary" class="headerlink" title="Stack Canary"></a>Stack Canary</h3><p>stack 上的柵欄<br>在 rbp 之前塞一個 random 值，ret 之前檢查是否相同，不同的話就會<code>abort</code><br><img src="https://i.imgur.com/Nub9RNa.png"><br>沒有 canary 的話，發生 buffer overflow 時就可以一直往下寫(return address等)<br>有 canary 的話，它發現後就會直接關掉程式<br><img src="https://i.imgur.com/ZCJ3KCP.png"></p>
+<h3 id="Stack-Canary"><a href="#Stack-Canary" class="headerlink" title="Stack Canary"></a>Stack Canary</h3><p>stack 上的柵欄<br>在 rbp 之前塞一個 random 值，ret 之前檢查是否相同，不同的話就會<code>abort</code><br><img src="https://i.imgur.com/Nub9RNa.png?200x"><br>沒有 canary 的話，發生 buffer overflow 時就可以一直往下寫(return address等)<br>有 canary 的話，它發現後就會直接關掉程式<br><img src="https://i.imgur.com/ZCJ3KCP.png"></p>
 <p>繞過</p>
 <ul>
 <li>想辦法事先取得 Canary 的值</li>
