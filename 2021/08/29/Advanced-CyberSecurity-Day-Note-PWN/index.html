@@ -538,7 +538,7 @@
 <h3 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a>gdb</h3><p><code>% j *0x4896aa</code> 跳到某個位址(jmp)</p>
 <p><code>% x/10gx 0x400686</code> 秀出某位址的值</p>
 <p><code>% set $rax=0x5</code> 設定某個位址/暫存器的值</p>
-<h3 id="checksec-查看程式的安全性保護"><a href="#checksec-查看程式的安全性保護" class="headerlink" title="checksec 查看程式的安全性保護"></a>checksec 查看程式的安全性保護</h3><p><code>%checksec $library</code><br><img src="https://i.imgur.com/f0gtvqq.png"></p>
+<h3 id="checksec-查看程式的安全性保護"><a href="#checksec-查看程式的安全性保護" class="headerlink" title="checksec 查看程式的安全性保護"></a>checksec 查看程式的安全性保護</h3><p><code>%checksec $library</code><br><img src="https://i.imgur.com/f0gtvqq.png?80"></p>
 <h3 id="gdb-vmmap"><a href="#gdb-vmmap" class="headerlink" title="gdb - vmmap"></a>gdb - vmmap</h3><p>查看目前程式的記憶體分布、rwn 權限設定<br><code>% vmmap</code></p>
 <pre class=" language-bash"><code class="language-bash">b main <span class="token punctuation">(</span>breakpoint<span class="token punctuation">)</span>
 r
@@ -615,7 +615,7 @@ hello
 <pre class=" language-bash"><code class="language-bash">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 </code></pre>
-<p><img src="https://i.imgur.com/KWnvPO7.png"><br><img src="https://i.imgur.com/4hB4Ihj.png"></p>
+<p><img src="https://i.imgur.com/KWnvPO7.png?80"><br><img src="https://i.imgur.com/4hB4Ihj.png?80"></p>
 <h3 id="輸入："><a href="#輸入：" class="headerlink" title="輸入："></a>輸入：</h3><ol>
 <li>gets 沒有限制輸入長度<pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -678,7 +678,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>把 return address 覆蓋成 shell 的 address<br><img src="https://i.imgur.com/buf8nSQ.png"></p>
+<p>把 return address 覆蓋成 shell 的 address<br><img src="https://i.imgur.com/buf8nSQ.png?80"></p>
 <p>找 shell 的 address</p>
 <ul>
 <li>shell：<code>% objdump -M intel -d test | less</code></li>
@@ -692,7 +692,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 </blockquote>
 </li>
 </ul>
-<p><img src="https://i.imgur.com/KcgnGYF.png"></p>
+<p><img src="https://i.imgur.com/KcgnGYF.png?80"></p>
 <p>寫 shell code</p>
 <ul>
 <li>選有 <strong>rwx</strong> 處</li>
@@ -731,7 +731,7 @@ system_got_value <span class="token operator">=</span> libc_base + system_libc
 <pre class=" language-bash"><code class="language-bash">leave <span class="token punctuation">;</span> ret
 pop * <span class="token punctuation">;</span> ret
 </code></pre>
-<h4 id="ROP-chain"><a href="#ROP-chain" class="headerlink" title="ROP chain"></a>ROP chain</h4><p>把 gadget 串起來<br><img src="https://i.imgur.com/wcpjb8y.png"><br>Step</p>
+<h4 id="ROP-chain"><a href="#ROP-chain" class="headerlink" title="ROP chain"></a>ROP chain</h4><p>把 gadget 串起來<br><img src="https://i.imgur.com/wcpjb8y.png?80"><br>Step</p>
 <ol>
 <li>ret address of gadget 1</li>
 <li>pop address of gadget 1</li>
@@ -764,7 +764,7 @@ pop * <span class="token punctuation">;</span> ret
 <li><code>%s</code>: 將 register / stack 上的值作為位址，印出該位址所<br>存的值</li>
 </ul>
 <h4 id="p-印出存的值"><a href="#p-印出存的值" class="headerlink" title="%p 印出存的值"></a>%p 印出存的值</h4><p>讀取順序：rsi -&gt; rdx -&gt; rcx -&gt; r8 -&gt; r9 -&gt; *rsp -&gt; *(rsp+0x8)<br>前幾個在 register 上，第 6 個開始在 stack 上(通常要的是 stack上的)<br>Ex. <code>%11$p</code> 會印出 <code>*(rsp+0x28)</code> 的值 </p>
-<h4 id="s-將存的值作為指標來讀取"><a href="#s-將存的值作為指標來讀取" class="headerlink" title="%s 將存的值作為指標來讀取"></a>%s 將存的值作為指標來讀取</h4><p>若 payload 在 stack 上，可以把特定 address 寫在 stack 上來讀取<br><img src="https://i.imgur.com/unzIwBt.png"></p>
+<h4 id="s-將存的值作為指標來讀取"><a href="#s-將存的值作為指標來讀取" class="headerlink" title="%s 將存的值作為指標來讀取"></a>%s 將存的值作為指標來讀取</h4><p>若 payload 在 stack 上，可以把特定 address 寫在 stack 上來讀取<br><img src="https://i.imgur.com/unzIwBt.png?80"></p>
 <h3 id="寫入"><a href="#寫入" class="headerlink" title="寫入"></a>寫入</h3><p>使用 <code>%n</code> 來將 printf 輸出過的字元數寫到指定的位置<br><code>%hn</code> 2 bytes<br><code>%hhn</code> 1 bytes (字元數 % 256)</p>
 <p><code>%c</code> 指定 <code>%n</code> 寫入大小<br>Ex. input：0x1234</p>
 <ol>
