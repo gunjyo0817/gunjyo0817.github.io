@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="MyFirstPWN Angelboy Pwn3 write-up, Gunjyo&#39;s Blog">
-    <meta name="description" content="校園資安深耕營 PWN 張元_Pwn-1_luck write-up">
+    <meta name="keywords" content="MyFirstPWN 張元_Pwn-8_return write-up, Gunjyo&#39;s Blog">
+    <meta name="description" content="校園資安深耕營 PWN 張元_Pwn-8_return write-up">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>MyFirstPWN Angelboy Pwn3 write-up | Gunjyo&#39;s Blog</title>
+    <title>MyFirstPWN 張元_Pwn-8_return write-up | Gunjyo&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -232,7 +232,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">MyFirstPWN Angelboy Pwn3 write-up</h1>
+                    <h1 class="description center-align post-title">MyFirstPWN 張元_Pwn-8_return write-up</h1>
                 </div>
             </div>
         </div>
@@ -394,7 +394,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    45
+                    80
                 </div>
                 
 
@@ -433,8 +433,18 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>首先先執行看看<br><img src="https://i.imgur.com/cJi8zVh.png"><br>它會讓我們先輸入一串 address<br>然後會叫我們輸入一個字串</p>
-<p>接著分析看看這個題目<br>從 main 開始看 <img src="https://i.imgur.com/8G1q8dB.png"></p>
+                <h1 id="Step1-執行看看"><a href="#Step1-執行看看" class="headerlink" title="Step1 - 執行看看"></a>Step1 - 執行看看</h1><p>需要輸入東西<br><img src="https://i.imgur.com/X63W6B1.png"></p>
+<h2 id="Step2-分析第一階段"><a href="#Step2-分析第一階段" class="headerlink" title="Step2 - 分析第一階段"></a>Step2 - 分析第一階段</h2><p>我們可以先用 r2 去分析第一階段要做什麼<br><img src="https://i.imgur.com/ooLAfIU.png" alt="Imgur"></p>
+<p>有一個 function 是 <code>sym.you_cant_see_this_its_too_evil</code><br>我們進去看一下</p>
+<p><img src="https://i.imgur.com/laE4ZGv.png"><br>他用 system 開一個東西，address 在 <code>0x4007c8</code></p>
+<pre class=" language-bash"><code class="language-bash">q 
+:s 0x4007c8
+</code></pre>
+<p><img src="https://i.imgur.com/mE7JDZr.png"><br>可以知道這個system開了一個shell</p>
+<h2 id="Step3-main"><a href="#Step3-main" class="headerlink" title="Step3 - main"></a>Step3 - main</h2><pre><code>q
+s main
+VV
+</code></pre>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
@@ -461,7 +471,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://gunjyo0817.github.io/2021/08/29/MyFirstPWN-Angelboy-Pwn3-write-up/">https://gunjyo0817.github.io/2021/08/29/MyFirstPWN-Angelboy-Pwn3-write-up/</a>
+                    <a href="https://gunjyo0817.github.io/2021/08/29/MyFirstPWN-%E5%BC%B5%E5%85%83-Pwn-8-return-write-up/">https://gunjyo0817.github.io/2021/08/29/MyFirstPWN-%E5%BC%B5%E5%85%83-Pwn-8-return-write-up/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -560,12 +570,12 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2021/08/29/MyFirstPWN-%E5%BC%B5%E5%85%83-Pwn-1-luck-write-up/">
+                <a href="/2021/08/29/MyFirstPWN-Angelboy-Pwn3-write-up/">
                     <div class="card-image">
                         
-                        <img src="/imgs/ISIP.jpg" class="responsive-img" alt="MyFirstPWN 張元_Pwn-1_luck write-up">
+                        <img src="/imgs/ISIP.jpg" class="responsive-img" alt="MyFirstPWN Angelboy Pwn3 write-up">
                         
-                        <span class="card-title">MyFirstPWN 張元_Pwn-1_luck write-up</span>
+                        <span class="card-title">MyFirstPWN Angelboy Pwn3 write-up</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -620,23 +630,23 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/08/29/MyFirstPWN-%E5%BC%B5%E5%85%83-Pwn-8-return-write-up/">
+                <a href="/2021/07/22/2021-SCIST-FinalCTF-write-up/">
                     <div class="card-image">
                         
-                        <img src="/imgs/ISIP.jpg" class="responsive-img" alt="MyFirstPWN 張元_Pwn-8_return write-up">
+                        <img src="/imgs/SCIST.jpg" class="responsive-img" alt="2021 SCIST FinalCTF write-up">
                         
-                        <span class="card-title">MyFirstPWN 張元_Pwn-8_return write-up</span>
+                        <span class="card-title">2021 SCIST FinalCTF write-up</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            校園資安深耕營 PWN 張元_Pwn-8_return write-up
+                            2021 SCIST 第一屆 資安課程季後賽 FinalCTF 的不專業 write-up，rank 1(Official)
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-29
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-22
                             </span>
                         <span class="publish-author">
                             
@@ -646,8 +656,8 @@
                                     write-up
                                 </a>
                             
-                            <a href="/categories/write-up/%E6%A0%A1%E5%9C%92%E8%B3%87%E5%AE%89%E6%B7%B1%E8%80%95%E7%87%9F/" class="post-category">
-                                    校園資安深耕營
+                            <a href="/categories/write-up/SCIST/" class="post-category">
+                                    SCIST
                                 </a>
                             
                             
@@ -665,8 +675,8 @@
                         <span class="chip bg-color">write-up</span>
                     </a>
                     
-                    <a href="/tags/%E6%A0%A1%E5%9C%92%E8%B3%87%E5%AE%89%E6%B7%B1%E8%80%95%E7%87%9F/">
-                        <span class="chip bg-color">校園資安深耕營</span>
+                    <a href="/tags/SCIST/">
+                        <span class="chip bg-color">SCIST</span>
                     </a>
                     
                 </div>

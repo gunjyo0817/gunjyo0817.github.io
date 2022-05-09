@@ -394,14 +394,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    1.8k
+                    2.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    8 Min
+                    9 Min
                 </div>
                 
 
@@ -704,27 +704,67 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 <li>寫的地方蓋到重要東西</li>
 <li>shell code 寫壞</li>
 </ul>
-<h3 id="GOT-Hikcaking"><a href="#GOT-Hikcaking" class="headerlink" title="GOT Hikcaking"></a>GOT Hikcaking</h3><p>透過改寫 GOT 使得呼叫該函式時，跳到指定位置</p>
+<h3 id="ret2libc"><a href="#ret2libc" class="headerlink" title="ret2libc"></a>ret2libc</h3><h4 id="GOT-Hikcaking"><a href="#GOT-Hikcaking" class="headerlink" title="GOT Hikcaking"></a>GOT Hikcaking</h4><p>透過改寫 GOT 使得呼叫該函式時，跳到指定位置</p>
 <blockquote>
 <p>不能是 Full RELRO (GOT 不能動)</p>
 </blockquote>
 <p>把 <code>puts libc</code>的地方覆蓋成我們要的<br><img src="https://i.imgur.com/pmKRFIo.png"></p>
-<h3 id="ret2libc"><a href="#ret2libc" class="headerlink" title="ret2libc"></a>ret2libc</h3><p>通常 libc 中的函式並不會全部⽤到，但其中包含許多好⽤的函式(Ex.<code>system()</code>,<code>execve()</code>)</p>
+<h4 id="ret2libc-1"><a href="#ret2libc-1" class="headerlink" title="ret2libc"></a>ret2libc</h4><p>通常 libc 中的函式並不會全部⽤到，但其中包含許多好⽤的函式(Ex.<code>system()</code>,<code>execve()</code>)</p>
 <p>因為 ASLR，libc 的位址會有 libc base(隨機值)，必須有 libc base 才可以使⽤ libc 函式</p>
 <h4 id="libc-base-在哪"><a href="#libc-base-在哪" class="headerlink" title="libc base 在哪?"></a>libc base 在哪?</h4><p>因為是隨機值，每次都不一樣，只能在執行過程中 leak 出來<br>尋找執⾏中有⽤到 libc 的位址</p>
 <ul>
 <li>GOT 的內容</li>
 <li>stack 上的殘渣</li>
 </ul>
-<h3 id="libc-base-計算"><a href="#libc-base-計算" class="headerlink" title="libc base 計算"></a>libc base 計算</h3><pre class=" language-bash"><code class="language-bash">puts_got_value <span class="token operator">=</span> libc_base + puts_libc
+<h4 id="libc-base-計算"><a href="#libc-base-計算" class="headerlink" title="libc base 計算"></a>libc base 計算</h4><pre class=" language-bash"><code class="language-bash">puts_got_value <span class="token operator">=</span> libc_base + puts_libc
 libc_base <span class="token operator">=</span> puts_got_value - puts_libc
 system_got_value <span class="token operator">=</span> libc_base + system_libc
 </code></pre>
 <h4 id="取得puts-libc"><a href="#取得puts-libc" class="headerlink" title="取得puts_libc"></a>取得puts_libc</h4><pre class=" language-bash"><code class="language-bash">% readelf -a /libc.so.6 <span class="token operator">|</span> <span class="token function">grep</span> puts
 </code></pre>
-<h3 id="one-gadget"><a href="#one-gadget" class="headerlink" title="one_gadget"></a>one_gadget</h3><p>在 libc 中可以一次拿到 shell address</p>
+<h4 id="one-gadget"><a href="#one-gadget" class="headerlink" title="one_gadget"></a>one_gadget</h4><p>在 libc 中可以一次拿到 shell address</p>
 <p>必須符合規定限制 &amp;&amp; 有 libc base</p>
 <p>usage： <code>% one_gadget /libc.so.6</code></p>
+<h3 id="ROP-Return-Oriented-Programming"><a href="#ROP-Return-Oriented-Programming" class="headerlink" title="ROP(Return Oriented Programming)"></a>ROP(Return Oriented Programming)</h3><p>串接 Gadget 來控制流程</p>
+<h4 id="Gadget-結尾是-ret-的程式碼片段"><a href="#Gadget-結尾是-ret-的程式碼片段" class="headerlink" title="Gadget - 結尾是 ret 的程式碼片段"></a>Gadget - 結尾是 <code>ret</code> 的程式碼片段</h4><p>找適合的 gadget<br><code>% ROPgadget --binary ./test | less</code><br><code>% ROPgadget --binary ./test | grep '*ret'</code></p>
+<p>好用的 gadget</p>
+<pre class=" language-bash"><code class="language-bash">leave <span class="token punctuation">;</span> ret
+pop * <span class="token punctuation">;</span> ret
+</code></pre>
+<h4 id="ROP-chain"><a href="#ROP-chain" class="headerlink" title="ROP chain"></a>ROP chain</h4><p>把 gadget 串起來<br><img src="https://i.imgur.com/wcpjb8y.png"><br>Step</p>
+<ol>
+<li>ret address of gadget 1</li>
+<li>pop address of gadget 1</li>
+<li>rsp 移動到 0xabcd</li>
+<li>pop rax -&gt; rax = 0xabcd</li>
+<li>ret 到 address of gadget 2</li>
+<li>pop address of gadget 2</li>
+<li>pop rbx -&gt; rbx = 0x1234</li>
+<li>ret …….依此循環</li>
+</ol>
+<h4 id="利用-ROP-攻擊-串接-syscall"><a href="#利用-ROP-攻擊-串接-syscall" class="headerlink" title="利用 ROP 攻擊 - 串接 syscall"></a>利用 ROP 攻擊 - 串接 syscall</h4><p><a target="_blank" rel="noopener" href="http://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/">x86_64_syscall_table</a><br>利用 ROP chain，依照 syscall table 把 rax , rdi , rsi , rdx 等設定好後 call syscall</p>
+<h4 id="Syscall-execve-“-x2F-bin-x2F-sh”"><a href="#Syscall-execve-“-x2F-bin-x2F-sh”" class="headerlink" title="Syscall - execve(“/bin/sh”)"></a>Syscall - execve(“/bin/sh”)</h4><p>設定<br>rax = 0x3b<br>rdi = address of ‘/bin/sh’<br>(rdi -&gt; buffer -&gt; ‘/bin/sh’)<br>rsi = 0<br>rdx = 0<br>設定完後 call syscall 就可以了</p>
+<h2 id="Format-String"><a href="#Format-String" class="headerlink" title="Format String"></a>Format String</h2><p>printf 使用上可以操作的漏洞，可以做到任意讀寫</p>
+<pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">char</span> buffer<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span>“<span class="token operator">%</span>s”<span class="token punctuation">,</span> buffer<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Input</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Output</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>其中 scanf 有指定 format(<code>%s</code>)，但 printf 沒有指定 format<br>若是輸入 format，input 會作為 format 被輸出</p>
+<pre class=" language-bash"><code class="language-bash">% ./test
+%p,%p,%p
+0x1,0x7f10e7dc3790,0xa
+</code></pre>
+<p>printf 參數 <code>%n$p</code> 指定第 n 個參數</p>
+<h3 id="讀取"><a href="#讀取" class="headerlink" title="讀取"></a>讀取</h3><ul>
+<li><code>%p</code> ：印出 register / stack 上存的值</li>
+<li><code>%s</code>: 將 register / stack 上的值作為位址，印出該位址所<br>存的值<h4 id="p-印出存的值"><a href="#p-印出存的值" class="headerlink" title="%p 印出存的值"></a>%p 印出存的值</h4>讀取順序：rsi -&gt; rdx -&gt; rcx -&gt; r8 -&gt; r9 -&gt; *rsp -&gt; *(rsp+0x8)<br>前幾個在 register 上，第 6 個開始在 stack 上(通常要的是 stack上的)<br>Ex. <code>%11$p</code> 會印出 <code>*(rsp+0x28)</code> 的值</li>
+</ul>
+<h4 id="s-將存的值作為指標來讀取"><a href="#s-將存的值作為指標來讀取" class="headerlink" title="%s 將存的值作為指標來讀取"></a>%s 將存的值作為指標來讀取</h4><p>若 payload 在 stack 上，可以把特定 address 寫在 stack 上來讀取<br><img src="https://i.imgur.com/unzIwBt.png"></p>
+<h3 id="寫入"><a href="#寫入" class="headerlink" title="寫入"></a>寫入</h3><p>使用 <code>%n</code> 來寫入特定位址</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
