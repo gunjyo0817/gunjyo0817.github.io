@@ -597,7 +597,7 @@ pdf <span class="token comment" spellcheck="true"># 印出現在位置的整個 
 <li>輸入時沒有控制輸入長度，導致記憶體空間被輸入覆蓋掉</li>
 <li>通常發⽣在 char 陣列 (字串) 的輸入</li>
 </ul>
-<h3 id="Ex"><a href="#Ex" class="headerlink" title="Ex"></a>Ex</h3><pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">char</span> buffer<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token function">gets</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Input</span>
@@ -616,7 +616,7 @@ hello
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 </code></pre>
 <p><img src="https://i.imgur.com/KWnvPO7.png?80"><br><img src="https://i.imgur.com/4hB4Ihj.png?80"></p>
-<h3 id="輸入："><a href="#輸入：" class="headerlink" title="輸入："></a>輸入：</h3><ol>
+<h3 id="輸入：gets-x2F-read"><a href="#輸入：gets-x2F-read" class="headerlink" title="輸入：gets / read"></a>輸入：gets / read</h3><ol>
 <li>gets 沒有限制輸入長度<pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
  <span class="token keyword">char</span> buffer<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
