@@ -764,7 +764,7 @@ pop * <span class="token punctuation">;</span> ret
 <li><code>%s</code>: 將 register / stack 上的值作為位址，印出該位址所<br>存的值</li>
 </ul>
 <h4 id="p-印出存的值"><a href="#p-印出存的值" class="headerlink" title="%p 印出存的值"></a>%p 印出存的值</h4><p>讀取順序：rsi -&gt; rdx -&gt; rcx -&gt; r8 -&gt; r9 -&gt; *rsp -&gt; *(rsp+0x8)<br>前幾個在 register 上，第 6 個開始在 stack 上(通常要的是 stack上的)<br>Ex. <code>%11$p</code> 會印出 <code>*(rsp+0x28)</code> 的值 </p>
-<h4 id="s-將存的值作為指標來讀取"><a href="#s-將存的值作為指標來讀取" class="headerlink" title="%s 將存的值作為指標來讀取"></a>%s 將存的值作為指標來讀取</h4><p>若 payload 在 stack 上，可以把特定 address 寫在 stack 上來讀取<br><img src="https://i.imgur.com/unzIwBt.png?80"></p>
+<h4 id="s-將存的值作為指標來讀取"><a href="#s-將存的值作為指標來讀取" class="headerlink" title="%s 將存的值作為指標來讀取"></a>%s 將存的值作為指標來讀取</h4><p>若 payload 在 stack 上，可以把特定 address 寫在 stack 上來讀取<br><img src="https://i.imgur.com/unzIwBt.png?60"></p>
 <h3 id="寫入"><a href="#寫入" class="headerlink" title="寫入"></a>寫入</h3><p>使用 <code>%n</code> 來將 printf 輸出過的字元數寫到指定的位置<br><code>%hn</code> 2 bytes<br><code>%hhn</code> 1 bytes (字元數 % 256)</p>
 <p><code>%c</code> 指定 <code>%n</code> 寫入大小<br>Ex. input：0x1234</p>
 <ol>
