@@ -450,7 +450,7 @@
 <li>看原始碼、組合語言找漏洞</li>
 </ol>
 <p>目標：Start -&gt; Input &lt;-&gt; Output -&gt; Shell</p>
-<h2 id="Program-Structure"><a href="#Program-Structure" class="headerlink" title="Program Structure"></a>Program Structure</h2><p><img src="https://i.imgur.com/MKf3HPC.png?200x"></p>
+<h2 id="Program-Structure"><a href="#Program-Structure" class="headerlink" title="Program Structure"></a>Program Structure</h2><p><img src="https://i.imgur.com/MKf3HPC.png?60"></p>
 <h3 id="Text-程式碼-Binary"><a href="#Text-程式碼-Binary" class="headerlink" title="Text - 程式碼 Binary"></a>Text - 程式碼 Binary</h3><p>r-x 可讀 不可寫 可執行</p>
 <h3 id="Data-已初始化的全域變數"><a href="#Data-已初始化的全域變數" class="headerlink" title="Data - 已初始化的全域變數"></a>Data - 已初始化的全域變數</h3><p>Ex. 字串、數字</p>
 <h3 id="BSS-未初始化的全域變數"><a href="#BSS-未初始化的全域變數" class="headerlink" title="BSS - 未初始化的全域變數"></a>BSS - 未初始化的全域變數</h3><h3 id="Heap-動態記憶體空間"><a href="#Heap-動態記憶體空間" class="headerlink" title="Heap - 動態記憶體空間"></a>Heap - 動態記憶體空間</h3><p><strong>從低位往高位長</strong></p>
@@ -467,7 +467,7 @@
     <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p><img src="https://i.imgur.com/EeGYurz.png"><br>rsp 表示最低位<br>一個 block 8 個 byte</p>
+<p><img src="https://i.imgur.com/EeGYurz.png?80"><br>rsp 表示最低位<br>一個 block 8 個 byte</p>
 <h4 id="Return-address"><a href="#Return-address" class="headerlink" title="Return address"></a>Return address</h4><p>Q：Call function 時，怎麼知道執行完要回到哪裡?<br>call function前，將 return address 存進 stack<br>return 時，回到 stack 中所存的位址</p>
 <pre class=" language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">process</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
