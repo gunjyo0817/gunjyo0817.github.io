@@ -5,12 +5,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="2020 SCIST Security Note Crypto, Gunjyo&#39;s Blog">
-    <meta name="description" content="LABYANG_RSA-1
+    <meta name="description" content="LABLevel1YANG_RSA-1
     
         problem.txt
     
     
-        n = 83092583783534841000145280642003842283533340442637642451258">
+        n = 83092583783534841000145280642003842283533340442637642">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -405,14 +405,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    808
+                    932
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    4 Min
+                    5 Min
                 </div>
                 
 
@@ -444,7 +444,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="LAB"><a href="#LAB" class="headerlink" title="LAB"></a>LAB</h1><h2 id="YANG-RSA-1"><a href="#YANG-RSA-1" class="headerlink" title="YANG_RSA-1"></a>YANG_RSA-1</h2><div class="spoiler collapsed">
+                <h1 id="LAB"><a href="#LAB" class="headerlink" title="LAB"></a>LAB</h1><h1 id="Level1"><a href="#Level1" class="headerlink" title="Level1"></a>Level1</h1><h2 id="YANG-RSA-1"><a href="#YANG-RSA-1" class="headerlink" title="YANG_RSA-1"></a>YANG_RSA-1</h2><div class="spoiler collapsed">
     <div class="spoiler-title">
         problem.txt
     </div>
@@ -571,6 +571,36 @@ m2 = pow(c,d2,n2)
 m1 = pow(m2,d1,n1)
 print(long_to_bytes(m1))
 </code></pre>
+<h2 id="babyRSA"><a href="#babyRSA" class="headerlink" title="babyRSA"></a>babyRSA</h2><p>This problem gives pub_key <code>pub.pem</code> and ciphertext <code>flag.enc</code></p>
+<p>About how to read these two files:</p>
+<pre class=" language-py"><code class="language-py">from Crypto.PublicKey.RSA import importKey
+key=importKey(open("pub.pem","rb").read())
+n=key.n
+e=key.e
+
+enc = open('flag.enc','rb').read()
+c = int(enc.hex(), 16)
+</code></pre>
+<p>So now we got <code>n``e``c</code>, we can solve this basic RSA problem.</p>
+<p>sol.py</p>
+<pre class=" language-py"><code class="language-py">from Crypto.Util.number import *
+from Crypto.PublicKey.RSA import importKey
+
+key = importKey(open("pub.pem","rb").read())
+n = key.n
+e = key.e
+
+enc = open("flag.enc","rb").read()
+c = int(enc.hex(),16)
+
+p = 270613060120468613971049355250995010949
+q = n//p
+phi = (p-1)*(q-1)
+d = inverse(e,phi)
+m = pow(c,d,n)
+print(long_to_bytes(m))
+</code></pre>
+<p>FLAG <code>BreakALLCTF{b@$RSA}</code></p>
 <h1 id="Level-2"><a href="#Level-2" class="headerlink" title="Level 2"></a>Level 2</h1><h2 id="AIS3-Pre-exam-2015-Crypto2"><a href="#AIS3-Pre-exam-2015-Crypto2" class="headerlink" title="AIS3_Pre_exam_2015-Crypto2"></a>AIS3_Pre_exam_2015-Crypto2</h2><p>It gave a <code>tgz</code> file, so we need to unzip it first.<br><code>tar zxvf crypto2.tgz</code><br>We got two file：<code>flag.enc</code> and <code>rsa.py</code></p>
 <p>read <code>flag.enc</code> as enc(bytes), then convert bytes into int</p>
 <pre class=" language-py"><code class="language-py">enc = open('flag.enc','rb').read()
