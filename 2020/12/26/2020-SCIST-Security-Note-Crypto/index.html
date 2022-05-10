@@ -231,6 +231,19 @@
 </header>
 
     
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('This blog is encrypted. You must enter the password to read.')).toString(CryptoJS.enc.Hex)) {
+                alert('Incorrect Password!');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
 
 
 
