@@ -444,7 +444,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="LAB"><a href="#LAB" class="headerlink" title="LAB"></a>LAB</h1><h1 id="Level1"><a href="#Level1" class="headerlink" title="Level1"></a>Level1</h1><h2 id="YANG-RSA-1"><a href="#YANG-RSA-1" class="headerlink" title="YANG_RSA-1"></a>YANG_RSA-1</h2><div class="spoiler collapsed">
+                <h2 id="LAB"><a href="#LAB" class="headerlink" title="LAB"></a>LAB</h2><h2 id="Level1"><a href="#Level1" class="headerlink" title="Level1"></a>Level1</h2><h3 id="YANG-RSA-1"><a href="#YANG-RSA-1" class="headerlink" title="YANG_RSA-1"></a>YANG_RSA-1</h3><div class="spoiler collapsed">
     <div class="spoiler-title">
         problem.txt
     </div>
@@ -475,7 +475,7 @@ m <span class="token operator">=</span> pow<span class="token punctuation">(</sp
 <span class="token keyword">print</span><span class="token punctuation">(</span>long_to_bytes<span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">)</span>
 </code></pre>
 <p>Flag <code>BreakALLCTF{R$A_!s_so_e@sy_r!ght?....}</code></p>
-<h2 id="YANG-RSA-2"><a href="#YANG-RSA-2" class="headerlink" title="YANG_RSA-2"></a>YANG_RSA-2</h2><div class="spoiler collapsed">
+<h3 id="YANG-RSA-2"><a href="#YANG-RSA-2" class="headerlink" title="YANG_RSA-2"></a>YANG_RSA-2</h3><div class="spoiler collapsed">
     <div class="spoiler-title">
         problem.txt
     </div>
@@ -503,7 +503,7 @@ m = gmpy2.iroot(c,e)[0]
 print(long_to_bytes(m))
 </code></pre>
 <p>Flag <code>BreakALLCTF{WTF_!$_7h@t_BI@_N...?...MON_DO_I_KNOW_RSA...?}</code></p>
-<h2 id="YANG-RSA-3"><a href="#YANG-RSA-3" class="headerlink" title="YANG_RSA-3"></a>YANG_RSA-3</h2><div class="spoiler collapsed">
+<h3 id="YANG-RSA-3"><a href="#YANG-RSA-3" class="headerlink" title="YANG_RSA-3"></a>YANG_RSA-3</h3><div class="spoiler collapsed">
     <div class="spoiler-title">
         problem.txt
     </div>
@@ -571,7 +571,7 @@ m2 = pow(c,d2,n2)
 m1 = pow(m2,d1,n1)
 print(long_to_bytes(m1))
 </code></pre>
-<h2 id="babyRSA"><a href="#babyRSA" class="headerlink" title="babyRSA"></a>babyRSA</h2><p>This problem gives pub_key <code>pub.pem</code> and ciphertext <code>flag.enc</code></p>
+<h3 id="babyRSA"><a href="#babyRSA" class="headerlink" title="babyRSA"></a>babyRSA</h3><p>This problem gives pub_key <code>pub.pem</code> and ciphertext <code>flag.enc</code></p>
 <p>About how to read these two files:</p>
 <pre class=" language-py"><code class="language-py">from Crypto.PublicKey.RSA import importKey
 key=importKey(open("pub.pem","rb").read())
@@ -601,7 +601,7 @@ m = pow(c,d,n)
 print(long_to_bytes(m))
 </code></pre>
 <p>FLAG <code>BreakALLCTF{b@$RSA}</code></p>
-<h1 id="Level-2"><a href="#Level-2" class="headerlink" title="Level 2"></a>Level 2</h1><h2 id="AIS3-Pre-exam-2015-Crypto2"><a href="#AIS3-Pre-exam-2015-Crypto2" class="headerlink" title="AIS3_Pre_exam_2015-Crypto2"></a>AIS3_Pre_exam_2015-Crypto2</h2><p>It gave a <code>tgz</code> file, so we need to unzip it first.<br><code>tar zxvf crypto2.tgz</code><br>We got two file：<code>flag.enc</code> and <code>rsa.py</code></p>
+<h2 id="Level-2"><a href="#Level-2" class="headerlink" title="Level 2"></a>Level 2</h2><h3 id="AIS3-Pre-exam-2015-Crypto2"><a href="#AIS3-Pre-exam-2015-Crypto2" class="headerlink" title="AIS3_Pre_exam_2015-Crypto2"></a>AIS3_Pre_exam_2015-Crypto2</h3><p>It gave a <code>tgz</code> file, so we need to unzip it first.<br><code>tar zxvf crypto2.tgz</code><br>We got two file：<code>flag.enc</code> and <code>rsa.py</code></p>
 <p>read <code>flag.enc</code> as enc(bytes), then convert bytes into int</p>
 <pre class=" language-py"><code class="language-py">enc = open('flag.enc','rb').read()
 c = int(enc.hex(), 16)
@@ -648,9 +648,9 @@ m = pow(c,d,n)
 print(long_to_bytes(m))
 </code></pre>
 <p>Flag <code>AIS3{rsaaaaaaaaA_orz}</code></p>
-<h1 id="Level-4"><a href="#Level-4" class="headerlink" title="Level 4"></a>Level 4</h1><h2 id="RSA後門-1"><a href="#RSA後門-1" class="headerlink" title="RSA後門(1)"></a>RSA後門(1)</h2><div class="spoiler collapsed">
+<h2 id="Level-4"><a href="#Level-4" class="headerlink" title="Level 4"></a>Level 4</h2><h3 id="RSA後門-1"><a href="#RSA後門-1" class="headerlink" title="RSA後門(1)"></a>RSA後門(1)</h3><div class="spoiler collapsed">
     <div class="spoiler-title">
-        description
+        problem
     </div>
     <div class="spoiler-content">
         <p>這是一個RSA 的題目，提供一個後門給你，你能否解密呢?<br>提示1:<a target="_blank" rel="noopener" href="https://simple.wikipedia.org/wiki/Modular_arithmetic">RSA 模運算觀念</a><br>提示2: <a target="_blank" rel="noopener" href="http://wsfdl.com/algorithm/2016/02/11/%E7%90%86%E8%A7%A3RSA%E7%AE%97%E6%B3%95.html">Fermat-euler theorem</a></p>
@@ -663,7 +663,8 @@ d^2*e + 7phi <span class="token operator">=</span> 16201262541783071078059253474
     </div>
 </div>
 
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p><code>d^2*e + 7phi</code><br>As we know <code>phi == 0 (mod phi) </code> and <code>e*d == 1 (mod phi)</code><br><code>d^2*e + 7phi = d*d*e + 0 = d*1 = d</code></p>
+
+<p><code>d^2*e + 7phi</code><br>As we know <code>phi == 0 (mod phi) </code> and <code>e*d == 1 (mod phi)</code><br><code>d^2*e + 7phi = d*d*e + 0 = d*1 = d</code></p>
 <pre class=" language-py"><code class="language-py">from Crypto.Util.number import *
 
 n = 760070912350840319011516178942471824408271276603018122766107466458905659805366910876741133101064132968975290327141913870064382857896676965896339499301686289349478192042225387715815300890772726396671069777379993317290403468858998199888875329375096856205675179863574081470688602128633185902300536380591686253782626310388376732381905094112550405708724116437892957067685087277238106233348311268725082471734753857194847838970086800848099069387690801700501505622593836970903856921989336476413802534078525413311063453348054161408156303570666333425678334142525184422436235677229592264286240481233065103525594733333609350428196011268071126676023443256564227488106063073893805882904030218186925942692848016877882566240601003792167543787342287123520711449083265386813671510310650585456131441220450039511889734856795425972738718472877437781909089006687000385532764327586589650518853864825005505232375529254511923368560433385960598232647516144607822711918385784586608803888123523660880157194471094579495414720939362559417376095025821133997982361566429601158965282863289774835745836514384219847770664031196660782737380240398358478721495348483958183701077510621561366810555045657804658889409015678773329196458757404769771384361180527520601391357800258141800488661477548160080188323687255844523623758493111371703516522245476661361074371234254770474249888532163823739762576169486427817071850060196906194007205553628806031759720577392913205266258974893510396850982203198212807648844222854214722691172053026220943259272390113639543712309874760232956983371190047789729422160337209334177864706118802632248174293863932718038360834909893547570166552708085714105225222230703430768672212375445000147155804641468351838745755024401386395525712050470895155325019568159034388240484857157405320152956355210692650494136549140160597175749
@@ -675,8 +676,8 @@ m = pow(c,d,n)
 print(long_to_bytes(m))
 </code></pre>
 <p>Flag <code>BreakALLCTF{__Crypto?_M@7h?__just_calculate~}</code></p>
-<h2 id="AIS3-Pre-exam-2015-Crypto3"><a href="#AIS3-Pre-exam-2015-Crypto3" class="headerlink" title="AIS3_Pre_exam_2015-Crypto3(*)"></a>AIS3_Pre_exam_2015-Crypto3(*)</h2><p>It gave a <code>tbz</code> file, so we need to unzip it first.<br><code>tar -jxvf crypto3.tbz</code><br>Now we can see </p>
-<h1 id="Homework"><a href="#Homework" class="headerlink" title="Homework"></a>Homework</h1><h2 id="Hash-Encrypt"><a href="#Hash-Encrypt" class="headerlink" title="Hash Encrypt"></a>Hash Encrypt</h2><p><code>res=(''.join([sha384(c.encode()).hexdigest()[:5] for c in FLAG ]))</code> is list comprehension in python<br>sha384 every character and keep first five characters of the result</p>
+<h3 id="AIS3-Pre-exam-2015-Crypto3"><a href="#AIS3-Pre-exam-2015-Crypto3" class="headerlink" title="AIS3_Pre_exam_2015-Crypto3(*)"></a>AIS3_Pre_exam_2015-Crypto3(*)</h3><p>It gave a <code>tbz</code> file, so we need to unzip it first.<br><code>tar -jxvf crypto3.tbz</code><br>Now we can see </p>
+<h2 id="Homework"><a href="#Homework" class="headerlink" title="Homework"></a>Homework</h2><h3 id="Hash-Encrypt"><a href="#Hash-Encrypt" class="headerlink" title="Hash Encrypt"></a>Hash Encrypt</h3><p><code>res=(''.join([sha384(c.encode()).hexdigest()[:5] for c in FLAG ]))</code> is list comprehension in python<br>sha384 every character and keep first five characters of the result</p>
 <p>Since the same character has the same result and there are less than 100 printable character, we can brute force every printable character and compare to the result.</p>
 <pre class=" language-py"><code class="language-py">from hashlib import sha384
 from string import printable
