@@ -42,7 +42,7 @@
       
       <categories>
           
-          <category> algorithm </category>
+          <category> Algorithm </category>
           
       </categories>
       
@@ -96,8 +96,6 @@
       
       <categories>
           
-          <category> write-up </category>
-          
           <category> 校園資安深耕營 </category>
           
       </categories>
@@ -127,8 +125,6 @@
       
       <categories>
           
-          <category> write-up </category>
-          
           <category> 校園資安深耕營 </category>
           
       </categories>
@@ -157,8 +153,6 @@
       
       
       <categories>
-          
-          <category> write-up </category>
           
           <category> 校園資安深耕營 </category>
           
@@ -191,8 +185,6 @@
           
           <category> SCIST </category>
           
-          <category> write-up </category>
-          
       </categories>
       
       
@@ -220,7 +212,7 @@
       
       <categories>
           
-          <category> write-up </category>
+          <category> AIS3 </category>
           
       </categories>
       
@@ -249,7 +241,7 @@
       
       <categories>
           
-          <category> write-up </category>
+          <category> MyFirstCTF </category>
           
       </categories>
       
@@ -276,11 +268,7 @@
       
       <categories>
           
-          <category> note </category>
-          
           <category> SCIST </category>
-          
-          <category> SCIST Security Note </category>
           
       </categories>
       
@@ -311,8 +299,6 @@
           
           <category> SCIST </category>
           
-          <category> write-up </category>
-          
       </categories>
       
       
@@ -340,11 +326,7 @@
       
       <categories>
           
-          <category> note </category>
-          
           <category> SCIST </category>
-          
-          <category> SCIST Security Note </category>
           
       </categories>
       
@@ -373,11 +355,7 @@
       
       <categories>
           
-          <category> note </category>
-          
           <category> SCIST </category>
-          
-          <category> SCIST Security Note </category>
           
       </categories>
       
