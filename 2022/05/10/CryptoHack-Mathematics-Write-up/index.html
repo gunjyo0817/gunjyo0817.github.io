@@ -405,14 +405,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    735
+                    918
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    4 Min
+                    5 Min
                 </div>
                 
 
@@ -448,7 +448,7 @@
 <p>We say that an integer <code>x</code> is a <strong>Quadratic Residue</strong> if there exists an <code>a</code> such that <code>a2 = x mod p</code>.<br>If there is no such solution, then the integer is a <strong>Quadratic Non-Residue</strong>.</p>
 </blockquote>
 <blockquote>
-<p>If a2 = x then (-a)2 = x. So if x is a quadratic residue in some finite field, then there are always two solutions for a.</p>
+<p>If <code>a^2 = x</code> then <code>(-a)^2 = x</code>. So if <code>x</code> is a quadratic residue in some finite field, then there are always two solutions for <code>a</code>.</p>
 </blockquote>
 <div class="spoiler collapsed">
     <div class="spoiler-title">
@@ -479,9 +479,9 @@ for i in ints:
 </blockquote>
 <p>An interesting property of quadratic (non-)residues.</p>
 <ul>
-<li>Quadratic Residue * Quadratic Residue = Quadratic Residue</li>
-<li>Quadratic Residue * Quadratic Non-residue = Quadratic Non-residue</li>
-<li>Quadratic Non-residue * Quadratic Non-residue = Quadratic Residue<br>(We can consider <code>Quadratic Residue</code> as <code>1</code> and <code>Quadratic Non-residue</code> as <code>-1</code>)</li>
+<li><code>Quadratic Residue * Quadratic Residue = Quadratic Residue</code></li>
+<li><code>Quadratic Residue * Quadratic Non-residue = Quadratic Non-residue</code></li>
+<li><code>Quadratic Non-residue * Quadratic Non-residue = Quadratic Residue</code><br>(We can consider <code>Quadratic Residue</code> as <code>1</code> and <code>Quadratic Non-residue</code> as <code>-1</code>)</li>
 </ul>
 <p>Legendre’s Symbol: <code>(a / p) ≡ a(p-1)/2 mod p</code> obeys:</p>
 <ul>
@@ -586,6 +586,55 @@ print(Tonelli_Shanks(a,p))
 <p>Ans</p>
 <pre class=" language-bash"><code class="language-bash">2362339307683048638327773298580489298932137505520500388338271052053734747862351779647314176817953359071871560041125289919247146074907151612762640868199621186559522068338032600991311882224016021222672243139362180461232646732465848840425458257930887856583379600967761738596782877851318489355679822813155123045705285112099448146426755110160002515592418850432103641815811071548456284263507805589445073657565381850521367969675699760755310784623577076440037747681760302434924932113640061738777601194622244192758024180853916244427254065441962557282572849162772740798989647948645207349737457445440405057156897508368531939120
 </code></pre>
+<h3 id="Chinese-Remainder-Theorem"><a href="#Chinese-Remainder-Theorem" class="headerlink" title="Chinese Remainder Theorem"></a>Chinese Remainder Theorem</h3><blockquote>
+<p>The Chinese Remainder Theorem gives a unique solution to a set of linear congruences if their moduli are coprime.<br>This means, that given a set of arbitrary integers ai, and pairwise coprime integers ni, such that the following linear congruences hold:</p>
+</blockquote>
+<pre class=" language-bash"><code class="language-bash">x ≡ a1 mod n1
+x ≡ a2 mod n2
+<span class="token punctuation">..</span>.
+x ≡ an mod nn
+</code></pre>
+<p>There is a unique solution <code>x ≡ a mod N</code> where <code>N = n1 * n2 * ... * nn</code>.</p>
+<div class="spoiler collapsed">
+    <div class="spoiler-title">
+        problem
+    </div>
+    <div class="spoiler-content">
+        <p>Given the following set of linear congruences:</p>
+<pre class=" language-bash"><code class="language-bash">x ≡ 2 mod 5
+x ≡ 3 mod 11
+x ≡ 5 mod 17
+</code></pre>
+<p>Find the integer a such that x ≡ a mod 935</p>
+
+    </div>
+</div>
+
+<h4 id="Sol1"><a href="#Sol1" class="headerlink" title="Sol1"></a>Sol1</h4><pre class=" language-py"><code class="language-py">import gmpy2, libnum
+from functools import reduce
+
+def CRT(r, mod):
+    M = reduce(lambda x,y:x*y, mod)
+
+    ans = 0
+    
+    for i in range(len(r)):
+        m = M // mod[i]
+        ans += r[i] * m * gmpy2.invert(m, mod[i])
+    
+    return ans % M
+
+a = [2,3,5]
+n = [5,11,17]
+print(CRT(a,n))
+</code></pre>
+<h4 id="Sol2"><a href="#Sol2" class="headerlink" title="Sol2"></a>Sol2</h4><p>We can directly use <code>crt()</code> in sympy</p>
+<pre class=" language-py"><code class="language-py">from sympy.ntheory.modular import crt
+a = [2,3,5]
+n = [5,11,17]
+print(crt(n,a))
+</code></pre>
+<p>Ans <code>872</code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
