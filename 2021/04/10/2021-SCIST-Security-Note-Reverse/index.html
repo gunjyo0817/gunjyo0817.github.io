@@ -32,9 +32,9 @@
 
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 
@@ -467,7 +467,7 @@
 <p><code>strace -s 36 ./strace</code></p>
 <p><img src="https://i.imgur.com/89zCNLc.png"></p>
 <p>Flag <code>FLAG{____yaaaa_flag_in_the_stack___}</code></p>
-<h2 id="EasyCTF-adder"><a href="#EasyCTF-adder" class="headerlink" title="EasyCTF_adder"></a>EasyCTF_adder</h2><p>IDA Pro 開起來，可以看到 <code>std::istream::operator&gt;&gt;(int &amp;)</code> ，代表它會 <code>cin</code> 3 個數字<br><img src="https://i.imgur.com/3hD4Jcz.png"></p>
+<h3 id="EasyCTF-adder"><a href="#EasyCTF-adder" class="headerlink" title="EasyCTF_adder"></a>EasyCTF_adder</h3><p>IDA Pro 開起來，可以看到 <code>std::istream::operator&gt;&gt;(int &amp;)</code> ，代表它會 <code>cin</code> 3 個數字<br><img src="https://i.imgur.com/3hD4Jcz.png"></p>
 <p>把它們換成好辨識的名字後看 pseudocode(F5)，可以看到三個相加為 <code>1337</code> 就會給 Flag<br><img src="https://i.imgur.com/7EdddJ1.png"></p>
 <p>Flag <code>EasyCTF_adder</code></p>
 <h3 id="picoCTF2017-Coffee"><a href="#picoCTF2017-Coffee" class="headerlink" title="picoCTF2017_Coffee"></a>picoCTF2017_Coffee</h3><p>下載之後看到是<code>.class</code><br>可以丟到網路上去反編譯<br><a target="_blank" rel="noopener" href="http://www.javadecompilers.com/">Decompilers online</a></p>
@@ -615,7 +615,7 @@ b <span class="token operator">=</span> <span class="token string">""</span>
         在 C++ 裡面先跑出 f
     </div>
     <div class="spoiler-content">
-        <pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h&gt;</span></span>
+        <pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 
 <span class="token keyword">int</span> f<span class="token punctuation">[</span><span class="token number">40</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -850,9 +850,9 @@ a <span class="token operator">=</span> <span class="token string">""</span>
 <p>flag <code>MyFirstCTF{MAKECHRTOINT}</code></p>
 </blockquote>
 <h2 id="lab-只有腳本"><a href="#lab-只有腳本" class="headerlink" title="lab(只有腳本)"></a>lab(只有腳本)</h2><h3 id="ptrace-me"><a href="#ptrace-me" class="headerlink" title="ptrace_me"></a>ptrace_me</h3><p>hoo.c</p>
-<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">ptrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">ptrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p><code>gcc -fPIC -shared -o hook.so hook.c</code></p>
 <p><img src="https://i.imgur.com/IOXKvFB.png"></p>
@@ -866,7 +866,7 @@ bin <span class="token operator">=</span> <span class="token string">'./rev'</sp
 
 p <span class="token operator">=</span> Project<span class="token punctuation">(</span>bin<span class="token punctuation">,</span> auto_load_libs<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
 
-flag_chars <span class="token operator">=</span> <span class="token punctuation">[</span>BVS<span class="token punctuation">(</span>f<span class="token string">'flag_&amp;#123;i&amp;#125;'</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+flag_chars <span class="token operator">=</span> <span class="token punctuation">[</span>BVS<span class="token punctuation">(</span>f<span class="token string">'flag_{i}'</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
 flag <span class="token operator">=</span> Concat<span class="token punctuation">(</span><span class="token operator">*</span>flag_chars<span class="token punctuation">)</span>
 
 st <span class="token operator">=</span> p<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>entry_state<span class="token punctuation">(</span>stdin<span class="token operator">=</span>flag<span class="token punctuation">)</span>
@@ -883,7 +883,7 @@ sm<span class="token punctuation">.</span>explore<span class="token punctuation"
 <blockquote>
 <p>flag </p>
 </blockquote>
-<pre class=" language-bash"><code class="language-bash">darkCON<span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;4r3_y0u_r34lly_th1nk1n9_th4t_y0u_c4n_try_th15_m4nu4lly???_Ok_I_th1nk_y0u_b3tt3r_us3_s0m3_aut0m4t3d_t00ls_l1k3_4n9r_0r_Z3_t0_m4k3_y0ur_l1f3_much_e4s13r.C0ngr4ts_f0r_s0lv1in9_th3_e4sy_ch4ll3ng3&amp;#125;</span>
+<pre class=" language-bash"><code class="language-bash">darkCON<span class="token punctuation">{</span>4r3_y0u_r34lly_th1nk1n9_th4t_y0u_c4n_try_th15_m4nu4lly???_Ok_I_th1nk_y0u_b3tt3r_us3_s0m3_aut0m4t3d_t00ls_l1k3_4n9r_0r_Z3_t0_m4k3_y0ur_l1f3_much_e4s13r.C0ngr4ts_f0r_s0lv1in9_th3_e4sy_ch4ll3ng3<span class="token punctuation">}</span>
 </code></pre>
 <h3 id="AIS3-crackme-Angr"><a href="#AIS3-crackme-Angr" class="headerlink" title="AIS3_crackme(Angr)"></a>AIS3_crackme(Angr)</h3><p>先看一下這支檔案在做甚麼<br>是簡單的 if-else 判斷<br><img src="https://i.imgur.com/8dKV5bS.png"><br>我們去看一下<code>verify</code>這個 function 在判斷甚麼<br><img src="https://i.imgur.com/GN5kOc9.png"><br>上面那些條件式全部都正確的話會<code>return i==23</code><br>可以猜到長度應該是 23</p>
 <p><strong>script</strong></p>
@@ -894,7 +894,7 @@ bin <span class="token operator">=</span> <span class="token string">'./ais3_cra
 
 p <span class="token operator">=</span> Project<span class="token punctuation">(</span>bin<span class="token punctuation">,</span> auto_load_libs<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
 
-flag_chars <span class="token operator">=</span> <span class="token punctuation">[</span>BVS<span class="token punctuation">(</span>f<span class="token string">'flag_&amp;#123;i&amp;#125;'</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+flag_chars <span class="token operator">=</span> <span class="token punctuation">[</span>BVS<span class="token punctuation">(</span>f<span class="token string">'flag_{i}'</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
 flag <span class="token operator">=</span> Concat<span class="token punctuation">(</span><span class="token operator">*</span>flag_chars<span class="token punctuation">)</span>
 
 st <span class="token operator">=</span> p<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>entry_state<span class="token punctuation">(</span>args<span class="token operator">=</span><span class="token punctuation">[</span>bin<span class="token punctuation">,</span>flag<span class="token punctuation">]</span><span class="token punctuation">)</span>
