@@ -5,14 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="CTF Reverse Angr, Gunjyo&#39;s Blog">
-    <meta name="description" content="起手式
-from angr import *
-
-p = Project(&#39;./00_angr_find&#39;, auto_load_libs=False)
-
-st = p.factory.entry_state()
-
-sm = p.factor">
+    <meta name="description" content="Reverse Angr Write-up">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -249,7 +242,7 @@ sm = p.factor">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/imgs/angr.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -368,12 +361,33 @@ sm = p.factor">
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/CTF/">
+                                <span class="chip bg-color">CTF</span>
+                            </a>
+                        
+                            <a href="/tags/SCIST/">
+                                <span class="chip bg-color">SCIST</span>
+                            </a>
+                        
+                            <a href="/tags/write-up/">
+                                <span class="chip bg-color">write-up</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Reverse/" class="post-category">
+                                Reverse
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -391,7 +405,7 @@ sm = p.factor">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    91
+                    179
                 </div>
                 
 
@@ -430,8 +444,8 @@ sm = p.factor">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>起手式</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> angr <span class="token keyword">import</span> <span class="token operator">*</span>
+                <p>未完</p>
+<h3 id="起手式"><a href="#起手式" class="headerlink" title="起手式"></a>起手式</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> angr <span class="token keyword">import</span> <span class="token operator">*</span>
 
 p <span class="token operator">=</span> Project<span class="token punctuation">(</span><span class="token string">'./00_angr_find'</span><span class="token punctuation">,</span> auto_load_libs<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
 
@@ -459,6 +473,21 @@ sm<span class="token punctuation">.</span>explore<span class="token punctuation"
         <span class="token keyword">print</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span>posix<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 </code></pre>
 <p>Flag <code>JXWVXRKX</code></p>
+<h3 id="01"><a href="#01" class="headerlink" title="01"></a>01</h3><p>因為字太多了沒辦法顯示 psuedocode，在 function name 可以看到有一個 <code>maybe good</code> 以及 <code>avoid me</code>，進去<code>maybe good</code>可以看到有<code>Good Job</code>，很直觀的分別對應到 <code>find</code> 和 <code>avoid</code><br><img src="https://i.imgur.com/aNEDN6P.png"></p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> angr <span class="token keyword">import</span> <span class="token operator">*</span>
+
+p <span class="token operator">=</span> Project<span class="token punctuation">(</span><span class="token string">'./01_angr_avoid'</span><span class="token punctuation">,</span> auto_load_libs <span class="token operator">=</span> <span class="token boolean">False</span><span class="token punctuation">)</span>
+
+st <span class="token operator">=</span> p<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>entry_state<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+sm <span class="token operator">=</span> p<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>simgr<span class="token punctuation">(</span>st<span class="token punctuation">)</span>
+
+sm<span class="token punctuation">.</span>explore<span class="token punctuation">(</span>find <span class="token operator">=</span> <span class="token number">0x080485E0</span><span class="token punctuation">,</span> avoid <span class="token operator">=</span> <span class="token number">0x080585A8</span><span class="token punctuation">)</span>
+
+<span class="token keyword">for</span> s <span class="token keyword">in</span> sm<span class="token punctuation">.</span>found<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span>posix<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<p>Flag <code>HUJOZMYS</code></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                 
             </div>
@@ -522,7 +551,19 @@ sm<span class="token punctuation">.</span>explore<span class="token punctuation"
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
+                            
+                                <a href="/tags/CTF/">
+                                    <span class="chip bg-color">CTF</span>
+                                </a>
+                            
+                                <a href="/tags/SCIST/">
+                                    <span class="chip bg-color">SCIST</span>
+                                </a>
+                            
+                                <a href="/tags/write-up/">
+                                    <span class="chip bg-color">write-up</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -576,8 +617,7 @@ sm<span class="token punctuation">.</span>explore<span class="token punctuation"
                 <a href="/2022/05/13/CTF-Reverse-Angr/">
                     <div class="card-image">
                         
-                        
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="CTF Reverse Angr">
+                        <img src="/imgs/angr.png" class="responsive-img" alt="CTF Reverse Angr">
                         
                         <span class="card-title">CTF Reverse Angr</span>
                     </div>
@@ -585,7 +625,7 @@ sm<span class="token punctuation">.</span>explore<span class="token punctuation"
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            Reverse Angr Write-up
                         
                     </div>
                     <div class="publish-info">
@@ -594,13 +634,33 @@ sm<span class="token punctuation">.</span>explore<span class="token punctuation"
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Gunjyo
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Reverse/" class="post-category">
+                                    Reverse
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CTF/">
+                        <span class="chip bg-color">CTF</span>
+                    </a>
+                    
+                    <a href="/tags/SCIST/">
+                        <span class="chip bg-color">SCIST</span>
+                    </a>
+                    
+                    <a href="/tags/write-up/">
+                        <span class="chip bg-color">write-up</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
