@@ -412,7 +412,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    18 Min
+                    19 Min
                 </div>
                 
 
@@ -631,6 +631,7 @@ M <span class="token operator">=</span> <span class="token number">2</span><span
     </div>
 </div>
 
+<p><img src="https://i.imgur.com/sBvvZNf.png"><br>由於我們知道 flag 格式，我們可以從 <code>'A'</code> 推回 key<br>接著把 key 照 <code>encrypt()</code> 去跑前五位，能發現可以推得 <code>AIS3{</code><br>因此只要跑完全部的 output 就能得到 flag 了</p>
 <p>sol.py</p>
 <pre class=" language-python"><code class="language-python">M <span class="token operator">=</span> <span class="token number">2</span><span class="token operator">**</span><span class="token number">1024</span>
 <span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
