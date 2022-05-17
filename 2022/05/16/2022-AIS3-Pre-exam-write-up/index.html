@@ -469,28 +469,28 @@
         cipher.py
     </div>
     <div class="spoiler-content">
-        <pre class=" language-py"><code class="language-py">import string
-import random
+        <pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> string
+<span class="token keyword">import</span> random
 
-def shuffle(x):
-    x = list(x)
-    random.shuffle(x)
-    return x
+<span class="token keyword">def</span> <span class="token function">shuffle</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    x <span class="token operator">=</span> list<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+    random<span class="token punctuation">.</span>shuffle<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> x
 
-def encrypt(T, file):
-    with open(file) as f:
-        pt = f.read()
-    with open(f"{file}.enc", "w") as f:
-        f.write(pt.translate(T))
+<span class="token keyword">def</span> <span class="token function">encrypt</span><span class="token punctuation">(</span>T<span class="token punctuation">,</span> file<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span>file<span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        pt <span class="token operator">=</span> f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span>f<span class="token string">"{file}.enc"</span><span class="token punctuation">,</span> <span class="token string">"w"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>pt<span class="token punctuation">.</span>translate<span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-charset = string.ascii_lowercase + string.ascii_uppercase + string.digits
-shuffled = "".join(shuffle(charset))
-T = str.maketrans(charset, shuffled)
+charset <span class="token operator">=</span> string<span class="token punctuation">.</span>ascii_lowercase <span class="token operator">+</span> string<span class="token punctuation">.</span>ascii_uppercase <span class="token operator">+</span> string<span class="token punctuation">.</span>digits
+shuffled <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>shuffle<span class="token punctuation">(</span>charset<span class="token punctuation">)</span><span class="token punctuation">)</span>
+T <span class="token operator">=</span> str<span class="token punctuation">.</span>maketrans<span class="token punctuation">(</span>charset<span class="token punctuation">,</span> shuffled<span class="token punctuation">)</span>
 
-encrypt(T, "flag.txt")
-encrypt(T, __file__)
+encrypt<span class="token punctuation">(</span>T<span class="token punctuation">,</span> <span class="token string">"flag.txt"</span><span class="token punctuation">)</span>
+encrypt<span class="token punctuation">(</span>T<span class="token punctuation">,</span> __file__<span class="token punctuation">)</span>
 
-"""
+<span class="token triple-quoted-string string">"""
 Substitution cipher
 From Wikipedia, the free encyclopedia
 Jump to navigationJump to search
@@ -517,7 +517,7 @@ Contents
 10    See also
 11    References
 12    External links
-"""
+"""</span>
 </code></pre>
 
     </div>
@@ -527,28 +527,28 @@ Contents
         cipher.py.enc
     </div>
     <div class="spoiler-content">
-        <pre class=" language-py"><code class="language-py">DXPpi6 I6iDwT
+        <pre class=" language-python"><code class="language-python">DXPpi6 I6iDwT
 DXPpi6 icwkpX
 
-ksq Iz2qqns(8):
-    8 = nDI6(8)
-    icwkpX.Iz2qqns(8)
-    is62iw 8
+ksq Iz2qqns<span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token number">8</span> <span class="token operator">=</span> nDI6<span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span>
+    icwkpX<span class="token punctuation">.</span>Iz2qqns<span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span>
+    is62iw <span class="token number">8</span>
 
-ksq swOijP6(B, qDns):
-    FD6z pPsw(qDns) cI q:
-        P6 = q.isck()
-    FD6z pPsw(q"{qDns}.swO", "F") cI q:
-        q.FiD6s(P6.6icwInc6s(B))
+ksq swOijP6<span class="token punctuation">(</span>B<span class="token punctuation">,</span> qDns<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    FD6z pPsw<span class="token punctuation">(</span>qDns<span class="token punctuation">)</span> cI q<span class="token punctuation">:</span>
+        P6 <span class="token operator">=</span> q<span class="token punctuation">.</span>isck<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    FD6z pPsw<span class="token punctuation">(</span>q<span class="token string">"{qDns}.swO"</span><span class="token punctuation">,</span> <span class="token string">"F"</span><span class="token punctuation">)</span> cI q<span class="token punctuation">:</span>
+        q<span class="token punctuation">.</span>FiD6s<span class="token punctuation">(</span>P6<span class="token punctuation">.</span>6icwInc6s<span class="token punctuation">(</span>B<span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-OzciIs6 = I6iDwT.cIODD_npFsiOcIs + I6iDwT.cIODD_2PPsiOcIs + I6iDwT.kDTD6I
-Iz2qqnsk = "".fpDw(Iz2qqns(OzciIs6))
-B = I6i.Xcas6icwI(OzciIs6, Iz2qqnsk)
+OzciIs6 <span class="token operator">=</span> I6iDwT<span class="token punctuation">.</span>cIODD_npFsiOcIs <span class="token operator">+</span> I6iDwT<span class="token punctuation">.</span>cIODD_2PPsiOcIs <span class="token operator">+</span> I6iDwT<span class="token punctuation">.</span>kDTD6I
+Iz2qqnsk <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">.</span>fpDw<span class="token punctuation">(</span>Iz2qqns<span class="token punctuation">(</span>OzciIs6<span class="token punctuation">)</span><span class="token punctuation">)</span>
+B <span class="token operator">=</span> I6i<span class="token punctuation">.</span>Xcas6icwI<span class="token punctuation">(</span>OzciIs6<span class="token punctuation">,</span> Iz2qqnsk<span class="token punctuation">)</span>
 
-swOijP6(B, "qncT.686")
-swOijP6(B, __qDns__)
+swOijP6<span class="token punctuation">(</span>B<span class="token punctuation">,</span> <span class="token string">"qncT.686"</span><span class="token punctuation">)</span>
+swOijP6<span class="token punctuation">(</span>B<span class="token punctuation">,</span> __qDns__<span class="token punctuation">)</span>
 
-"""
+<span class="token triple-quoted-string string">"""
 v24I6D626Dpw ODPzsi
 0ipX SDaDPskDc, 6zs qiss swOjOnpPskDc
 g2XP 6p wcCDTc6Dpwg2XP 6p IsciOz
@@ -575,7 +575,7 @@ Y    v24I6D626Dpw ODPzsiI Dw PpP2nci O2n62is
 WV    vss cnIp
 WW    9sqsiswOsI
 WG    Z86siwcn nDwaI
-"""
+"""</span>
 </code></pre>
 
     </div>
@@ -680,7 +680,7 @@ key <span class="token operator">=</span> <span class="token punctuation">(</spa
 <p>Flag <code>AIS3{kn0ckKNOCKknock}</code></p>
 <h2 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h2><h3 id="Time-Management"><a href="#Time-Management" class="headerlink" title="Time Management"></a>Time Management</h3><p>IDA Pro 看一下 main</p>
 <p><img src="https://i.imgur.com/tyatVhK.png"></p>
-<p>我們有 secret[] 和 key[]，所以只要照著把 v4 推出來就可以了</p>
+<p>我們有 <code>secret[]</code> 和 <code>key[]</code>，所以只要照著把 <code>v4</code> 推出來就可以了</p>
 <pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 
