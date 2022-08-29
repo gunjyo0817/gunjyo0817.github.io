@@ -239,7 +239,7 @@
 <script src="/libs/cryptojs/crypto-js.min.js"></script>
 <script>
     (function() {
-        let pwd = '';
+        let pwd = '96de04dc3c3716071e4bcb3dd968a20a7f62f61d06e53cf55efe3273a7c3007e';
         if (pwd && pwd.length > 0) {
             if (pwd !== CryptoJS.SHA256(prompt('This blog is encrypted. You must enter the password to read.')).toString(CryptoJS.enc.Hex)) {
                 alert('Incorrect Password!');
